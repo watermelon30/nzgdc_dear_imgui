@@ -15,66 +15,78 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\imgui\backends\imgui_impl_glfw.cpp">
+    <ClCompile Include="dependencies\imgui\backends\imgui_impl_glfw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\imgui\backends\imgui_impl_opengl3.cpp">
+    <ClCompile Include="dependencies\imgui\backends\imgui_impl_opengl3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\imgui\misc\cpp\imgui_stdlib.cpp">
+    <ClCompile Include="dependencies\imgui\misc\cpp\imgui_stdlib.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\imgui\imgui.cpp">
+    <ClCompile Include="dependencies\imgui\imgui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\imgui\imgui_demo.cpp">
+    <ClCompile Include="dependencies\imgui\imgui_demo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\imgui\imgui_draw.cpp">
+    <ClCompile Include="dependencies\imgui\imgui_draw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\imgui\imgui_tables.cpp">
+    <ClCompile Include="dependencies\imgui\imgui_tables.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\imgui\imgui_widgets.cpp">
+    <ClCompile Include="dependencies\imgui\imgui_widgets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\pong.cpp">
+    <ClCompile Include="source\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\imgui\backends\imgui_impl_glfw.h">
+    <ClInclude Include="dependencies\imgui\backends\imgui_impl_glfw.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\imgui\backends\imgui_impl_opengl3.h">
+    <ClInclude Include="dependencies\imgui\backends\imgui_impl_opengl3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\imgui\backends\imgui_impl_opengl3_loader.h">
+    <ClInclude Include="dependencies\imgui\backends\imgui_impl_opengl3_loader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\imgui\misc\cpp\imgui_stdlib.h">
+    <ClInclude Include="dependencies\imgui\misc\cpp\imgui_stdlib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\imgui\imconfig.h">
+    <ClInclude Include="dependencies\imgui\imconfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\imgui\imgui.h">
+    <ClInclude Include="dependencies\imgui\imgui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\imgui\imgui_internal.h">
+    <ClInclude Include="dependencies\imgui\imgui_internal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\imgui\imstb_rectpack.h">
+    <ClInclude Include="dependencies\imgui\imstb_rectpack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\imgui\imstb_textedit.h">
+    <ClInclude Include="dependencies\imgui\imstb_textedit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\imgui\imstb_truetype.h">
+    <ClInclude Include="dependencies\imgui\imstb_truetype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\App.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

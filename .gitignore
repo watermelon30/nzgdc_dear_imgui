@@ -1,0 +1,77 @@
+# Build results
+[Dd]ebug/
+[Rr]elease/
+[Rr][Ee][Ll][Ee][Aa][Ss][Ee]/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+[Bb]in/
+[Oo]bj/
+[Dd]ebugPS/
+[Rr]eleasePS/
+
+# Visual Studio Specific
+.vscode/
+.vs/
+*.suo
+*.user
+*.userprefs
+*.sln.grv
+*.sln.ide
+*.sln.doc
+*.sln.backup
+*.vcxproj.user
+*.vcxproj.filters
+*.vscode/*
+*.ide/
+
+# Visual Studio Code
+.vscode/
+.settings/
+
+# Rider
+.idea/
+
+# Other files
+*.ncb
+*.sdf
+*.opendb
+*.opensdf
+*.tlog
+*.log
+*.sln.ide
+*.sln.doc
+*.sln.backup
+*.vspx
+*.pidb
+*.cache
+*.pdb
+*.dbmdl
+*.jfm
+*.jfm.bak
+*.ilk
+*.idb
+*.pdb
+*.DMP
+*.pgc
+*.pgd
+
+# Temporary Files
+*.tmp
+*.temp
+*.tmp.*
+*.~*
+
+# Backup files
+*~
+*.bak
+*.swp
+
+# C++ specific ignores
+*.ilk
+*.idb
+*.pdb
+*.pdb1
+*.obj
+*.exe
