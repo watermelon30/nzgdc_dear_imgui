@@ -11,6 +11,11 @@ namespace nzgdc_demo
 
         void Use() const noexcept;
 
+        Shader(const Shader&) = delete;
+        Shader& operator=(const Shader&) = delete;
+        Shader(Shader&&) = delete;
+        Shader& operator=(Shader&&) = delete;
+
     private:
         unsigned int CompileShader(const unsigned int _shaderType, const std::string& _source);
 

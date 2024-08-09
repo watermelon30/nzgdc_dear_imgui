@@ -34,7 +34,7 @@ namespace nzgdc_demo
 
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		{
-			std::cout << "Failed to initialize GLAD" << std::endl;
+			std::cout << "Failed to initialize GLAD\n";
 		}
 
 		IMGUI_CHECKVERSION();
