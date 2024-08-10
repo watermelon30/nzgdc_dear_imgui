@@ -10,6 +10,7 @@ namespace nzgdc_demo
         Shader(const std::string& _vertexPath, const std::string& _fragmentPath);
 
         void Use() const noexcept;
+        unsigned int GetId() const { return m_ShaderId; }
 
         Shader(const Shader&) = delete;
         Shader& operator=(const Shader&) = delete;

@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\App.cpp" />
+    <ClCompile Include="source\Quad.cpp" />
+    <ClCompile Include="source\QuadEditor.cpp" />
     <ClCompile Include="source\Shader.cpp" />
     <ClCompile Include="source\glad.c" />
     <ClCompile Include="dependencies\imgui\backends\imgui_impl_glfw.cpp" />
@@ -44,7 +46,14 @@
     <ClInclude Include="dependencies\imgui\imstb_textedit.h" />
     <ClInclude Include="dependencies\imgui\imstb_truetype.h" />
     <ClInclude Include="dependencies\imgui\misc\cpp\imgui_stdlib.h" />
+    <ClInclude Include="source\Quad.h" />
+    <ClInclude Include="source\QuadEditor.h" />
     <ClInclude Include="source\Shader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="res\shaders\basic.frag" />
+    <Content Include="res\shaders\basic.vs" />
+    <Content Include="res\shaders\transform.vs" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -98,6 +107,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(ProjectDir)dependencies\glm;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>

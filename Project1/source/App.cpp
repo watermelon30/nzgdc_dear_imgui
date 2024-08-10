@@ -7,6 +7,9 @@
 #include <glfw3.h>
 #include <iostream>
 
+#include "Quad.h"
+#include "QuadEditor.h"
+
 namespace nzgdc_demo
 {
 	const static int windowWidth = 800; 
@@ -60,45 +63,28 @@ namespace nzgdc_demo
 	void App::Run()
 	{
 		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
-		ImVec4 color = ImVec4(1.0f, 0.0f, 0.0f, 1.0f);
 
-		float vertices[] =
-		{
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.0f,  0.5f, 0.0f
-		};
-
-		unsigned int vao;
-		glGenVertexArrays(1, &vao);
-		glBindVertexArray(vao);
-
-		unsigned int vbo{ 0 };
-		glGenBuffers(1, &vbo);
-		glBindBuffer(GL_ARRAY_BUFFER, vbo);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-		Shader basicShader("res/shaders/basic.vs", "res/shaders/basic.frag");
-		basicShader.Use();
-
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(0);
-
+		Shader transformShader("res/shaders/transform.vs", "res/shaders/basic.frag");
+		const std::shared_ptr<Quad> quad = std::make_shared<Quad>(transformShader);
+		QuadEditor quadEditor(quad);
+		
 		while (!glfwWindowShouldClose(m_Window))
 		{
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			glfwPollEvents();
 
+			quadEditor.UpdateQuadSettings();
+			quad->Render();
+
 			ImGui_ImplGlfw_NewFrame();
 			ImGui_ImplOpenGL3_NewFrame();
 			ImGui::NewFrame();
 			ImGui::ShowDemoWindow();
+			quadEditor.Render();
+			
 			ImGui::Render();
 			ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-			glBindVertexArray(vao);
-			glDrawArrays(GL_TRIANGLES, 0, 3);
 
 			glfwSwapBuffers(m_Window);
 		}
