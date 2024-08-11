@@ -1,4 +1,7 @@
 #pragma once
+#include <memory>
+
+#include "DebugModule/DebugSystem.h"
 
 struct GLFWwindow;
 
@@ -19,5 +22,6 @@ namespace nzgdc_demo
 
 	private:
 		GLFWwindow* m_Window;
+		std::shared_ptr<DebugSystem> m_debugSystem;
 	};
 }
