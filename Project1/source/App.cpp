@@ -1,11 +1,14 @@
 #include "App.h"
 #include "imgui.h"
 #include "Shader.h"
-#include <glad/glad.h>
+#include "glad/glad.h"
 #include <glfw3.h>
 #include <iostream>
 
 #include "Quad.h"
+#include "QuadEditor.h"
+
+
 namespace nzgdc_demo
 {
 	const static int windowWidth = 800; 
@@ -57,7 +60,9 @@ namespace nzgdc_demo
 
 		Shader transformShader("res/shaders/transform.vs", "res/shaders/basic.frag");
 		const std::shared_ptr<Quad> quad = std::make_shared<Quad>(transformShader);
+#ifdef _DEBUG
 		m_debugSystem->AddWindow(std::make_shared<QuadEditor>(quad));
+#endif
 		
 		while (!glfwWindowShouldClose(m_Window))
 		{

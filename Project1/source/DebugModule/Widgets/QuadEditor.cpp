@@ -3,7 +3,7 @@
 #include <vec3.hpp>
 
 #include "imgui.h"
-#include "Quad.h"
+#include <Quad.h>
 
 nzgdc_demo::QuadEditor::QuadEditor(const std::shared_ptr<Quad>& quad)
     : m_quad(quad)

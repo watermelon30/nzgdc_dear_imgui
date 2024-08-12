@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <memory>
 
-#include "../DebugWindowBase.h"
+#include "DebugWindowBase.h"
 
 namespace nzgdc_demo {
 	class Quad;
