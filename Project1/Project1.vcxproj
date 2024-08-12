@@ -55,6 +55,10 @@
     <Content Include="res\shaders\basic.vs" />
     <Content Include="res\shaders\transform.vs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shaders\basic.frag" />
+    <None Include="res\shaders\basic.vs" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
