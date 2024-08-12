@@ -6,7 +6,7 @@
 #include <iostream>
 
 #include "Quad.h"
-#include "QuadEditor.h"
+#include "DebugModule/Widgets/QuadEditor.h"
 
 
 namespace nzgdc_demo

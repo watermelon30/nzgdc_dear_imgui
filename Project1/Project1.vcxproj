@@ -853,6 +853,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;GLFW_INCLUDE_NONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)dependencies\imgui\backends;$(ProjectDir)dependencies\glfw\include\GLFW;$(ProjectDir)dependencies\glm;$(ProjectDir)dependencies;$(ProjectDir)dependencies\glad\include;$(ProjectDir)dependencies\imgui;$(ProjectDir)source\DebugModule;$(ProjectDir)source\DebugModule\Widgets;</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -870,6 +871,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)dependencies\imgui\backends;$(ProjectDir)dependencies\glfw\include\GLFW;$(ProjectDir)dependencies\glm;$(ProjectDir)dependencies;$(ProjectDir)dependencies\glad\include;$(ProjectDir)dependencies\imgui;$(ProjectDir)source\DebugModule;$(ProjectDir)source\DebugModule\Widgets;</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -885,8 +887,9 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)dependencies\imgui\backends;$(ProjectDir)dependencies\glfw\include\GLFW;$(ProjectDir)dependencies\glm;$(ProjectDir)dependencies;$(ProjectDir)dependencies\glad\include;$(ProjectDir)dependencies\imgui;$(ProjectDir)source\DebugModule;$(ProjectDir)source\DebugModule\Widgets;$(ProjectDir)source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)dependencies\imgui\backends;$(ProjectDir)dependencies\glfw\include\GLFW;$(ProjectDir)dependencies\glm;$(ProjectDir)dependencies;$(ProjectDir)dependencies\glad\include;$(ProjectDir)dependencies\imgui;$(ProjectDir)source\DebugModule;$(ProjectDir)source</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;GLFW_INCLUDE_NONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -903,7 +906,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;GLFW_INCLUDE_NONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)dependencies\imgui\backends;$(ProjectDir)dependencies\glfw\include\GLFW;$(ProjectDir)dependencies\glm;$(ProjectDir)dependencies;$(ProjectDir)dependencies\glad\include;$(ProjectDir)dependencies\imgui;$(ProjectDir)source\DebugModule;$(ProjectDir)source\DebugModule\Widgets;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)dependencies\imgui\backends;$(ProjectDir)dependencies\glfw\include\GLFW;$(ProjectDir)dependencies\glm;$(ProjectDir)dependencies;$(ProjectDir)dependencies\glad\include;$(ProjectDir)dependencies\imgui;$(ProjectDir)source\DebugModule;$(ProjectDir)source</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
