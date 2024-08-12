@@ -1,14 +1,13 @@
 #include "App.h"
 #include "imgui.h"
-#include "backends/imgui_impl_glfw.h"
-#include "backends/imgui_impl_opengl3.h"
 #include "Shader.h"
-#include <glad/glad.h>
+#include "glad/glad.h"
 #include <glfw3.h>
 #include <iostream>
 
 #include "Quad.h"
-#include "QuadEditor.h"
+#include "DebugModule/Widgets/QuadEditor.h"
+
 
 namespace nzgdc_demo
 {
@@ -22,7 +21,6 @@ namespace nzgdc_demo
 		{
 			std::cerr << "Failed to initialize GLFW\n";
 		}
-
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -39,25 +37,21 @@ namespace nzgdc_demo
 		{
 			std::cout << "Failed to initialize GLAD\n";
 		}
-
-		IMGUI_CHECKVERSION();
-		ImGui::CreateContext();
-		ImGuiIO& io = ImGui::GetIO();
-		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-		io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
-		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-		ImGui_ImplGlfw_InitForOpenGL(m_Window, true);
-		ImGui_ImplOpenGL3_Init();
+#ifdef _DEBUG
+		m_debugSystem = std::make_shared<DebugSystem>();
+		m_debugSystem->Initialize(m_Window);
+#endif
 	}
 
 	App::~App()
 	{
 		glfwDestroyWindow(m_Window);
 		glfwTerminate();
+		
 
-		ImGui_ImplOpenGL3_Shutdown();
-		ImGui_ImplGlfw_Shutdown();
-		ImGui::DestroyContext();
+#ifdef _DEBUG
+		m_debugSystem->Shutdown();
+#endif
 	}
 
 	void App::Run()
@@ -66,7 +60,9 @@ namespace nzgdc_demo
 
 		Shader transformShader("res/shaders/transform.vs", "res/shaders/basic.frag");
 		const std::shared_ptr<Quad> quad = std::make_shared<Quad>(transformShader);
-		QuadEditor quadEditor(quad);
+#ifdef _DEBUG
+		m_debugSystem->AddWindow(std::make_shared<QuadEditor>(quad));
+#endif
 		
 		while (!glfwWindowShouldClose(m_Window))
 		{
@@ -74,17 +70,12 @@ namespace nzgdc_demo
 
 			glfwPollEvents();
 
-			quadEditor.UpdateQuadSettings();
 			quad->Render();
 
-			ImGui_ImplGlfw_NewFrame();
-			ImGui_ImplOpenGL3_NewFrame();
-			ImGui::NewFrame();
-			ImGui::ShowDemoWindow();
-			quadEditor.Render();
-			
-			ImGui::Render();
-			ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+#ifdef _DEBUG
+			m_debugSystem->Render();
+#endif
+
 
 			glfwSwapBuffers(m_Window);
 		}
