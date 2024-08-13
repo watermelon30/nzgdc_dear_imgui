@@ -11,6 +11,8 @@ void nzgdc_demo::DebugSystem::Initialize(GLFWwindow* mainWindow)
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+
 	ImGui_ImplGlfw_InitForOpenGL(mainWindow, true);
 	ImGui_ImplOpenGL3_Init();
 }
@@ -29,6 +31,16 @@ void nzgdc_demo::DebugSystem::Render()
 
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+	// Multi viewport
+	if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+	{
+		GLFWwindow* currentContext = glfwGetCurrentContext();
+		ImGui::UpdatePlatformWindows();
+		ImGui::RenderPlatformWindowsDefault();
+		// restore previous context
+		glfwMakeContextCurrent(currentContext);
+	}
 }
 
 void nzgdc_demo::DebugSystem::Shutdown()
