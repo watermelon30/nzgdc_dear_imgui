@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "Camera.h"
+#include "ParticleSystem.h"
 #include "Quad.h"
 #include "QuadMVP.h"
 #include "DebugModule/Widgets/QuadEditor.h"
@@ -77,6 +78,11 @@ namespace nzgdc_demo
 		
 		Shader transformShader("res/shaders/transform.vs", "res/shaders/basic.frag");
 		m_quad = std::make_shared<Quad>(transformShader);
+
+		ParticleSystemData particleSystemData;
+		particleSystemData.AngularVelocity = 100.0f;
+		m_particleSystem = std::make_shared<ParticleSystem>(particleSystemData, mvpShader, m_camera);
+		m_particleSystem->Play();
 #ifdef _DEBUG
 		// m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quad));
 		m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quadMVP), true);
@@ -106,12 +112,15 @@ namespace nzgdc_demo
 	{		
 		m_quadMVP->SetView(m_camera->GetView());
 		m_quadMVP->SetProjection(m_camera->GetProjection());
+
+		m_particleSystem->Update(deltaTime);
 	}
 
 	void App::Render(float deltaTime)
 	{
 		// m_quad->Render();
-		m_quadMVP->Render();
+		// m_quadMVP->Render();
+		m_particleSystem->Render();
 
 #ifdef _DEBUG
 		m_debugSystem->Render();
