@@ -9,9 +9,9 @@ nzgdc_demo::CameraEditor::CameraEditor(const std::shared_ptr<Camera>& camera)
     m_data = m_camera->Data;
 }
 
-void nzgdc_demo::CameraEditor::Render()
+void nzgdc_demo::CameraEditor::RenderContent()
 {
-    ImGui::Begin("Camera Editor");
+    ImGui::Begin(GetWindowId().c_str());
     bool edited{false};
     if (ImGui::DragFloat3("Position", glm::value_ptr(m_data.Position)))
     {
@@ -23,6 +23,11 @@ void nzgdc_demo::CameraEditor::Render()
         UpdateCameraSettings();
     }
     ImGui::End();
+}
+
+std::string nzgdc_demo::CameraEditor::GetWindowId() const
+{
+    return "Camera Editor";
 }
 
 void nzgdc_demo::CameraEditor::UpdateCameraSettings()

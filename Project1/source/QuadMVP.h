@@ -7,9 +7,9 @@ namespace nzgdc_demo
 	{
 	public:
 		QuadMVP(const Shader& shader)
-		: Quad(shader)
+			: Quad(shader)
 		{ }
-		
+
 		virtual void Render() const override;
 
 		void SetView(const glm::mat4& view) const;

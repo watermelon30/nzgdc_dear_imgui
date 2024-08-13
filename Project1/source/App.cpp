@@ -1,5 +1,4 @@
 #include "App.h"
-#include "imgui.h"
 #include "Shader.h"
 #include "glad/glad.h"
 #include <glfw3.h>

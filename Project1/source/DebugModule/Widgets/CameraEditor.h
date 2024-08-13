@@ -10,8 +10,8 @@ namespace nzgdc_demo
     {
     public:
         CameraEditor(const std::shared_ptr<Camera>& camera);
-        virtual void Render() override;
-
+        void RenderContent() override;
+        std::string GetWindowId() const override;
         void UpdateCameraSettings();
 
     private:
