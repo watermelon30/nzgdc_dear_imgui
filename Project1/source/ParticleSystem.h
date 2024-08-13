@@ -37,6 +37,8 @@ namespace nzgdc_demo
         float GetPlaybackTime() const { return m_timer; }
         bool IsPlaying() const { return m_isPlaying; }
 
+        ParticleSystemData& GetData() { return m_data; }
+
     private:
         void EmitParticle();
         std::shared_ptr<Particle> GenerateParticle() const;

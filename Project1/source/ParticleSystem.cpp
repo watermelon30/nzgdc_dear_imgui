@@ -15,6 +15,19 @@ void nzgdc_demo::ParticleSystem::Update(float deltaTime)
 {
     if (!m_isPlaying) return;
 
+    std::erase_if(m_particles, [](const std::shared_ptr<Particle>& particle)
+    {
+        return particle->GetRemainingLifeTime() <= 0;
+    });
+
+    for (const auto& particle : m_particles)
+    {
+        if (particle == nullptr) continue; // kek
+        particle->SetView(m_camera->GetView());
+        particle->SetProjection(m_camera->GetProjection());
+        particle->Update(deltaTime);
+    }
+    
     if (m_timer >= m_data.Duration)
     {
         if (!m_data.Looping) return;
@@ -28,18 +41,6 @@ void nzgdc_demo::ParticleSystem::Update(float deltaTime)
     {
         EmitParticle();
         m_emissionTimer = 0.0f;
-    }
-
-    std::erase_if(m_particles, [](const std::shared_ptr<Particle>& particle)
-    {
-        return particle->GetRemainingLifeTime() <= 0;
-    });
-
-    for (const auto& particle : m_particles)
-    {
-        particle->SetView(m_camera->GetView());
-        particle->SetProjection(m_camera->GetProjection());
-        particle->Update(deltaTime);
     }
 }
 
@@ -79,6 +80,10 @@ void nzgdc_demo::ParticleSystem::EmitParticle()
 {
     if (m_particles.size() >= m_data.MaxParticles) return;
     auto particle = GenerateParticle();
+    particle->BindOnLifeTimeEnd([this, particle]()
+    {
+        m_particles.erase(std::find(m_particles.begin(), m_particles.end(), particle));
+    });
     m_particles.emplace_back(particle);
 }
 

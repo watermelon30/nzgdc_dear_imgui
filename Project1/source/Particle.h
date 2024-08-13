@@ -1,5 +1,7 @@
 ﻿#pragma once
+#include <functional>
 #include <glm.hpp>
+#include <memory>
 
 #include "QuadMVP.h"
 
@@ -22,8 +24,11 @@ namespace nzgdc_demo
 
         void Update(float deltaTime);
         float GetRemainingLifeTime() const { return m_remainingLifeTime; }
-
+        void BindOnLifeTimeEnd(const std::function<void()>& onLifeTimeEnd);
+        
     private:
+        std::function<void()> m_onLifeTimeEnd;
+        
         ParticleData m_data;
         float m_remainingLifeTime;
     };
