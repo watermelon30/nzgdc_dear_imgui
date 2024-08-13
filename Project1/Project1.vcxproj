@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\DebugModule\Widgets\ParticleSystemEditor.cpp" />
+    <ClCompile Include="source\Particle.cpp" />
+    <ClCompile Include="source\ParticleSystem.cpp" />
     <ClCompile Include="source\QuadMVP.cpp" />
     <ClCompile Include="source\App.cpp" />
     <ClCompile Include="source\DebugModule\DebugSystem.cpp" />
@@ -30,6 +33,9 @@
     <ClCompile Include="source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\DebugModule\Widgets\ParticleSystemEditor.h" />
+    <ClInclude Include="source\Particle.h" />
+    <ClInclude Include="source\ParticleSystem.h" />
     <ClInclude Include="source\QuadMVP.h" />
     <ClInclude Include="source\App.h" />
     <ClInclude Include="source\Camera.h" />
