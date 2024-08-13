@@ -1,6 +1,7 @@
 #pragma once
 #include <glfw3.h>
 #include <memory>
+#include <string>
 #include <vector>
 
 #include "DebugWindowBase.h"
@@ -13,9 +14,12 @@ namespace nzgdc_demo
 		static void Initialize(GLFWwindow* mainWindow);
 		void Render();
 		void Shutdown();
-		void AddWindow(std::shared_ptr<DebugWindowBase> window);
+		void AddWindow(std::shared_ptr<DebugWindowBase> window, bool open = false);
+
 	private:
-		std::vector<std::shared_ptr<DebugWindowBase>> windows;
+		void drawMainMenuBar(std::string& popupId);
+	private:
+		std::vector<std::shared_ptr<DebugWindowBase>> m_windows;
 	};
 
 }

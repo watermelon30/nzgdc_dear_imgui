@@ -80,8 +80,8 @@ namespace nzgdc_demo
 		m_quad = std::make_shared<Quad>(transformShader);
 #ifdef _DEBUG
 		// m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quad));
-		m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quadMVP));
-		m_debugSystem->AddWindow(std::make_shared<CameraEditor>(m_camera));
+		m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quadMVP), true);
+		m_debugSystem->AddWindow(std::make_shared<CameraEditor>(m_camera), true);
 #endif
 		
 		while (!glfwWindowShouldClose(m_Window))

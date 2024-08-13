@@ -24,9 +24,15 @@ void nzgdc_demo::DebugSystem::Render()
 	ImGui::NewFrame();
 	ImGui::ShowDemoWindow();
 
-	for (const auto& window : windows)
+	std::string popupId;
+	drawMainMenuBar(popupId);
+
+	for (const auto& window : m_windows)
 	{
-		window->Render();
+		if (window->isWindowOpen())
+		{
+			window->Render();
+		}
 	}
 
 	ImGui::Render();
@@ -48,10 +54,52 @@ void nzgdc_demo::DebugSystem::Shutdown()
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();
-
 }
 
-void nzgdc_demo::DebugSystem::AddWindow(std::shared_ptr<DebugWindowBase> window)
+void nzgdc_demo::DebugSystem::AddWindow(std::shared_ptr<DebugWindowBase> window, bool open)
 {
-	windows.push_back(window);
+	window->SetWindowEnable(open);
+	m_windows.push_back(window);
+}
+
+void nzgdc_demo::DebugSystem::drawMainMenuBar(std::string& popupId)
+{
+	if (ImGui::BeginMainMenuBar())
+	{
+		if (ImGui::BeginMenu("Open Window"))
+		{
+			for (const auto& window : m_windows)
+			{
+				if (ImGui::MenuItem(window->GetWindowId().c_str()))
+				{
+					window->SetWindowEnable(true);
+				}
+
+				// Demo: just to show you can do it this way too
+				bool isWindowOpen = window->isWindowOpen();
+				auto selectableId = window->GetWindowId() + " (selectable)";
+				// Note: ImGuiSelectableFlags_DontClosePopups will work only if ImGuiWindowFlags_NoFocusOnAppearing is set on the opening window.
+				if (ImGui::Selectable(selectableId.c_str(), &isWindowOpen, ImGuiSelectableFlags_DontClosePopups)) {
+					window->SetWindowEnable(!window->isWindowOpen());
+				}
+			}
+
+			ImGui::EndMenu();
+		}
+
+		if (ImGui::BeginMenu("Open pop up"))
+		{
+			if (ImGui::MenuItem("Popup1 (wrong)"))
+			{
+				// TODO: do it wrong
+			}
+			if (ImGui::MenuItem("Popup1 (correct)"))
+			{
+				// TODO: do it correctly
+			}
+
+			ImGui::EndMenu();
+		}
+		ImGui::EndMainMenuBar();
+	}
 }

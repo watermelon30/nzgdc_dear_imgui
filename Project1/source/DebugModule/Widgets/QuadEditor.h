@@ -11,7 +11,8 @@ namespace nzgdc_demo {
 	public:
 		QuadEditor(const std::shared_ptr<Quad>& quad);
 		void UpdateQuadSettings();
-		void Render() override;
+		void RenderContent() override;
+		std::string GetWindowId() const override;
 
 	private:
 		std::shared_ptr<Quad> m_quad;
