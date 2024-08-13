@@ -42,6 +42,7 @@ namespace nzgdc_demo
         virtual void Render() const;
         Transform& GetTransform() { return m_transform; }
 
+
     protected:
         const Shader& m_shader;
         unsigned int m_vao, m_vbo, m_ebo;

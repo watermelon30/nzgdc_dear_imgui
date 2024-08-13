@@ -5,9 +5,11 @@
 #include <glfw3.h>
 #include <iostream>
 
+#include "Camera.h"
 #include "Quad.h"
+#include "QuadMVP.h"
 #include "DebugModule/Widgets/QuadEditor.h"
-
+#include "Widgets/CameraEditor.h"
 
 namespace nzgdc_demo
 {
@@ -32,6 +34,11 @@ namespace nzgdc_demo
 			glfwTerminate();
 		}
 		glfwMakeContextCurrent(m_Window);
+
+		glfwSetFramebufferSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
+			{
+				glViewport(0.0f, 0.0f, width, height);
+			});
 
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		{
@@ -58,10 +65,23 @@ namespace nzgdc_demo
 	{
 		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
+		CameraData cameraData;
+		cameraData.Projection = ProjectionType::Orthographic;
+		cameraData.Width = windowWidth;
+		cameraData.Height = windowHeight;
+		cameraData.Position = glm::vec3(0.0f, 0.0f, 3.0f);
+		m_camera = std::make_shared<Camera>(cameraData);
+
+		Shader mvpShader("res/shaders/mvp.vs", "res/shaders/basic.frag");
+		m_quadMVP = std::make_shared<QuadMVP>(mvpShader);
+		m_quadMVP->GetTransform().Scale = glm::vec3(100.0f);
+		
 		Shader transformShader("res/shaders/transform.vs", "res/shaders/basic.frag");
-		const std::shared_ptr<Quad> quad = std::make_shared<Quad>(transformShader);
+		m_quad = std::make_shared<Quad>(transformShader);
 #ifdef _DEBUG
-		m_debugSystem->AddWindow(std::make_shared<QuadEditor>(quad));
+		// m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quad));
+		m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quadMVP));
+		m_debugSystem->AddWindow(std::make_shared<CameraEditor>(m_camera));
 #endif
 		
 		while (!glfwWindowShouldClose(m_Window))
@@ -70,16 +90,32 @@ namespace nzgdc_demo
 
 			glfwPollEvents();
 
-			quad->Render();
+			m_currentFrame = static_cast<float>(glfwGetTime());
+			const float deltaTime = m_currentFrame - m_lastFrame;
+			m_lastFrame = m_currentFrame;
 
-#ifdef _DEBUG
-			m_debugSystem->Render();
-#endif
-
+			Update(deltaTime);
+			Render(deltaTime);
 
 			glfwSwapBuffers(m_Window);
 		}
 
 		glBindVertexArray(0);
+	}
+
+	void App::Update(float deltaTime)
+	{		
+		m_quadMVP->SetView(m_camera->GetView());
+		m_quadMVP->SetProjection(m_camera->GetProjection());
+	}
+
+	void App::Render(float deltaTime)
+	{
+		// m_quad->Render();
+		m_quadMVP->Render();
+
+#ifdef _DEBUG
+		m_debugSystem->Render();
+#endif
 	}
 }
