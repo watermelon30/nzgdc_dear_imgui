@@ -90,6 +90,7 @@ void nzgdc_demo::ParticleSystem::EmitParticle()
 std::shared_ptr<nzgdc_demo::Particle> nzgdc_demo::ParticleSystem::GenerateParticle() const
 {
     ParticleData data;
+    data.LifeTime = m_data.LifeTime;
     data.AngularVelocity = m_data.AngularVelocity;
     data.Velocity = CalculateParticleVelocity() * m_data.ParticleSpeed;
     data.StartPosition = m_data.Position;

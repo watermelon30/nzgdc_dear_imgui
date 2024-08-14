@@ -20,6 +20,7 @@ namespace nzgdc_demo
         float ParticleSpeed { 100.0f };
         glm::vec3 Position { 0.0f };
         glm::vec3 StartSize { 100.0f };
+        float LifeTime { 1.0f };
     };
     
     class ParticleSystem
