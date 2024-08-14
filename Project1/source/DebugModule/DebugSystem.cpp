@@ -3,6 +3,8 @@
 #include <backends/imgui_impl_glfw.h>
 #include <backends/imgui_impl_opengl3.h>
 
+#include "FluidSimulator/FluidSimulator.h"
+
 void nzgdc_demo::DebugSystem::Initialize(GLFWwindow* mainWindow)
 {
 	IMGUI_CHECKVERSION();
@@ -98,6 +100,15 @@ void nzgdc_demo::DebugSystem::drawMainMenuBar(std::string& popupId)
 				// TODO: do it correctly
 			}
 
+			ImGui::EndMenu();
+		}
+
+		if (ImGui::BeginMenu("Open Editor"))
+		{
+			if (ImGui::MenuItem("Fluid Simulator")) {
+				FluidSimulator::Get().Show(true);
+			}
+			
 			ImGui::EndMenu();
 		}
 		ImGui::EndMainMenuBar();

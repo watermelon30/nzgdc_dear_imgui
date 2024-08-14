@@ -8,6 +8,7 @@
 #include "Quad.h"
 #include "QuadMVP.h"
 #include "DebugModule/Widgets/QuadEditor.h"
+#include "FluidSimulator/FluidSimulator.h"
 #include "Widgets/CameraEditor.h"
 
 namespace nzgdc_demo
@@ -47,6 +48,7 @@ namespace nzgdc_demo
 		m_debugSystem = std::make_shared<DebugSystem>();
 		m_debugSystem->Initialize(m_Window);
 #endif
+		FluidSimulator::Get().m_share = m_Window;
 	}
 
 	App::~App()
@@ -82,11 +84,10 @@ namespace nzgdc_demo
 		m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quadMVP), true);
 		m_debugSystem->AddWindow(std::make_shared<CameraEditor>(m_camera), true);
 #endif
-		
+
+		glfwSwapInterval(1);
 		while (!glfwWindowShouldClose(m_Window))
 		{
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 			glfwPollEvents();
 
 			m_currentFrame = static_cast<float>(glfwGetTime());
@@ -96,7 +97,7 @@ namespace nzgdc_demo
 			Update(deltaTime);
 			Render(deltaTime);
 
-			glfwSwapBuffers(m_Window);
+			HandleFluidSimulator(deltaTime);
 		}
 
 		glBindVertexArray(0);
@@ -110,11 +111,21 @@ namespace nzgdc_demo
 
 	void App::Render(float deltaTime)
 	{
+		glfwMakeContextCurrent(m_Window);
+
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 		// m_quad->Render();
 		m_quadMVP->Render();
 
 #ifdef _DEBUG
 		m_debugSystem->Render();
 #endif
+
+		glfwSwapBuffers(m_Window);
+	}
+
+	void App::HandleFluidSimulator(float deltaTime) {
+		FluidSimulator::Get().Update(deltaTime);
 	}
 }

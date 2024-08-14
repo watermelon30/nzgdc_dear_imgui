@@ -27,6 +27,7 @@ namespace nzgdc_demo
 	private:
 		void Update(float deltaTime);
 		void Render(float deltaTime);
+		void HandleFluidSimulator(float deltaTime);
 
 	private:
 		GLFWwindow* m_Window;
