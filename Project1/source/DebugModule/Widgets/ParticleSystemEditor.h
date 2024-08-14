@@ -14,7 +14,6 @@ namespace nzgdc_demo
 
         virtual std::string GetWindowId() const override;
         virtual void RenderContent() override;
-        void UpdateParticleSystemSettings();
 
     private:
         std::shared_ptr<ParticleSystem> m_particleSystem;

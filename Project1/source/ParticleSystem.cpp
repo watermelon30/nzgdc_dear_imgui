@@ -92,6 +92,8 @@ std::shared_ptr<nzgdc_demo::Particle> nzgdc_demo::ParticleSystem::GeneratePartic
     ParticleData data;
     data.AngularVelocity = m_data.AngularVelocity;
     data.Velocity = CalculateParticleVelocity() * m_data.ParticleSpeed;
+    data.StartPosition = m_data.Position;
+    data.StartSize = m_data.StartSize;
     // TODO: use a pool?
     return std::make_shared<Particle>(data, m_shader);
 }

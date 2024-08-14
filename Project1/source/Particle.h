@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include <functional>
 #include <glm.hpp>
-#include <memory>
 
 #include "QuadMVP.h"
 

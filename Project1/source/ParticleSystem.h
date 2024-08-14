@@ -18,6 +18,8 @@ namespace nzgdc_demo
         int Arc { 45 };    // 0 - 360
         float AngularVelocity { 0.0f };
         float ParticleSpeed { 100.0f };
+        glm::vec3 Position { 0.0f };
+        glm::vec3 StartSize { 100.0f };
     };
     
     class ParticleSystem
