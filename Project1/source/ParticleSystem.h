@@ -21,6 +21,8 @@ namespace nzgdc_demo
         glm::vec3 Position { 0.0f };
         glm::vec3 StartSize { 100.0f };
         float LifeTime { 1.0f };
+        bool UseSizeOverLifeTime { false };
+        glm::vec3 EndSize { 100.0f };
     };
     
     class ParticleSystem

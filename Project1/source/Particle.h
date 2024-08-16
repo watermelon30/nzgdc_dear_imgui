@@ -4,6 +4,8 @@
 
 #include "QuadMVP.h"
 
+#define GLM_ENABLE_EXPERIMENTAL
+
 namespace nzgdc_demo
 {
     struct ParticleData
@@ -14,6 +16,8 @@ namespace nzgdc_demo
         glm::vec2 Velocity { 0.0f };
         float AngularVelocity { 0.0f };
         glm::vec4 Color { 1.0f };
+        bool UseSizeOverLifeTime { false };
+        glm::vec3 EndSize { 0.0f };
     };
     
     class Particle : public QuadMVP
@@ -22,13 +26,13 @@ namespace nzgdc_demo
         Particle(ParticleData data, const Shader& shader);
 
         void Update(float deltaTime);
-        float GetRemainingLifeTime() const { return m_remainingLifeTime; }
+        float GetRemainingLifeTime() const { return m_elapsedTime; }
         void BindOnLifeTimeEnd(const std::function<void()>& onLifeTimeEnd);
         
     private:
         std::function<void()> m_onLifeTimeEnd;
         
         ParticleData m_data;
-        float m_remainingLifeTime;
+        float m_elapsedTime;
     };
 }
