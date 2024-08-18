@@ -26,7 +26,7 @@ void nzgdc_demo::Particle::Update(float deltaTime)
 
     if (m_data.UseSizeOverLifeTime)
     {
-        const auto normalizedTime = m_elapsedTime / m_data.LifeTime;
+        const auto normalizedTime = glm::min(m_elapsedTime / m_data.LifeTime, 1.0f);
         const auto lerpValue = glm::linearInterpolation(normalizedTime);
         m_transform.Scale = glm::mix(m_data.StartSize, m_data.EndSize, lerpValue);
     }

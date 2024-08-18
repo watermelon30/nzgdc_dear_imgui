@@ -15,6 +15,7 @@ namespace nzgdc_demo
         float Duration { 3.0f };
         int MaxParticles { 100 };
         float EmissionRate { 5 }; // particles per second
+        float Radius { 100.0f };
         int Arc { 45 };    // 0 - 360
         float AngularVelocity { 0.0f };
         float ParticleSpeed { 100.0f };

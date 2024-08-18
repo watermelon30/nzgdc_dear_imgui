@@ -15,14 +15,13 @@ void nzgdc_demo::ParticleSystem::Update(float deltaTime)
 {
     if (!m_isPlaying) return;
 
-    std::erase_if(m_particles, [](const std::shared_ptr<Particle>& particle)
+    std::erase_if(m_particles, [this](const std::shared_ptr<Particle>& particle)
     {
-        return particle->GetRemainingLifeTime() <= 0;
+        return particle->GetRemainingLifeTime() >= m_data.LifeTime;
     });
 
     for (const auto& particle : m_particles)
     {
-        if (particle == nullptr) continue; // kek
         particle->SetView(m_camera->GetView());
         particle->SetProjection(m_camera->GetProjection());
         particle->Update(deltaTime);
@@ -30,7 +29,11 @@ void nzgdc_demo::ParticleSystem::Update(float deltaTime)
     
     if (m_timer >= m_data.Duration)
     {
-        if (!m_data.Looping) return;
+        if (!m_data.Looping)
+        {
+            m_isPlaying = false;
+            return;
+        }
         Restart();
     }
 
@@ -39,8 +42,11 @@ void nzgdc_demo::ParticleSystem::Update(float deltaTime)
 
     if (m_emissionTimer >= 1.0f / m_data.EmissionRate)
     {
-        EmitParticle();
-        m_emissionTimer = 0.0f;
+        if (m_data.Looping || m_timer < m_data.Duration - m_data.LifeTime)
+        {
+            EmitParticle();
+            m_emissionTimer = 0.0f;
+        }
     }
 }
 
@@ -54,6 +60,10 @@ void nzgdc_demo::ParticleSystem::Render()
 
 void nzgdc_demo::ParticleSystem::Play()
 {
+    if (m_timer >= m_data.Duration)
+    {
+        m_timer = 0.0f;
+    }
     m_isPlaying = true;
     EmitParticle();
 }
@@ -80,21 +90,21 @@ void nzgdc_demo::ParticleSystem::EmitParticle()
 {
     if (m_particles.size() >= m_data.MaxParticles) return;
     auto particle = GenerateParticle();
-    particle->BindOnLifeTimeEnd([this, particle]()
-    {
-        m_particles.erase(std::find(m_particles.begin(), m_particles.end(), particle));
-    });
     m_particles.emplace_back(particle);
 }
 
 std::shared_ptr<nzgdc_demo::Particle> nzgdc_demo::ParticleSystem::GenerateParticle() const
 {
+    const float randomRadius = static_cast <float>(std::rand()) / (RAND_MAX / m_data.Radius);
+    
     ParticleData data;
     data.LifeTime = m_data.LifeTime;
     data.AngularVelocity = m_data.AngularVelocity;
     data.Velocity = CalculateParticleVelocity() * m_data.ParticleSpeed;
-    data.StartPosition = m_data.Position;
+    data.StartPosition = m_data.Position + glm::vec3(CalculateParticleVelocity(), 0.0f) * randomRadius;
     data.StartSize = m_data.StartSize;
+    data.UseSizeOverLifeTime = m_data.UseSizeOverLifeTime;
+    data.EndSize = m_data.EndSize;
     // TODO: use a pool?
     return std::make_shared<Particle>(data, m_shader);
 }
