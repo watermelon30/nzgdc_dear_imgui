@@ -2,6 +2,7 @@
 #include <memory>
 
 #include "DebugWindowBase.h"
+#include <json/value.h>
 
 namespace nzgdc_demo {
 	class Quad;
@@ -12,10 +13,17 @@ namespace nzgdc_demo {
 		QuadEditor(const std::shared_ptr<Quad>& quad);
 		void UpdateQuadSettings();
 		void RenderContent() override;
-		std::string GetWindowId() const override;
+		[[nodiscard]] std::string GetWindowId() const override;
 
 	private:
+		void drawMenuBar(std::string popupId);
+		bool saveToJson();
+		bool loadFromJson();
+
+	private:
+		inline static std::string saveSettingsPath{"res/assets/QuadEditor.json"};
 		std::shared_ptr<Quad> m_quad;
+		Json::Value m_loadedJson;
 		// ImGui requires a reference& to the data it manipulates.
 		// store the reference in this class and upate quad every frame
 		float m_position[2]{0.0f, 0.0f};
