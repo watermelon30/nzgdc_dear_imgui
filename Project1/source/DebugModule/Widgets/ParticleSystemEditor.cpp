@@ -46,10 +46,12 @@ void nzgdc_demo::ParticleSystemEditor::RenderContent()
     ImGui::DragFloat("Angular Velocity", &m_particleSystem->GetData().AngularVelocity);
     ImGui::DragFloat("Speed", &m_particleSystem->GetData().ParticleSpeed);
     ImGui::DragFloat3("Position", glm::value_ptr(m_particleSystem->GetData().Position));
+    ImGui::DragFloat("Rotation", &m_particleSystem->GetData().Rotation, 1.0f, 0.0f, 360.0f);
     ImGui::Text("Particle");
     ImGui::LabelText("Num Particles", std::to_string(m_particleSystem->GetNumParticles()).c_str());
     ImGui::DragFloat("Life Time", &m_particleSystem->GetData().LifeTime, 0.001f, 1000.0f);
     ImGui::DragFloat3("Scale", glm::value_ptr(m_particleSystem->GetData().StartSize));
+    ImGui::DragFloat3("Acceleration", glm::value_ptr(m_particleSystem->GetData().Acceleration));
     ImGui::Checkbox("Size Over Lifetime", &m_particleSystem->GetData().UseSizeOverLifeTime);
     if (m_particleSystem->GetData().UseSizeOverLifeTime)
     {

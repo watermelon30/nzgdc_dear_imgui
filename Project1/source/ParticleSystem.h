@@ -20,10 +20,12 @@ namespace nzgdc_demo
         float AngularVelocity { 0.0f };
         float ParticleSpeed { 100.0f };
         glm::vec3 Position { 0.0f };
+        float Rotation { 0.0f };
         glm::vec3 StartSize { 100.0f };
         float LifeTime { 1.0f };
         bool UseSizeOverLifeTime { false };
         glm::vec3 EndSize { 100.0f };
+        glm::vec3 Acceleration { 0.0f };
     };
     
     class ParticleSystem

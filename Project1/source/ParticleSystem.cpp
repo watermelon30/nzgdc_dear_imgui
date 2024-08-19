@@ -100,17 +100,18 @@ std::shared_ptr<nzgdc_demo::Particle> nzgdc_demo::ParticleSystem::GeneratePartic
     ParticleData data;
     data.LifeTime = m_data.LifeTime;
     data.AngularVelocity = m_data.AngularVelocity;
-    data.Velocity = CalculateParticleVelocity() * m_data.ParticleSpeed;
+    data.Velocity = glm::vec3(CalculateParticleVelocity(), 0.0f) * m_data.ParticleSpeed;
     data.StartPosition = m_data.Position + glm::vec3(CalculateParticleVelocity(), 0.0f) * randomRadius;
     data.StartSize = m_data.StartSize;
     data.UseSizeOverLifeTime = m_data.UseSizeOverLifeTime;
     data.EndSize = m_data.EndSize;
+    data.Acceleration = m_data.Acceleration;
     // TODO: use a pool?
     return std::make_shared<Particle>(data, m_shader);
 }
 
 glm::vec2 nzgdc_demo::ParticleSystem::CalculateParticleVelocity() const
 {
-    const auto randomDirection = static_cast<float>(std::rand() % (m_data.Arc + 1));
+    const auto randomDirection = m_data.Rotation + static_cast<float>(std::rand() % (m_data.Arc + 1));
     return {glm::cos(glm::radians(randomDirection)), glm::sin(glm::radians(randomDirection))};
 }

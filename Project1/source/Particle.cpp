@@ -9,6 +9,7 @@ nzgdc_demo::Particle::Particle(ParticleData data, const Shader& shader)
 {
     m_transform.Position = m_data.StartPosition;
     m_transform.Scale = m_data.StartSize;
+    m_velocity = m_data.Velocity;
 }
 
 void nzgdc_demo::Particle::Update(float deltaTime)
@@ -21,7 +22,9 @@ void nzgdc_demo::Particle::Update(float deltaTime)
             m_onLifeTimeEnd();
         }
     }
-    m_transform.Position += glm::vec3(m_data.Velocity * deltaTime, 0.0f);
+    
+    m_velocity += m_data.Acceleration * deltaTime;
+    m_transform.Position += m_velocity * deltaTime;
     m_transform.Rotation += glm::vec3(0.0f, 0.0f, m_data.AngularVelocity * deltaTime);
 
     if (m_data.UseSizeOverLifeTime)

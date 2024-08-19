@@ -13,11 +13,12 @@ namespace nzgdc_demo
         float LifeTime { 5.0f };
         glm::vec3 StartPosition { 0.0f };
         glm::vec3 StartSize { 100.0f };
-        glm::vec2 Velocity { 0.0f };
+        glm::vec3 Velocity { 0.0f };
         float AngularVelocity { 0.0f };
         glm::vec4 Color { 1.0f };
         bool UseSizeOverLifeTime { false };
         glm::vec3 EndSize { 0.0f };
+        glm::vec3 Acceleration { 0.0f };
     };
     
     class Particle : public QuadMVP
@@ -33,6 +34,7 @@ namespace nzgdc_demo
         std::function<void()> m_onLifeTimeEnd;
         
         ParticleData m_data;
+        glm::vec3 m_velocity;
         float m_elapsedTime;
     };
 }
