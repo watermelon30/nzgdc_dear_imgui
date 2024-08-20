@@ -49,7 +49,10 @@
   <ItemGroup>
     <Content Include="res\shaders\basic.frag" />
     <Content Include="res\shaders\basic.vs" />
+    <Content Include="res\shaders\color.frag" />
     <Content Include="res\shaders\mvp.vs" />
+    <Content Include="res\shaders\particle.frag" />
+    <Content Include="res\shaders\particle.vs" />
     <Content Include="res\shaders\transform.vs" />
   </ItemGroup>
   <ItemGroup>
