@@ -64,6 +64,9 @@ namespace nzgdc_demo
 
 	void App::Run()
 	{
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
 		CameraData cameraData;
@@ -73,8 +76,8 @@ namespace nzgdc_demo
 		cameraData.Position = glm::vec3(0.0f, 0.0f, 3.0f);
 		m_camera = std::make_shared<Camera>(cameraData);
 
-		Shader mvpShader("res/shaders/mvp.vs", "res/shaders/basic.frag");
-		m_quadMVP = std::make_shared<QuadMVP>(mvpShader);
+		Shader particleShader("res/shaders/particle.vs", "res/shaders/particle.frag");
+		m_quadMVP = std::make_shared<QuadMVP>(particleShader);
 		m_quadMVP->GetTransform().Scale = glm::vec3(100.0f);
 		
 		Shader transformShader("res/shaders/transform.vs", "res/shaders/basic.frag");
@@ -82,7 +85,7 @@ namespace nzgdc_demo
 
 		ParticleSystemData particleSystemData;
 		particleSystemData.AngularVelocity = 100.0f;
-		m_particleSystem = std::make_shared<ParticleSystem>(particleSystemData, mvpShader, m_camera);
+		m_particleSystem = std::make_shared<ParticleSystem>(particleSystemData, particleShader, m_camera);
 		m_particleSystem->Play();
 #ifdef _DEBUG
 		// m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quad));

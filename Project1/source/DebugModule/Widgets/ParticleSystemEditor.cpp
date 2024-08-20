@@ -57,4 +57,10 @@ void nzgdc_demo::ParticleSystemEditor::RenderContent()
     {
         ImGui::DragFloat3("End Scale", glm::value_ptr(m_particleSystem->GetData().EndSize));
     }
+    ImGui::ColorEdit4("Color", glm::value_ptr(m_particleSystem->GetData().StartColor));
+    ImGui::Checkbox("Color Over Lifetime", &m_particleSystem->GetData().UseColorOverLifeTime);
+    if (m_particleSystem->GetData().UseColorOverLifeTime)
+    {
+        ImGui::ColorEdit4("End Color", glm::value_ptr(m_particleSystem->GetData().EndColor));
+    }
 }

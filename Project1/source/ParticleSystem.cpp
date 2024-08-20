@@ -106,6 +106,10 @@ std::shared_ptr<nzgdc_demo::Particle> nzgdc_demo::ParticleSystem::GeneratePartic
     data.UseSizeOverLifeTime = m_data.UseSizeOverLifeTime;
     data.EndSize = m_data.EndSize;
     data.Acceleration = m_data.Acceleration;
+    data.UseColorOverLifeTime = m_data.UseColorOverLifeTime;
+    data.StartColor = m_data.StartColor;
+    data.EndColor = m_data.EndColor;
+
     // TODO: use a pool?
     return std::make_shared<Particle>(data, m_shader);
 }

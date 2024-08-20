@@ -26,6 +26,9 @@ namespace nzgdc_demo
         bool UseSizeOverLifeTime { false };
         glm::vec3 EndSize { 100.0f };
         glm::vec3 Acceleration { 0.0f };
+        glm::vec4 StartColor { 1.0f };
+        bool UseColorOverLifeTime { false };
+        glm::vec4 EndColor { 1.0f };
     };
     
     class ParticleSystem
