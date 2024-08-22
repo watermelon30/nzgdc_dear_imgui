@@ -47,6 +47,8 @@
   <ItemGroup>
     <Content Include="res\shaders\basic.frag" />
     <Content Include="res\shaders\basic.vs" />
+    <Content Include="res\shaders\fluid.frag" />
+    <Content Include="res\shaders\fluid.vs" />
     <Content Include="res\shaders\mvp.vs" />
     <Content Include="res\shaders\transform.vs" />
   </ItemGroup>
