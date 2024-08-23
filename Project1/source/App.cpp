@@ -28,7 +28,7 @@ namespace nzgdc_demo
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-		m_Window = glfwCreateWindow(windowWidth, windowHeight, "NZGDC_24", NULL, NULL);
+		m_Window = glfwCreateWindow(windowWidth, windowHeight, "NZGDC_24", nullptr, nullptr);
 		if (!m_Window)
 		{
 			std::cerr << "Failed to create GLFW window\n";
@@ -43,7 +43,7 @@ namespace nzgdc_demo
 
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		{
-			std::cout << "Failed to initialize GLAD\n";
+			std::cerr << "Failed to initialize GLAD\n";
 			return;
 		}
 #ifdef _DEBUG
@@ -88,7 +88,7 @@ namespace nzgdc_demo
 			glfwPollEvents();
 
 			m_currentFrame = static_cast<float>(glfwGetTime());
-			const float deltaTime = m_currentFrame - m_lastFrame;
+			const float deltaTime{ m_currentFrame - m_lastFrame };
 			m_lastFrame = m_currentFrame;
 
 			Update(deltaTime);

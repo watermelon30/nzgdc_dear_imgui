@@ -15,6 +15,7 @@ namespace nzgdc_demo
     struct CameraData
     {
         CameraData() noexcept = default;
+
         CameraData(ProjectionType proj, const float w, const float h, const glm::vec3& pos) noexcept :
             Projection(proj),
             Width(w),
@@ -46,7 +47,7 @@ namespace nzgdc_demo
     class Camera
     {
     public:
-        explicit Camera(const CameraData& data) :
+        explicit Camera(const CameraData& data) noexcept :
             Data(data)
         {}
 
@@ -64,8 +65,8 @@ namespace nzgdc_demo
             }
 
             // center is 0,0
-            const float halfWidth = Data.Width * 0.5f;
-            const float halfHeight = Data.Height * 0.5f;
+            const float halfWidth{Data.Width * 0.5f};
+            const float halfHeight{Data.Height * 0.5f};
             return glm::ortho(-halfWidth, halfWidth, -halfHeight, halfHeight, Data.NearPlane, Data.FarPlane);
         }
 
