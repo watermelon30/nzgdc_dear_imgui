@@ -21,7 +21,9 @@ namespace nzgdc_demo
 		if (!glfwInit())
 		{
 			std::cerr << "Failed to initialize GLFW\n";
+			return;
 		}
+		
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -32,8 +34,8 @@ namespace nzgdc_demo
 			std::cerr << "Failed to create GLFW window\n";
 			glfwTerminate();
 		}
+		
 		glfwMakeContextCurrent(m_Window);
-
 		glfwSetFramebufferSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
 			{
 				glViewport(0.0f, 0.0f, width, height);
@@ -42,6 +44,7 @@ namespace nzgdc_demo
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		{
 			std::cout << "Failed to initialize GLAD\n";
+			return;
 		}
 #ifdef _DEBUG
 		m_debugSystem = std::make_shared<DebugSystem>();
@@ -53,7 +56,6 @@ namespace nzgdc_demo
 	{
 		glfwDestroyWindow(m_Window);
 		glfwTerminate();
-		
 
 #ifdef _DEBUG
 		m_debugSystem->Shutdown();
@@ -64,18 +66,13 @@ namespace nzgdc_demo
 	{
 		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
-		CameraData cameraData;
-		cameraData.Projection = ProjectionType::Orthographic;
-		cameraData.Width = windowWidth;
-		cameraData.Height = windowHeight;
-		cameraData.Position = glm::vec3(0.0f, 0.0f, 3.0f);
+		const CameraData cameraData(ProjectionType::Orthographic, windowWidth, windowHeight, glm::vec3(0.0f, 0.0f, 3.0f));
 		m_camera = std::make_shared<Camera>(cameraData);
 
 		const Shader defaultShader("res/shaders/basic.vs", "res/shaders/basic.frag");
 
 		m_quad = std::make_shared<Quad>(defaultShader);
 		m_quadMVP = std::make_shared<QuadMVP>(defaultShader, "res/textures/jack.jpg");
-
 		m_quadMVP->GetTransform().m_scale = glm::vec3(400.0f);
 		
 #ifdef _DEBUG
