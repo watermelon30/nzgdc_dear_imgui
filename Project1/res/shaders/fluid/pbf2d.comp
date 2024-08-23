@@ -1,0 +1,121 @@
+#version 430 core
+
+#define MAX_NEIGHBORS 100
+#define NUM_ITERATIONS 5
+
+struct Particle {
+    vec2 position;
+    vec2 velocity;
+    float lambda;
+    vec2 deltaP;
+};
+
+layout(std430, binding = 0) buffer Particles {
+    Particle particles[];
+};
+
+uniform float deltaTime;
+uniform float particleRadius = 0.02;
+uniform vec2 gravity = vec2(0.0, -9.8);
+uniform float restDensity = 1.0;
+uniform float h = 1.1;
+uniform float epsilon = 100.0;
+uniform int numParticles;
+
+// Kernels for density and spiky gradient
+float poly6Kernel(float r, float h) {
+    float res = 0.0;
+    float hr = h * h - r * r;
+    if (r < h) {
+        res = 315.0 / (64.0 * 3.14159265359 * pow(h, 9)) * pow(hr, 3);
+    }
+    return res;
+}
+
+vec2 spikyKernelGradient(vec2 r, float h) {
+    vec2 res = vec2(0.0, 0.0);
+    float rLen = length(r);
+    if (rLen > 0.0 && rLen < h) {
+        res = -45.0 / (3.14159265359 * pow(h, 6)) * pow(h - rLen, 2) * normalize(r);
+    }
+    return res;
+}
+
+void main() {
+    uint i = gl_GlobalInvocationID.x;
+
+    if (i >= numParticles) return;
+
+    Particle p = particles[i];
+
+    // Neighbor search and density estimation
+    float density = 0.0;
+    for (int j = 0; j < numParticles; j++) {
+        if (i == j) continue;
+        Particle q = particles[j];
+        vec2 rij = p.position - q.position;
+        float rLen = length(rij);
+        if (rLen < h) {
+            density += poly6Kernel(rLen, h);
+        }
+    }
+    density *= 1.0; // Assume mass = 1 for simplicity
+
+    // Compute lambda (Lagrange multiplier)
+    float C = (density / restDensity) - 1.0;
+    float sumGradC2 = 0.0;
+    vec2 gradC_i = vec2(0.0);
+
+    for (int j = 0; j < numParticles; j++) {
+        if (i == j) continue;
+        Particle q = particles[j];
+        vec2 rij = p.position - q.position;
+        float rLen = length(rij);
+        if (rLen < h) {
+            vec2 gradC_j = spikyKernelGradient(rij, h) / restDensity;
+            sumGradC2 += dot(gradC_j, gradC_j);
+            gradC_i += gradC_j;
+        }
+    }
+    sumGradC2 += dot(gradC_i, gradC_i);
+
+    p.lambda = -C / (sumGradC2 + epsilon);
+
+    particles[i] = p;
+
+    // Barrier to ensure all lambdas are computed
+    barrier();
+
+    // Compute position correction
+    vec2 deltaP = vec2(0.0);
+    for (int j = 0; j < numParticles; j++) {
+        if (i == j) continue;
+        Particle q = particles[j];
+        vec2 rij = p.position - q.position;
+        float rLen = length(rij);
+        if (rLen < h) {
+            float scorr = -0.01 * poly6Kernel(rLen, h) * poly6Kernel(rLen, h);
+            deltaP += (p.lambda + q.lambda + scorr) * spikyKernelGradient(rij, h);
+        }
+    }
+    p.deltaP = deltaP / restDensity;
+
+    particles[i] = p;
+
+    // Barrier to ensure all position corrections are computed
+    barrier();
+
+    // Apply position correction
+    p.position += p.deltaP;
+
+    particles[i] = p;
+
+    // Barrier to ensure all positions are updated
+    barrier();
+
+    // Update velocity
+    p.velocity = (p.position - (p.position - p.deltaP)) / deltaTime;
+    p.velocity += gravity * deltaTime;
+
+    particles[i] = p;
+}

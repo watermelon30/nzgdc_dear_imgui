@@ -29,9 +29,11 @@
     <ClCompile Include="source\Quad.cpp" />
     <ClCompile Include="source\Shader.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\Shader\ComputeShader.cpp" />
     <ClCompile Include="source\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\Shader\ComputeShader.h" />
     <ClInclude Include="source\Window\Window.h" />
     <ClInclude Include="source\FluidSimulator\FluidSimulator.h" />
     <ClInclude Include="source\QuadMVP.h" />
@@ -47,8 +49,15 @@
   <ItemGroup>
     <Content Include="res\shaders\basic.frag" />
     <Content Include="res\shaders\basic.vs" />
-    <Content Include="res\shaders\fluid.frag" />
-    <Content Include="res\shaders\fluid.vs" />
+    <Content Include="res\shaders\fluid\advectParticles.comp" />
+    <Content Include="res\shaders\fluid\applyForces.comp" />
+    <Content Include="res\shaders\fluid\fluid.frag" />
+    <Content Include="res\shaders\fluid\fluid.vert" />
+    <Content Include="res\shaders\fluid\pbf2d.comp" />
+    <Content Include="res\shaders\fluid\projectVelocities.comp" />
+    <Content Include="res\shaders\fluid\solvePressure.comp" />
+    <Content Include="res\shaders\fluid\transferGridToParticles.comp" />
+    <Content Include="res\shaders\fluid\transferParticlesToGrid.comp" />
     <Content Include="res\shaders\mvp.vs" />
     <Content Include="res\shaders\transform.vs" />
   </ItemGroup>

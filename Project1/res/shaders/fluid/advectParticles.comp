@@ -1,0 +1,41 @@
+﻿#version 430 core
+
+layout (local_size_x = 256) in;
+
+struct Particle {
+    vec2 position;
+    vec2 velocity;
+};
+
+layout (std430, binding = 0) buffer Particles {
+    Particle particles[];
+};
+
+uniform float dt;
+uniform vec2 gridSize;
+uniform float restitution;
+
+void main() {
+    uint index = gl_GlobalInvocationID.x;
+
+    // Update position
+    particles[index].position += particles[index].velocity * dt;
+
+    // Reflective boundary conditions with energy loss
+    if (particles[index].position.x < 0.0) {
+        particles[index].position.x = 0.0;
+        particles[index].velocity.x = -particles[index].velocity.x * restitution;
+    }
+    if (particles[index].position.x > gridSize.x) {
+        particles[index].position.x = gridSize.x;
+        particles[index].velocity.x = -particles[index].velocity.x * restitution;
+    }
+    if (particles[index].position.y < 0.0) {
+        particles[index].position.y = 0.0;
+        particles[index].velocity.y = -particles[index].velocity.y * restitution;
+    }
+    if (particles[index].position.y > gridSize.y) {
+        particles[index].position.y = gridSize.y;
+        particles[index].velocity.y = -particles[index].velocity.y * restitution;
+    }
+}
