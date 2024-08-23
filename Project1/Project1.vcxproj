@@ -28,6 +28,7 @@
     <ClCompile Include="source\Quad.cpp" />
     <ClCompile Include="source\Shader.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\QuadMVP.h" />
@@ -39,6 +40,8 @@
     <ClInclude Include="source\DebugModule\Widgets\QuadEditor.h" />
     <ClInclude Include="source\Quad.h" />
     <ClInclude Include="source\Shader.h" />
+    <ClInclude Include="source\Texture.h" />
+    <ClInclude Include="source\Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="res\shaders\basic.frag" />

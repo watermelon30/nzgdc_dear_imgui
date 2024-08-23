@@ -12,8 +12,8 @@
 
 namespace nzgdc_demo
 {
-	const static int windowWidth = 800; 
-	const static int windowHeight = 600;
+	constexpr static int windowWidth{ 800 }; 
+	constexpr static int windowHeight{ 600 };
 
 	App::App() :
 		m_Window{ nullptr }
@@ -71,12 +71,13 @@ namespace nzgdc_demo
 		cameraData.Position = glm::vec3(0.0f, 0.0f, 3.0f);
 		m_camera = std::make_shared<Camera>(cameraData);
 
-		Shader mvpShader("res/shaders/mvp.vs", "res/shaders/basic.frag");
-		m_quadMVP = std::make_shared<QuadMVP>(mvpShader);
-		m_quadMVP->GetTransform().Scale = glm::vec3(100.0f);
+		const Shader defaultShader("res/shaders/basic.vs", "res/shaders/basic.frag");
+
+		m_quad = std::make_shared<Quad>(defaultShader);
+		m_quadMVP = std::make_shared<QuadMVP>(defaultShader, "res/textures/jack.jpg");
+
+		m_quadMVP->GetTransform().m_scale = glm::vec3(400.0f);
 		
-		Shader transformShader("res/shaders/transform.vs", "res/shaders/basic.frag");
-		m_quad = std::make_shared<Quad>(transformShader);
 #ifdef _DEBUG
 		// m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quad));
 		m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quadMVP), true);
