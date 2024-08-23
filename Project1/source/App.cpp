@@ -8,8 +8,8 @@
 #include "Quad.h"
 #include "QuadMVP.h"
 #include "DebugModule/Widgets/QuadEditor.h"
-#include "FluidSimulator/FluidSimulator.h"
 #include "Widgets/CameraEditor.h"
+#include "Window/FluidSimulatorWindow.h"
 
 namespace nzgdc_demo
 {
@@ -46,9 +46,8 @@ namespace nzgdc_demo
 		}
 #ifdef _DEBUG
 		m_debugSystem = std::make_shared<DebugSystem>();
-		m_debugSystem->Initialize(m_Window);
+		m_debugSystem->Initialize(this);
 #endif
-		FluidSimulator::Get().m_share = m_Window;
 	}
 
 	App::~App()
@@ -97,10 +96,22 @@ namespace nzgdc_demo
 			Update(deltaTime);
 			Render(deltaTime);
 
-			HandleFluidSimulator(deltaTime);
+			for (const auto& window : m_windows)
+			{
+				window->Update(deltaTime);
+				window->Render(deltaTime);
+			}
 		}
 
 		glBindVertexArray(0);
+	}
+
+	std::shared_ptr<Window> App::CreateFluidSimulatorWindow()
+	{
+		auto window = std::make_shared<FluidSimulatorWindow>();
+		window->Init(m_Window);
+		m_windows.push_back(window);
+		return window;
 	}
 
 	void App::Update(float deltaTime)
@@ -123,9 +134,5 @@ namespace nzgdc_demo
 #endif
 
 		glfwSwapBuffers(m_Window);
-	}
-
-	void App::HandleFluidSimulator(float deltaTime) {
-		FluidSimulator::Get().Update(deltaTime);
 	}
 }

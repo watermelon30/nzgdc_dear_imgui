@@ -29,9 +29,11 @@
     <ClCompile Include="source\Quad.cpp" />
     <ClCompile Include="source\Shader.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\Window\FluidSimulatorWindow.cpp" />
     <ClCompile Include="source\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\Window\FluidSimulatorWindow.h" />
     <ClInclude Include="source\Window\Window.h" />
     <ClInclude Include="source\FluidSimulator\FluidSimulator.h" />
     <ClInclude Include="source\QuadMVP.h" />

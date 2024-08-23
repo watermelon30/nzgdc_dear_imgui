@@ -10,6 +10,7 @@ namespace nzgdc_demo
 	class Camera;
 	class QuadMVP;
 	class Quad;
+	class Window;
 
 	class App
 	{
@@ -18,6 +19,8 @@ namespace nzgdc_demo
 		~App();
 
 		void Run();
+		std::shared_ptr<Window> CreateFluidSimulatorWindow();
+		GLFWwindow* GetMainWindow() const { return m_Window; }
 
 		App(const App&) = delete;
 		App& operator=(const App&) = delete; 
@@ -27,7 +30,6 @@ namespace nzgdc_demo
 	private:
 		void Update(float deltaTime);
 		void Render(float deltaTime);
-		void HandleFluidSimulator(float deltaTime);
 
 	private:
 		GLFWwindow* m_Window;
@@ -39,5 +41,7 @@ namespace nzgdc_demo
 		
 		float m_currentFrame { 0.0f };
 		float m_lastFrame { 0.0f };
+
+		std::vector<std::shared_ptr<Window>> m_windows;
 	};
 }
