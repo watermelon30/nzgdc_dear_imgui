@@ -7,7 +7,8 @@
 
 namespace nzgdc_demo
 {
-    Window::Window(int windowWidth, int windowHeight, const std::string& windowTitle) : m_windowWidth(windowWidth)
+    Window::Window(int windowWidth, int windowHeight, const std::string& windowTitle)
+        : m_windowWidth(windowWidth)
         , m_windowHeight(windowHeight)
         , m_windowTitle(windowTitle)
     {
@@ -57,10 +58,10 @@ namespace nzgdc_demo
 
     void Window::WindowCloseCallback(GLFWwindow* window)
     {
-        Window* windowPtr = static_cast<Window*>(glfwGetWindowUserPointer(window));
-        if (windowPtr && windowPtr->OnWindowShouldClose)
+        if (window)
         {
-            windowPtr->OnWindowShouldClose(window);
+            glfwHideWindow(window);
+            glfwSetWindowShouldClose(window, false);
         }
     }
 
@@ -82,6 +83,7 @@ namespace nzgdc_demo
     void Window::Render(float deltaTime)
     {
         assert(m_window != nullptr);
+        glfwGetFramebufferSize(m_window, &m_windowWidth, &m_windowHeight);
         glfwMakeContextCurrent(m_window);
         glViewport(0, 0, m_windowWidth, m_windowHeight);
 
