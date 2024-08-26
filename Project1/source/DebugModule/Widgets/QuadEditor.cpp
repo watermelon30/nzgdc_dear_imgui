@@ -10,7 +10,8 @@
 #include <json/writer.h>
 
 nzgdc_demo::QuadEditor::QuadEditor(const std::shared_ptr<Quad>& quad)
-	: m_quad(quad), m_loadedJson(Json::nullValue) {
+	: m_quad(quad), m_loadedJson(Json::nullValue)
+{
 	m_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing;
 	m_position[0] = quad->GetTransform().m_position[0];
 	m_position[1] = quad->GetTransform().m_position[1];
@@ -25,39 +26,67 @@ void nzgdc_demo::QuadEditor::UpdateQuadSettings() {
 	m_quad->GetTransform().m_scale = glm::vec3(m_scale[0], m_scale[1], 0.0f);
 }
 
-void nzgdc_demo::QuadEditor::RenderContent() {
+void nzgdc_demo::QuadEditor::RenderContent()
+{
 	std::string popupId;
 	drawMenuBar(popupId);
-	bool edited{ false };
-	if (ImGui::DragFloat2("Position", m_position)) {
+	bool edited{false};
+	if (ImGui::DragFloat2("Position", m_position))
+	{
 		edited = true;
 	}
-	if (ImGui::DragFloat("Rotation", &m_rotation)) {
+	if (ImGui::DragFloat("Rotation", &m_rotation))
+	{
 		edited = true;
 	}
-	if (ImGui::DragFloat2("Scale", m_scale)) {
+	if (ImGui::DragFloat2("Scale", m_scale))
+	{
 		edited = true;
 	}
-	if (edited) {
+	if (edited)
+	{
 		UpdateQuadSettings();
 	}
 }
 
-std::string nzgdc_demo::QuadEditor::GetWindowId() const {
+std::string nzgdc_demo::QuadEditor::GetWindowId() const
+{
 	return "Quad Editor";
 }
 
-void nzgdc_demo::QuadEditor::drawMenuBar(std::string popupId) {
-	if (ImGui::BeginMenuBar()) {
-		if (ImGui::BeginMenu("Options")) {
-			if (ImGui::MenuItem("Load")) {
-				loadFromJson();
+void nzgdc_demo::QuadEditor::drawMenuBar(std::string popupId)
+{
+	if (ImGui::BeginMenuBar())
+	{
+		if (ImGui::BeginMenu("Options"))
+		{
+			if (ImGui::MenuItem("Load"))
+			{
+				if (loadFromJson())
+				{
+					UpdateQuadSettings();
+				}
 			}
-			if (ImGui::MenuItem("Save")) {
+			if (ImGui::MenuItem("Save"))
+			{
 				saveToJson();
 			}
+			if (ImGui::MenuItem("Reset coordinates"))
+			{
+				resetCoordinates();
+			}
+			ImGui::EndMenu();
 		}
+		ImGui::EndMenuBar();
 	}
+}
+
+void nzgdc_demo::QuadEditor::resetCoordinates()
+{
+	m_position[0] = 0.0f;
+	m_position[1] = 0.0f;
+	m_rotation = 0.0f;
+	UpdateQuadSettings();
 }
 
 bool nzgdc_demo::QuadEditor::saveToJson()
@@ -73,7 +102,8 @@ bool nzgdc_demo::QuadEditor::saveToJson()
 
 	std::ofstream file(saveSettingsPath);
 
-	if (!file.is_open()) {
+	if (!file.is_open())
+	{
 		// TODO: Log error
 		return false;
 	}
@@ -86,30 +116,37 @@ bool nzgdc_demo::QuadEditor::loadFromJson()
 {
 	std::ifstream file(saveSettingsPath);
 
-	if (!file.is_open()) {
+	if (!file.is_open())
+	{
 		// TODO: Log error
 		return false;
 	}
 	Json::Reader reader;
 
-	if (!reader.parse(file, m_loadedJson)) {
+	if (!reader.parse(file, m_loadedJson))
+	{
 		// TODO: Log error
 		return false;
 	}
 
-	if (m_loadedJson["scale_x"].empty()) {
+	if (!m_loadedJson["scale_x"].empty())
+	{
 		m_scale[0] = m_loadedJson["scale_x"].asFloat();
 	}
-	if (m_loadedJson["scale_y"].empty()) {
+	if (!m_loadedJson["scale_y"].empty())
+	{
 		m_scale[1] = m_loadedJson["scale_y"].asFloat();
 	}
-	if (m_loadedJson["rotation"].empty()) {
+	if (!m_loadedJson["rotation"].empty())
+	{
 		m_rotation = m_loadedJson["rotation"].asFloat();
 	}
-	if (m_loadedJson["position_x"].empty()) {
+	if (!m_loadedJson["position_x"].empty())
+	{
 		m_position[0] = m_loadedJson["position_x"].asFloat();
 	}
-	if (m_loadedJson["position_y"].empty()) {
+	if (!m_loadedJson["position_y"].empty())
+	{
 		m_position[1] = m_loadedJson["position_y"].asFloat();
 	}
 	return true;

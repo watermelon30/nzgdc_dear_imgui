@@ -17,6 +17,7 @@ namespace nzgdc_demo {
 
 	private:
 		void drawMenuBar(std::string popupId);
+		void resetCoordinates();
 		bool saveToJson();
 		bool loadFromJson();
 
