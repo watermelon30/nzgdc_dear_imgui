@@ -38,7 +38,7 @@ namespace nzgdc_demo
 		glfwMakeContextCurrent(m_Window);
 		glfwSetFramebufferSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
 			{
-				glViewport(0.0f, 0.0f, width, height);
+				glViewport(0, 0, width, height);
 			});
 
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))

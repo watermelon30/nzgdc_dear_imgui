@@ -36,7 +36,10 @@
     <ClCompile Include="source\Quad.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QuadMVP.cpp">
+    <ClCompile Include="source\QuadMVP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\DebugModule\Widgets\CameraEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,7 +62,13 @@
     <ClInclude Include="source\Quad.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="QuadMVP.h">
+    <ClInclude Include="source\QuadMVP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\DebugModule\Widgets\CameraEditor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
