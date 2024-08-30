@@ -35,6 +35,7 @@ nzgdc_demo::Quad::Quad(const Shader& shader)
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
+    // Reset buffer to 0
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 }
@@ -43,7 +44,7 @@ void nzgdc_demo::Quad::Render() const
 {
     m_shader.Use();
     glUniformMatrix4fv(glGetUniformLocation(m_shader.GetId(), "transform"), 1, GL_FALSE, glm::value_ptr(m_transform.Get()));
-    
+
     glBindVertexArray(m_vao);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
