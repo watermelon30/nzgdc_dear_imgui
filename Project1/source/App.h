@@ -3,14 +3,17 @@
 
 #include "DebugModule/DebugSystem.h"
 
+namespace nzgdc_demo
+{
+	class ParticleSystemWindow;
+}
+
 struct GLFWwindow;
 
 namespace nzgdc_demo
 {
-	class ParticleSystem;
 	class Camera;
 	class QuadMVP;
-	class Quad;
 	class Window;
 
 	class App
@@ -21,6 +24,8 @@ namespace nzgdc_demo
 
 		void Run();
 		std::shared_ptr<Window> CreateFluidSimulatorWindow();
+		std::weak_ptr<ParticleSystemWindow> CreateParticleSystemWindow();
+		
 		GLFWwindow* GetMainWindow() const { return m_Window; }
 
 		App(const App&) = delete;
@@ -37,9 +42,7 @@ namespace nzgdc_demo
 		std::shared_ptr<DebugSystem> m_debugSystem;
 
 		std::shared_ptr<Camera> m_camera;
-		std::shared_ptr<Quad> m_quad;
 		std::shared_ptr<QuadMVP> m_quadMVP;
-		std::shared_ptr<ParticleSystem> m_particleSystem;
 		
 		float m_currentFrame { 0.0f };
 		float m_lastFrame { 0.0f };

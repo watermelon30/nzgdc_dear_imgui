@@ -112,6 +112,10 @@ void nzgdc_demo::DebugSystem::drawMainMenuBar(std::string& popupId)
 			{
 				m_app->CreateFluidSimulatorWindow();
 			}
+			if (ImGui::MenuItem("Particle System"))
+			{
+				m_app->CreateParticleSystemWindow();
+			}
 			
 			ImGui::EndMenu();
 		}
