@@ -13,8 +13,8 @@
 
 namespace nzgdc_demo
 {
-	const static int windowWidth = 800; 
-	const static int windowHeight = 600;
+	constexpr static int windowWidth{ 800 }; 
+	constexpr static int windowHeight{ 600 };
 
 	App::App() :
 		m_Window{ nullptr }
@@ -22,27 +22,29 @@ namespace nzgdc_demo
 		if (!glfwInit())
 		{
 			std::cerr << "Failed to initialize GLFW\n";
+			return;
 		}
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-		m_Window = glfwCreateWindow(windowWidth, windowHeight, "NZGDC_24", NULL, NULL);
+		m_Window = glfwCreateWindow(windowWidth, windowHeight, "NZGDC_24", nullptr, nullptr);
 		if (!m_Window)
 		{
 			std::cerr << "Failed to create GLFW window\n";
 			glfwTerminate();
 		}
+		
 		glfwMakeContextCurrent(m_Window);
-
 		glfwSetFramebufferSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
 			{
-				glViewport(0.0f, 0.0f, width, height);
+				glViewport(0, 0, width, height);
 			});
 
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		{
-			std::cout << "Failed to initialize GLAD\n";
+			std::cerr << "Failed to initialize GLAD\n";
+			return;
 		}
 #ifdef _DEBUG
 		m_debugSystem = std::make_shared<DebugSystem>();
@@ -55,7 +57,6 @@ namespace nzgdc_demo
 	{
 		glfwDestroyWindow(m_Window);
 		glfwTerminate();
-		
 
 #ifdef _DEBUG
 		m_debugSystem->Shutdown();
@@ -66,19 +67,15 @@ namespace nzgdc_demo
 	{
 		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
-		CameraData cameraData;
-		cameraData.Projection = ProjectionType::Orthographic;
-		cameraData.Width = windowWidth;
-		cameraData.Height = windowHeight;
-		cameraData.Position = glm::vec3(0.0f, 0.0f, 3.0f);
+		const CameraData cameraData(ProjectionType::Orthographic, windowWidth, windowHeight, glm::vec3(0.0f, 0.0f, 3.0f));
 		m_camera = std::make_shared<Camera>(cameraData);
 
-		Shader mvpShader("res/shaders/mvp.vs", "res/shaders/basic.frag");
-		m_quadMVP = std::make_shared<QuadMVP>(mvpShader);
-		m_quadMVP->GetTransform().Scale = glm::vec3(100.0f);
+		const Shader defaultShader("res/shaders/basic.vs", "res/shaders/basic.frag");
+
+		m_quad = std::make_shared<Quad>(defaultShader);
+		m_quadMVP = std::make_shared<QuadMVP>(defaultShader, "res/textures/jack.jpg");
+		m_quadMVP->GetTransform().m_scale = glm::vec3(400.0f);
 		
-		Shader transformShader("res/shaders/transform.vs", "res/shaders/basic.frag");
-		m_quad = std::make_shared<Quad>(transformShader);
 #ifdef _DEBUG
 		// m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quad));
 		m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quadMVP), true);
@@ -91,7 +88,7 @@ namespace nzgdc_demo
 			glfwPollEvents();
 
 			m_currentFrame = static_cast<float>(glfwGetTime());
-			const float deltaTime = m_currentFrame - m_lastFrame;
+			const float deltaTime{ m_currentFrame - m_lastFrame };
 			m_lastFrame = m_currentFrame;
 
 			Update(deltaTime);

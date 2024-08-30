@@ -81,7 +81,8 @@ void nzgdc_demo::DebugSystem::drawMainMenuBar(std::string& popupId)
 				bool isWindowOpen = window->isWindowOpen();
 				auto selectableId = window->GetWindowId() + " (selectable)";
 				// Note: ImGuiSelectableFlags_DontClosePopups will work only if ImGuiWindowFlags_NoFocusOnAppearing is set on the opening window.
-				if (ImGui::Selectable(selectableId.c_str(), &isWindowOpen, ImGuiSelectableFlags_DontClosePopups)) {
+				if (ImGui::Selectable(selectableId.c_str(), &isWindowOpen, ImGuiSelectableFlags_DontClosePopups))
+				{
 					window->SetWindowEnable(!window->isWindowOpen());
 				}
 			}

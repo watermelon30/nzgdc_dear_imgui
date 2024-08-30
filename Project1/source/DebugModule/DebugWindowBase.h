@@ -12,10 +12,11 @@ namespace nzgdc_demo
 		virtual ~DebugWindowBase() = default;
 		void Render();
 
-		virtual std::string GetWindowId() const = 0;
+		[[nodiscard]] virtual std::string GetWindowId() const = 0;
 		virtual void RenderContent() = 0;
+
 		void SetWindowEnable(bool enabled);
-		bool isWindowOpen() const;
+		[[nodiscard]] bool isWindowOpen() const;
 	protected:
 		bool m_isOpen{true};
 		ImGuiWindowFlags m_flags{ImGuiWindowFlags_NoFocusOnAppearing};

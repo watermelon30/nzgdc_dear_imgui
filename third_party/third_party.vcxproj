@@ -78,7 +78,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)\glad\include;$(ProjectDir)\imgui;$(ProjectDir)\glfw\include\GLFW;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)glad\include;$(ProjectDir)imgui;$(ProjectDir)glfw\include\GLFW;$(ProjectDir)jsoncpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -116,7 +116,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)\glad\include;$(ProjectDir)\imgui;$(ProjectDir)\glfw\include\GLFW;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)glad\include;$(ProjectDir)imgui;$(ProjectDir)glfw\include\GLFW;$(ProjectDir)jsoncpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -450,7 +450,18 @@
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="imgui\misc\cpp\imgui_stdlib.h" />
+    <ClInclude Include="jsoncpp\include\json\allocator.h" />
+    <ClInclude Include="jsoncpp\include\json\assertions.h" />
+    <ClInclude Include="jsoncpp\include\json\config.h" />
+    <ClInclude Include="jsoncpp\include\json\forwards.h" />
+    <ClInclude Include="jsoncpp\include\json\json.h" />
+    <ClInclude Include="jsoncpp\include\json\json_features.h" />
+    <ClInclude Include="jsoncpp\include\json\reader.h" />
+    <ClInclude Include="jsoncpp\include\json\value.h" />
+    <ClInclude Include="jsoncpp\include\json\version.h" />
+    <ClInclude Include="jsoncpp\include\json\writer.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad\src\glad.c" />
@@ -464,6 +475,7 @@
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="imgui\misc\cpp\imgui_stdlib.cpp" />
+    <ClCompile Include="jsoncpp\example\readFromString\readFromString.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -672,6 +684,236 @@
     <None Include="glm\gtx\vector_angle.inl" />
     <None Include="glm\gtx\vector_query.inl" />
     <None Include="glm\gtx\wrap.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="jsoncpp\.clang-format" />
+    <Content Include="jsoncpp\.clang-tidy" />
+    <Content Include="jsoncpp\.git" />
+    <Content Include="jsoncpp\.gitattributes" />
+    <Content Include="jsoncpp\.github\ISSUE_TEMPLATE\bug_report.md" />
+    <Content Include="jsoncpp\.github\ISSUE_TEMPLATE\feature_request.md" />
+    <Content Include="jsoncpp\.gitignore" />
+    <Content Include="jsoncpp\.travis.yml" />
+    <Content Include="jsoncpp\.travis_scripts\cmake_builder.sh" />
+    <Content Include="jsoncpp\.travis_scripts\meson_builder.sh" />
+    <Content Include="jsoncpp\.travis_scripts\run-clang-format.py" />
+    <Content Include="jsoncpp\.travis_scripts\run-clang-format.sh" />
+    <Content Include="jsoncpp\.travis_scripts\travis.before_install.linux.sh" />
+    <Content Include="jsoncpp\.travis_scripts\travis.before_install.osx.sh" />
+    <Content Include="jsoncpp\.travis_scripts\travis.install.linux.sh" />
+    <Content Include="jsoncpp\.travis_scripts\travis.install.osx.sh" />
+    <Content Include="jsoncpp\amalgamate.py" />
+    <Content Include="jsoncpp\appveyor.yml" />
+    <Content Include="jsoncpp\AUTHORS" />
+    <Content Include="jsoncpp\BUILD.bazel" />
+    <Content Include="jsoncpp\CMakeLists.txt" />
+    <Content Include="jsoncpp\cmake\JoinPaths.cmake" />
+    <Content Include="jsoncpp\CONTRIBUTING.md" />
+    <Content Include="jsoncpp\CTestConfig.cmake" />
+    <Content Include="jsoncpp\dev.makefile" />
+    <Content Include="jsoncpp\devtools\agent_vmw7.json" />
+    <Content Include="jsoncpp\devtools\agent_vmxp.json" />
+    <Content Include="jsoncpp\devtools\antglob.py" />
+    <Content Include="jsoncpp\devtools\batchbuild.py" />
+    <Content Include="jsoncpp\devtools\fixeol.py" />
+    <Content Include="jsoncpp\devtools\licenseupdater.py" />
+    <Content Include="jsoncpp\devtools\tarball.py" />
+    <Content Include="jsoncpp\devtools\__init__.py" />
+    <Content Include="jsoncpp\doc\doxyfile.in" />
+    <Content Include="jsoncpp\doc\footer.html" />
+    <Content Include="jsoncpp\doc\header.html" />
+    <Content Include="jsoncpp\doc\jsoncpp.dox" />
+    <Content Include="jsoncpp\doc\readme.txt" />
+    <Content Include="jsoncpp\doc\roadmap.dox" />
+    <Content Include="jsoncpp\doc\web_doxyfile.in" />
+    <Content Include="jsoncpp\doxybuild.py" />
+    <Content Include="jsoncpp\example\CMakeLists.txt" />
+    <Content Include="jsoncpp\example\readFromStream\errorFormat.json" />
+    <Content Include="jsoncpp\example\readFromStream\withComment.json" />
+    <Content Include="jsoncpp\example\README.md" />
+    <Content Include="jsoncpp\get_version.pl" />
+    <Content Include="jsoncpp\include\CMakeLists.txt" />
+    <Content Include="jsoncpp\include\PreventInBuildInstalls.cmake" />
+    <Content Include="jsoncpp\include\PreventInSourceBuilds.cmake" />
+    <Content Include="jsoncpp\jsoncpp-namespaced-targets.cmake" />
+    <Content Include="jsoncpp\jsoncppConfig.cmake.in" />
+    <Content Include="jsoncpp\LICENSE" />
+    <Content Include="jsoncpp\meson.build" />
+    <Content Include="jsoncpp\meson_options.txt" />
+    <Content Include="jsoncpp\pkg-config\jsoncpp.pc.in" />
+    <Content Include="jsoncpp\README.md" />
+    <Content Include="jsoncpp\reformat.sh" />
+    <Content Include="jsoncpp\src\CMakeLists.txt" />
+    <Content Include="jsoncpp\src\jsontestrunner\CMakeLists.txt" />
+    <Content Include="jsoncpp\src\lib_json\CMakeLists.txt" />
+    <Content Include="jsoncpp\src\test_lib_json\CMakeLists.txt" />
+    <Content Include="jsoncpp\src\test_lib_json\fuzz.dict" />
+    <Content Include="jsoncpp\test\cleantests.py" />
+    <Content Include="jsoncpp\test\data\fail_invalid_quote.json" />
+    <Content Include="jsoncpp\test\data\fail_test_array_01.json" />
+    <Content Include="jsoncpp\test\data\fail_test_array_02.json" />
+    <Content Include="jsoncpp\test\data\fail_test_object_01.json" />
+    <Content Include="jsoncpp\test\data\fail_test_stack_limit.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_array_01.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_array_01.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_array_02.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_array_02.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_array_03.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_array_03.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_array_04.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_array_04.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_array_05.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_array_05.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_array_06.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_array_06.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_array_07.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_array_07.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_basic_01.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_basic_01.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_basic_02.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_basic_02.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_basic_03.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_basic_03.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_basic_04.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_basic_04.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_basic_05.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_basic_05.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_basic_06.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_basic_06.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_basic_07.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_basic_07.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_basic_08.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_basic_08.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_basic_09.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_basic_09.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_comment_00.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_comment_00.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_comment_01.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_comment_01.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_comment_02.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_comment_02.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_complex_01.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_complex_01.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_integer_01.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_integer_01.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_integer_02.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_integer_02.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_integer_03.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_integer_03.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_integer_04.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_integer_04.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_integer_05.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_integer_05.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_integer_06_64bits.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_integer_06_64bits.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_integer_07_64bits.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_integer_07_64bits.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_integer_08_64bits.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_integer_08_64bits.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_large_01.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_large_01.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_object_01.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_object_01.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_object_02.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_object_02.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_object_03.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_object_03.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_object_04.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_object_04.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_preserve_comment_01.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_preserve_comment_01.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_01.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_01.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_02.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_02.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_03.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_03.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_04.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_04.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_05.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_05.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_06.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_06.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_07.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_07.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_08.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_08.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_09.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_09.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_10.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_10.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_11.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_11.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_12.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_12.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_13.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_real_13.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_string_01.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_string_01.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_string_02.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_string_02.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_string_03.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_string_03.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_string_04.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_string_04.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_string_05.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_string_05.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_string_unicode_01.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_string_unicode_01.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_string_unicode_02.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_string_unicode_02.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_string_unicode_03.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_string_unicode_03.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_string_unicode_04.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_string_unicode_04.json" />
+    <Content Include="jsoncpp\test\data\legacy_test_string_unicode_05.expected" />
+    <Content Include="jsoncpp\test\data\legacy_test_string_unicode_05.json" />
+    <Content Include="jsoncpp\test\data\test_array_08.expected" />
+    <Content Include="jsoncpp\test\data\test_array_08.json" />
+    <Content Include="jsoncpp\test\data\test_object_05.expected" />
+    <Content Include="jsoncpp\test\data\test_object_05.json" />
+    <Content Include="jsoncpp\test\generate_expected.py" />
+    <Content Include="jsoncpp\test\jsonchecker\fail1.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail10.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail11.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail12.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail13.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail14.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail15.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail16.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail17.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail18.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail19.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail2.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail20.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail21.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail22.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail23.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail24.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail25.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail26.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail27.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail28.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail29.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail3.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail30.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail31.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail32.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail33.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail4.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail5.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail6.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail7.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail8.json" />
+    <Content Include="jsoncpp\test\jsonchecker\fail9.json" />
+    <Content Include="jsoncpp\test\jsonchecker\pass1.json" />
+    <Content Include="jsoncpp\test\jsonchecker\pass2.json" />
+    <Content Include="jsoncpp\test\jsonchecker\pass3.json" />
+    <Content Include="jsoncpp\test\jsonchecker\readme.txt" />
+    <Content Include="jsoncpp\test\pyjsontestrunner.py" />
+    <Content Include="jsoncpp\test\runjsontests.py" />
+    <Content Include="jsoncpp\test\rununittests.py" />
+    <Content Include="jsoncpp\version.in" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
