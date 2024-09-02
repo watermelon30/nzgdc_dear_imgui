@@ -107,47 +107,51 @@ bool nzgdc_demo::QuadEditor::saveToJson()
 		// TODO: Log error
 		return false;
 	}
-	Json::StyledStreamWriter writer;
-	writer.write(file, m_loadedJson);
+	Json::StreamWriterBuilder writerBuilder;
+	std::unique_ptr<Json::StreamWriter> writer(writerBuilder.newStreamWriter());
+	writer->write(m_loadedJson, &file);
 	return true;
 }
 
 bool nzgdc_demo::QuadEditor::loadFromJson()
 {
 	std::ifstream file(saveSettingsPath);
-
 	if (!file.is_open())
 	{
-		// TODO: Log error
-		return false;
-	}
-	Json::Reader reader;
-
-	if (!reader.parse(file, m_loadedJson))
-	{
-		// TODO: Log error
+		// TODO: Log error (Failed to open the file)
 		return false;
 	}
 
-	if (!m_loadedJson["scale_x"].empty())
+	Json::Value root;
+	Json::CharReaderBuilder readerBuilder;
+	std::string errors;
+
+	if (!Json::parseFromStream(readerBuilder, file, &root, &errors))
 	{
-		m_scale[0] = m_loadedJson["scale_x"].asFloat();
+		// TODO: Log error (Failed to parse JSON)
+		return false;
 	}
-	if (!m_loadedJson["scale_y"].empty())
+
+	if (root.isMember("scale_x") && root["scale_x"].isNumeric())
 	{
-		m_scale[1] = m_loadedJson["scale_y"].asFloat();
+		m_scale[0] = root["scale_x"].asFloat();
 	}
-	if (!m_loadedJson["rotation"].empty())
+	if (root.isMember("scale_y") && root["scale_y"].isNumeric())
 	{
-		m_rotation = m_loadedJson["rotation"].asFloat();
+		m_scale[1] = root["scale_y"].asFloat();
 	}
-	if (!m_loadedJson["position_x"].empty())
+	if (root.isMember("rotation") && root["rotation"].isNumeric())
 	{
-		m_position[0] = m_loadedJson["position_x"].asFloat();
+		m_rotation = root["rotation"].asFloat();
 	}
-	if (!m_loadedJson["position_y"].empty())
+	if (root.isMember("position_x") && root["position_x"].isNumeric())
 	{
-		m_position[1] = m_loadedJson["position_y"].asFloat();
+		m_position[0] = root["position_x"].asFloat();
 	}
+	if (root.isMember("position_y") && root["position_y"].isNumeric())
+	{
+		m_position[1] = root["position_y"].asFloat();
+	}
+
 	return true;
 }
