@@ -22,8 +22,9 @@ namespace nzgdc_demo
 	const int GRID_SIZE_X = WINDOW_WIDTH / SCALE_FACTOR;
 	const int GRID_SIZE_Y = WINDOW_HEIGHT / SCALE_FACTOR;
 
-	const float TIME_STEP = 0.01f;
-	const int NUM_PARTICLES = 3000;
+	// const float TIME_STEP = 0.01f;
+	const float TIME_STEP = 1.0f;
+	const int NUM_PARTICLES = 300;
 	const float RESTITUTION = 0.8f;
 
 	const float BOX_WIDTH = 200.0f;
@@ -34,6 +35,8 @@ namespace nzgdc_demo
 
 	const float POINT_SIZE = 10.f;
 
+	const int local_size_x = 256;
+	
 	// Particle structure
 	struct Particle
 	{
@@ -139,12 +142,14 @@ namespace nzgdc_demo
 		void InitGPU();
 
 	private:
-		void InitParticles();
-		void InitParticlesGPU();
+		void InitBuffers();
 		void RenderParticles();
 
 		void StepGPU();
 
+		void InitPosition();
+		void ResetVelocitySSBO();
+		
 	private:
 		std::shared_ptr<Shader> m_renderShader;
 
@@ -158,12 +163,13 @@ namespace nzgdc_demo
 		bool m_bShow = false;
 		std::shared_ptr<Window> m_window;
 
-		unsigned int VAO, VBO;
-		std::vector<Particle> particles;
+		unsigned int VAO;
 		Grid grid;
 
 		// GPU
-		GLuint particleSSBO;
-		GLuint gridSSBO;
+		GLuint positionSSBO;
+		GLuint velocitySSBO;
+		std::vector<glm::vec2> positions; // GPU
+		std::vector<float> particlePositions; // Normalized on cpu
 	};
 }

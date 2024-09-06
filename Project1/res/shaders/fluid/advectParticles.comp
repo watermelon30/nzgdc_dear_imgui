@@ -1,41 +1,44 @@
 ﻿#version 430 core
 
-layout (local_size_x = 256) in;
+layout(local_size_x = 256) in;
 
-struct Particle {
-    vec2 position;
-    vec2 velocity;
+layout (std430, binding = 0) buffer Pos {
+    vec2 Positions[];
 };
 
-layout (std430, binding = 0) buffer Particles {
-    Particle particles[];
+layout (std430, binding = 1) buffer Vel {
+    vec2 Velocities[];
 };
 
 uniform float dt;
 uniform vec2 gridSize;
 uniform float restitution;
+uniform uint numParticles;
 
 void main() {
     uint index = gl_GlobalInvocationID.x;
 
-    // Update position
-    particles[index].position += particles[index].velocity * dt;
+    if (index >= numParticles) {
+        return;
+    }
+
+    Positions[index] += vec2(0.0, -1.0) * dt;
 
     // Reflective boundary conditions with energy loss
-    if (particles[index].position.x < 0.0) {
-        particles[index].position.x = 0.0;
-        particles[index].velocity.x = -particles[index].velocity.x * restitution;
-    }
-    if (particles[index].position.x > gridSize.x) {
-        particles[index].position.x = gridSize.x;
-        particles[index].velocity.x = -particles[index].velocity.x * restitution;
-    }
-    if (particles[index].position.y < 0.0) {
-        particles[index].position.y = 0.0;
-        particles[index].velocity.y = -particles[index].velocity.y * restitution;
-    }
-    if (particles[index].position.y > gridSize.y) {
-        particles[index].position.y = gridSize.y;
-        particles[index].velocity.y = -particles[index].velocity.y * restitution;
-    }
+    // if (Positions[index].x < 0.0) {
+    //     Positions[index].x = 0.0;
+    //     Velocities[index].x = -Velocities[index].x * restitution;
+    // }
+    // if (Positions[index].x > gridSize.x) {
+    //     Positions[index].x = gridSize.x;
+    //     Velocities[index].x = -Velocities[index].x * restitution;
+    // }
+    // if (Positions[index].y < 0.0) {
+    //     Positions[index].y = 0.0;
+    //     Velocities[index].y = -Velocities[index].y * restitution;
+    // }
+    // if (Positions[index].y > gridSize.y) {
+    //     Positions[index].y = gridSize.y;
+    //     Velocities[index].y = -Velocities[index].y * restitution;
+    // }
 }

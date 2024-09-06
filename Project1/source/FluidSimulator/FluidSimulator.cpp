@@ -1,6 +1,7 @@
 ﻿#include "FluidSimulator.h"
 
 #include <glfw3.h>
+#include <iostream>
 #include <random>
 
 #include "geometric.hpp"
@@ -48,7 +49,6 @@ namespace nzgdc_demo
 	{
 		if (m_bShow)
 		{
-			// Step(deltaTime);
 			StepGPU();
 			Render(deltaTime);
 		}
@@ -73,7 +73,7 @@ namespace nzgdc_demo
 		m_window->Use();
 		m_renderShader = std::make_shared<Shader>("res/shaders/fluid/fluid.vert", "res/shaders/fluid/fluid.frag");
 
-		InitParticles();
+		InitBuffers();
 	}
 
 	void FluidSimulator::InitGPU()
@@ -88,104 +88,55 @@ namespace nzgdc_demo
 		m_solvePressureShader = std::make_shared<ComputeShader>("res/shaders/fluid/solvePressure.comp");
 		m_projectVelocitiesShader = std::make_shared<ComputeShader>("res/shaders/fluid/projectVelocities.comp");
 		m_transferToParticlesShader = std::make_shared<ComputeShader>("res/shaders/fluid/transferGridToParticles.comp");
-
-		InitParticlesGPU();
 	}
 
-	void FluidSimulator::InitParticles()
+	void FluidSimulator::InitBuffers()
 	{
-		particles.clear(); // Clear any existing particles
-		particles.reserve(NUM_PARTICLES); // Reserve space for NUM_PARTICLES
-
-		// Initialize random number generators for X and Y positions
-		std::mt19937 rng(std::random_device{}());
-		std::uniform_real_distribution<float> randomX(BOX_CENTER.x - BOX_WIDTH / 2, BOX_CENTER.x + BOX_WIDTH / 2);
-		std::uniform_real_distribution<float> randomY(BOX_CENTER.y - BOX_HEIGHT / 2, BOX_CENTER.y + BOX_HEIGHT / 2);
-
-		for (int i = 0; i < NUM_PARTICLES; ++i)
-		{
-			Particle p;
-			p.position = glm::vec2(randomX(rng), randomY(rng)); // Random position within the box
-			p.velocity = glm::vec2(0.0f, -0.05f); // Initial velocity is zero
-			particles.push_back(p);
-		}
-
-		// 
 		glGenVertexArrays(1, &VAO);
-		glGenBuffers(1, &VBO);
-
 		glBindVertexArray(VAO);
-
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 2 * NUM_PARTICLES, nullptr, GL_DYNAMIC_DRAW);
-
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(0);
+		
+		glGenBuffers(1, &positionSSBO);
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, positionSSBO);
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, positionSSBO);
+		InitPosition();
+		glBufferData(GL_SHADER_STORAGE_BUFFER, NUM_PARTICLES * sizeof(glm::vec2), positions.data(), GL_DYNAMIC_DRAW);
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 
 		glBindVertexArray(0);
-	}
-
-	void FluidSimulator::InitParticlesGPU()
-	{
-		// Create and bind the SSBO for particles
-		glGenBuffers(1, &particleSSBO);
-		glBindBuffer(GL_SHADER_STORAGE_BUFFER, particleSSBO);
-		// What does this do?
-		glBufferData(GL_SHADER_STORAGE_BUFFER, NUM_PARTICLES * sizeof(Particle), particles.data(), GL_DYNAMIC_COPY);
-		// What does this do?
-		// glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, particleSSBO);
-		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
-	
-		// TODO: https://www.geeks3d.com/20140704/tutorial-introduction-to-opengl-4-3-shader-storage-buffers-objects-ssbo-demo/
-		// https://ktstephano.github.io/rendering/opengl/ssbos
 		
-		// Create and bind the SSBO for grid
-		glGenBuffers(1, &gridSSBO);
-		glBindBuffer(GL_SHADER_STORAGE_BUFFER, gridSSBO);
-		glBufferData(GL_SHADER_STORAGE_BUFFER, GRID_SIZE_X * GRID_SIZE_Y * sizeof(glm::vec2), nullptr, GL_DYNAMIC_DRAW);
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, gridSSBO);
+		glGenBuffers(1, &velocitySSBO);
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, velocitySSBO);
+		glBufferData(GL_SHADER_STORAGE_BUFFER, NUM_PARTICLES * sizeof(glm::vec2), NULL, GL_DYNAMIC_DRAW);
+		ResetVelocitySSBO();
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, velocitySSBO);
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 	}
 
 	void FluidSimulator::RenderParticles()
 	{
-		std::vector<float> particlePositions;
-		particlePositions.reserve(particles.size() * 2);
-
-		for (const auto& p : particles)
-		{
-			float normalizedX = (p.position.x / WINDOW_WIDTH) * 2.0f - 1.0f;
-			float normalizedY = (p.position.y / WINDOW_HEIGHT) * 2.0f - 1.0f;
-
-			particlePositions.push_back(normalizedX);
-			particlePositions.push_back(normalizedY);
-		}
-
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferSubData(GL_ARRAY_BUFFER, 0, particlePositions.size() * sizeof(float), particlePositions.data());
-
 		m_renderShader->Use();
 		glBindVertexArray(VAO);
-		glDrawArrays(GL_POINTS, 0, particles.size());
-
-		glBindVertexArray(0);
+		glUniform1ui(glGetUniformLocation(m_renderShader->GetId(), "windowWidth"), WINDOW_WIDTH);
+		glUniform1ui(glGetUniformLocation(m_renderShader->GetId(), "windowHeight"), WINDOW_HEIGHT);
+		glDrawArrays(GL_POINTS, 0, NUM_PARTICLES);
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 		glUseProgram(0);
 	}
 
 	void FluidSimulator::StepGPU()
 	{
-		glBindBuffer(GL_SHADER_STORAGE_BUFFER, particleSSBO);
 		// Step 1: Advection
 		m_advectShader->Use();
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, positionSSBO);
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, positionSSBO);
 		glUniform1f(glGetUniformLocation(m_advectShader->GetId(), "dt"), TIME_STEP);
 		glUniform2f(glGetUniformLocation(m_advectShader->GetId(), "gridSize"), GRID_SIZE_X, GRID_SIZE_Y);
 		glUniform1f(glGetUniformLocation(m_advectShader->GetId(), "restitution"), RESTITUTION);
-		glDispatchCompute((NUM_PARTICLES + 255) / 256, 1, 1);
+		glUniform1ui(glGetUniformLocation(m_advectShader->GetId(), "numParticles"), NUM_PARTICLES);
+		int numWorkgroups = (NUM_PARTICLES + local_size_x - 1) / local_size_x;
+		glDispatchCompute(numWorkgroups, 1, 1);
 		glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
-		
-		GLvoid* p = glMapBuffer(GL_SHADER_STORAGE_BUFFER, GL_WRITE_ONLY);
-		memcpy(p, particles.data(), NUM_PARTICLES * sizeof(Particle));
-		glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
-		// Unbind
+
 		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 		
 		return;
@@ -228,5 +179,29 @@ namespace nzgdc_demo
 		glUniform1f(glGetUniformLocation(m_transferToParticlesShader->GetId(), "blendFactor"), 0.05f);
 		glDispatchCompute((NUM_PARTICLES + 255) / 256, 1, 1);
 		glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
+	}
+
+	void FluidSimulator::InitPosition()
+	{
+		particlePositions.reserve(NUM_PARTICLES * 2);
+		std::fill_n(std::back_inserter(particlePositions), NUM_PARTICLES * 2, 0.f);
+
+		// Initialize random number generators for X and Y positions
+		std::mt19937 rng(std::random_device{}());
+		std::uniform_real_distribution<float> randomX(BOX_CENTER.x - BOX_WIDTH / 2, BOX_CENTER.x + BOX_WIDTH / 2);
+		std::uniform_real_distribution<float> randomY(BOX_CENTER.y - BOX_HEIGHT / 2, BOX_CENTER.y + BOX_HEIGHT / 2);
+
+		for (int i = 0; i < NUM_PARTICLES ; i++) {
+			positions.push_back(glm::vec2(randomX(rng), randomY(rng))); // Random position within the box
+		}
+	}
+
+	void FluidSimulator::ResetVelocitySSBO()
+	{
+		glm::vec2* velocities = (glm::vec2*) glMapBufferRange(GL_SHADER_STORAGE_BUFFER, 0, NUM_PARTICLES * sizeof(glm::vec2), GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
+		for (int i = 0; i < NUM_PARTICLES ; i++) {
+			velocities[i] = glm::vec2(1.0f, -0.1f); // Initial velocity
+		}
+		glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
 	}
 }

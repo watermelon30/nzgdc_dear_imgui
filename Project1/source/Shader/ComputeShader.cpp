@@ -26,7 +26,7 @@ nzgdc_demo::ComputeShader::ComputeShader(const std::string& _computePath)
 		std::cerr << "ERROR: Failed to read shader file. Error:\n" << _e.what();
 	}
 
-	unsigned int compute = CompileShader(GL_VERTEX_SHADER, computeCode);
+	unsigned int compute = CompileShader(GL_COMPUTE_SHADER, computeCode);
 
 	m_ShaderId = glCreateProgram();
 	glAttachShader(m_ShaderId, compute);
@@ -53,14 +53,7 @@ unsigned int nzgdc_demo::ComputeShader::CompileShader(const unsigned int _shader
 		char infoLog[512];
 		glGetShaderInfoLog(shader, 512, nullptr, infoLog);
 
-		if (_shaderType == GL_VERTEX_SHADER)
-		{
-			std::cerr << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << '\n';
-		}
-		else if (_shaderType == GL_FRAGMENT_SHADER)
-		{
-			std::cerr << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << '\n';
-		}
+		std::cerr << "ERROR::SHADER::COMPUTE::COMPILATION_FAILED\n" << infoLog << '\n';
 	}
 
 	return shader;
