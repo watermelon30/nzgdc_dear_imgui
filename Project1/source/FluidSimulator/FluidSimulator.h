@@ -16,15 +16,38 @@ namespace nzgdc_demo
 	class Window;
 
 	const int WINDOW_WIDTH = 800;
-	const int WINDOW_HEIGHT = 600;
+	const int WINDOW_HEIGHT = 400;
 
-	const int SCALE_FACTOR = 8;
-	const int GRID_SIZE_X = WINDOW_WIDTH / SCALE_FACTOR;
-	const int GRID_SIZE_Y = WINDOW_HEIGHT / SCALE_FACTOR;
+	const float SCREEN_TO_WORLD_RATIO = 10.f;
+	const glm::vec2 BOUNDARY(WINDOW_WIDTH / SCREEN_TO_WORLD_RATIO, WINDOW_HEIGHT / SCREEN_TO_WORLD_RATIO);
 
-	// const float TIME_STEP = 0.01f;
-	const float TIME_STEP = 1.0f;
-	const int NUM_PARTICLES = 300;
+	const float CELL_SIZE = 2.51f;
+	const float CELL_RECPR = 1.0f / CELL_SIZE;
+
+	const glm::vec2 GRID_SIZE(std::ceil(BOUNDARY.x * CELL_RECPR), std::ceil(BOUNDARY.y * CELL_RECPR));
+
+	const int NUM_PARTICLES_X = 60;
+	const int NUM_PARTICLES = NUM_PARTICLES_X * 20;
+	
+	const int MAX_NUM_PARTICLES_PER_CELL = 100;
+	const int MAX_NUM_NEIGHBORS = 100;
+	
+	const float TIME_STEP = 0.05f;
+	const float EPSILON = 1.e-5f;
+	
+	const float PARTICLE_RADIUS = 3.f; // Screen space
+	const float PARTICLE_RADIUS_IN_WORLD = PARTICLE_RADIUS / SCREEN_TO_WORLD_RATIO;
+
+	// PBF params
+	const float h_ = 1.1f;
+	const float mass = 1.0f;
+	const float rho0 = 1.0f;
+	const float lambda_epsilon = 100.0f;
+	const int pbf_num_iters = 5;
+	const float corr_deltaQ_coeff = 0.3f;
+	const float corrK = 0.001f;
+	const float neighbor_radius = h_ * 1.05f;
+
 	const float RESTITUTION = 0.8f;
 
 	const float BOX_WIDTH = 200.0f;
@@ -33,7 +56,7 @@ namespace nzgdc_demo
 
 	const glm::vec2 GRAVITY(0.0f, -9.81f);
 
-	const float POINT_SIZE = 10.f;
+	const float POINT_SIZE = 5.f;
 
 	const int local_size_x = 256;
 	
@@ -169,7 +192,6 @@ namespace nzgdc_demo
 		// GPU
 		GLuint positionSSBO;
 		GLuint velocitySSBO;
-		std::vector<glm::vec2> positions; // GPU
-		std::vector<float> particlePositions; // Normalized on cpu
+		std::vector<glm::vec2> positions;
 	};
 }

@@ -12,8 +12,15 @@ layout (std430, binding = 1) buffer Vel {
 
 uniform float dt;
 uniform vec2 gridSize;
+uniform vec2 windowSize;
 uniform float restitution;
 uniform uint numParticles;
+
+// (window height)
+// y
+// ^
+// |
+// |______> x (window width)
 
 void main() {
     uint index = gl_GlobalInvocationID.x;
@@ -22,23 +29,22 @@ void main() {
         return;
     }
 
-    Positions[index] += vec2(0.0, -1.0) * dt;
+    Positions[index] += Velocities[index] * dt;
 
-    // Reflective boundary conditions with energy loss
-    // if (Positions[index].x < 0.0) {
-    //     Positions[index].x = 0.0;
-    //     Velocities[index].x = -Velocities[index].x * restitution;
-    // }
-    // if (Positions[index].x > gridSize.x) {
-    //     Positions[index].x = gridSize.x;
-    //     Velocities[index].x = -Velocities[index].x * restitution;
-    // }
-    // if (Positions[index].y < 0.0) {
-    //     Positions[index].y = 0.0;
-    //     Velocities[index].y = -Velocities[index].y * restitution;
-    // }
-    // if (Positions[index].y > gridSize.y) {
-    //     Positions[index].y = gridSize.y;
-    //     Velocities[index].y = -Velocities[index].y * restitution;
-    // }
+    if (Positions[index].x < 0.0) {
+        Positions[index].x = 0.0;
+        Velocities[index].x = -Velocities[index].x * restitution;
+    }
+    if (Positions[index].x > windowSize.x) {
+        Positions[index].x = windowSize.x;
+        Velocities[index].x = -Velocities[index].x * restitution;
+    }
+    if (Positions[index].y < 0.0) {
+        Positions[index].y = 0.0;
+        Velocities[index].y = -Velocities[index].y * restitution;
+    }
+    if (Positions[index].y > windowSize.y) {
+        Positions[index].y = windowSize.y;
+        Velocities[index].y = -Velocities[index].y * restitution;
+    }
 }

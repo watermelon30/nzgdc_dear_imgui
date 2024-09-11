@@ -37,7 +37,7 @@ namespace nzgdc_demo
 
 	FluidSimulator::FluidSimulator()
 	{
-		m_window = std::make_shared<Window>(800, 600, "FluidSimulator");
+		m_window = std::make_shared<Window>(WINDOW_WIDTH , WINDOW_HEIGHT, "FluidSimulator");
 		m_window->OnWindowShouldClose = [](GLFWwindow* window)
 		{
 			Get().Show(false);
@@ -102,14 +102,14 @@ namespace nzgdc_demo
 		glBufferData(GL_SHADER_STORAGE_BUFFER, NUM_PARTICLES * sizeof(glm::vec2), positions.data(), GL_DYNAMIC_DRAW);
 		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 
-		glBindVertexArray(0);
-		
 		glGenBuffers(1, &velocitySSBO);
 		glBindBuffer(GL_SHADER_STORAGE_BUFFER, velocitySSBO);
 		glBufferData(GL_SHADER_STORAGE_BUFFER, NUM_PARTICLES * sizeof(glm::vec2), NULL, GL_DYNAMIC_DRAW);
 		ResetVelocitySSBO();
 		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, velocitySSBO);
 		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
+	
+		glBindVertexArray(0);
 	}
 
 	void FluidSimulator::RenderParticles()
@@ -128,16 +128,15 @@ namespace nzgdc_demo
 		// Step 1: Advection
 		m_advectShader->Use();
 		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, positionSSBO);
-		glBindBuffer(GL_SHADER_STORAGE_BUFFER, positionSSBO);
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, velocitySSBO);
 		glUniform1f(glGetUniformLocation(m_advectShader->GetId(), "dt"), TIME_STEP);
 		glUniform2f(glGetUniformLocation(m_advectShader->GetId(), "gridSize"), GRID_SIZE_X, GRID_SIZE_Y);
+		glUniform2f(glGetUniformLocation(m_advectShader->GetId(), "windowSize"), WINDOW_WIDTH, WINDOW_HEIGHT);
 		glUniform1f(glGetUniformLocation(m_advectShader->GetId(), "restitution"), RESTITUTION);
 		glUniform1ui(glGetUniformLocation(m_advectShader->GetId(), "numParticles"), NUM_PARTICLES);
 		int numWorkgroups = (NUM_PARTICLES + local_size_x - 1) / local_size_x;
 		glDispatchCompute(numWorkgroups, 1, 1);
 		glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
-
-		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 		
 		return;
 
@@ -183,9 +182,6 @@ namespace nzgdc_demo
 
 	void FluidSimulator::InitPosition()
 	{
-		particlePositions.reserve(NUM_PARTICLES * 2);
-		std::fill_n(std::back_inserter(particlePositions), NUM_PARTICLES * 2, 0.f);
-
 		// Initialize random number generators for X and Y positions
 		std::mt19937 rng(std::random_device{}());
 		std::uniform_real_distribution<float> randomX(BOX_CENTER.x - BOX_WIDTH / 2, BOX_CENTER.x + BOX_WIDTH / 2);
@@ -200,7 +196,7 @@ namespace nzgdc_demo
 	{
 		glm::vec2* velocities = (glm::vec2*) glMapBufferRange(GL_SHADER_STORAGE_BUFFER, 0, NUM_PARTICLES * sizeof(glm::vec2), GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
 		for (int i = 0; i < NUM_PARTICLES ; i++) {
-			velocities[i] = glm::vec2(1.0f, -0.1f); // Initial velocity
+			velocities[i] = glm::vec2(1000.0f, -1000.f); // Initial velocity
 		}
 		glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
 	}
