@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\LightShow\LightShow.cpp" />
     <ClCompile Include="source\FluidSimulator\FluidSimulator.cpp" />
     <ClCompile Include="source\QuadMVP.cpp" />
     <ClCompile Include="source\App.cpp" />
@@ -34,6 +35,7 @@
     <ClCompile Include="source\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\LightShow\LightShow.h" />
     <ClInclude Include="source\Shader\ComputeShader.h" />
     <ClInclude Include="source\Window\Window.h" />
     <ClInclude Include="source\FluidSimulator\FluidSimulator.h" />

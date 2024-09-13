@@ -2,7 +2,7 @@
 #include <imgui.h>
 #include <backends/imgui_impl_glfw.h>
 #include <backends/imgui_impl_opengl3.h>
-
+#include "LightShow/LightShow.h"
 #include "FluidSimulator/FluidSimulator.h"
 
 void nzgdc_demo::DebugSystem::Initialize(GLFWwindow* mainWindow)
@@ -106,7 +106,24 @@ void nzgdc_demo::DebugSystem::drawMainMenuBar(std::string& popupId)
 
 		if (ImGui::BeginMenu("Open Editor"))
 		{
-			if (ImGui::MenuItem("Fluid Simulator")) {
+			if (ImGui::MenuItem("Textured Quad"))
+			{
+				if (m_OpenQuadFunction)
+				{
+					m_OpenQuadFunction();
+				}
+			}
+
+			if (ImGui::MenuItem("Lighting")) 
+			{
+				if (m_OpenLightingFunction)
+				{
+					m_OpenLightingFunction();
+				}
+			}
+
+			if (ImGui::MenuItem("Fluid Simulator")) 
+			{
 				FluidSimulator::Get().Show(true);
 			}
 			

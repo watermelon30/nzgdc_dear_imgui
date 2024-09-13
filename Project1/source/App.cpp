@@ -13,11 +13,13 @@
 
 namespace nzgdc_demo
 {
-	constexpr static int windowWidth{ 800 }; 
+	constexpr static int windowWidth{ 800 };
 	constexpr static int windowHeight{ 600 };
 
 	App::App() :
-		m_Window{ nullptr }
+		m_Window{ nullptr },
+		m_LightShow({}),
+		m_currentSceneState(SceneState::QuadScene)
 	{
 		if (!glfwInit())
 		{
@@ -34,7 +36,7 @@ namespace nzgdc_demo
 			std::cerr << "Failed to create GLFW window\n";
 			glfwTerminate();
 		}
-		
+
 		glfwMakeContextCurrent(m_Window);
 		glfwSetFramebufferSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
 			{
@@ -49,6 +51,18 @@ namespace nzgdc_demo
 #ifdef _DEBUG
 		m_debugSystem = std::make_shared<DebugSystem>();
 		m_debugSystem->Initialize(m_Window);
+
+		m_debugSystem->SubscribeToOpenQuadScene([this]()
+			{
+				glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+				m_currentSceneState = SceneState::QuadScene;
+			});
+
+		m_debugSystem->SubscribeToOpenLighting([this]()
+			{
+				m_LightShow.Activate();
+				m_currentSceneState = SceneState::LightingScene;
+			});
 #endif
 		FluidSimulator::Get().m_share = m_Window;
 	}
@@ -75,7 +89,7 @@ namespace nzgdc_demo
 		m_quad = std::make_shared<Quad>(defaultShader);
 		m_quadMVP = std::make_shared<QuadMVP>(defaultShader, "res/textures/jack.jpg");
 		m_quadMVP->GetTransform().m_scale = glm::vec3(400.0f);
-		
+
 #ifdef _DEBUG
 		// m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quad));
 		m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quadMVP), true);
@@ -101,7 +115,7 @@ namespace nzgdc_demo
 	}
 
 	void App::Update(float deltaTime)
-	{		
+	{
 		m_quadMVP->SetView(m_camera->GetView());
 		m_quadMVP->SetProjection(m_camera->GetProjection());
 	}
@@ -112,11 +126,17 @@ namespace nzgdc_demo
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// m_quad->Render();
-		m_quadMVP->Render();
+		switch (m_currentSceneState)
+		{
+		case SceneState::QuadScene: m_quadMVP->Render(); break;
+		case SceneState::LightingScene: m_LightShow.Render(); break;
+		}
 
 #ifdef _DEBUG
-		m_debugSystem->Render();
+		if (m_currentSceneState != SceneState::LightingScene)
+		{
+			m_debugSystem->Render();
+		}
 #endif
 
 		glfwSwapBuffers(m_Window);
