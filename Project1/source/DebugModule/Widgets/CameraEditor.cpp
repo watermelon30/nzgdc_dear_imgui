@@ -12,7 +12,6 @@ nzgdc_demo::CameraEditor::CameraEditor(const std::shared_ptr<Camera>& camera)
 
 void nzgdc_demo::CameraEditor::RenderContent()
 {
-    ImGui::Begin(GetWindowId().c_str());
     bool edited{false};
     if (ImGui::DragFloat3("Position", glm::value_ptr(m_data.Position)))
     {
@@ -81,7 +80,6 @@ void nzgdc_demo::CameraEditor::RenderContent()
     {
         UpdateCameraSettings();
     }
-    ImGui::End();
 }
 
 std::string nzgdc_demo::CameraEditor::GetWindowId() const

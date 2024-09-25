@@ -66,6 +66,7 @@ void nzgdc_demo::DebugSystem::AddWindow(std::shared_ptr<DebugWindowBase> window,
 
 void nzgdc_demo::DebugSystem::drawMainMenuBar(std::string& popupId)
 {
+	std::string openPopupId;
 	if (ImGui::BeginMainMenuBar())
 	{
 		if (ImGui::BeginMenu("Open Window"))
@@ -94,11 +95,11 @@ void nzgdc_demo::DebugSystem::drawMainMenuBar(std::string& popupId)
 		{
 			if (ImGui::MenuItem("Popup1 (wrong)"))
 			{
-				// TODO: do it wrong
+				ImGui::OpenPopup(Popup1Id.c_str()); // does not work
 			}
 			if (ImGui::MenuItem("Popup1 (correct)"))
 			{
-				// TODO: do it correctly
+				openPopupId = Popup1Id;
 			}
 
 			ImGui::EndMenu();
@@ -113,5 +114,13 @@ void nzgdc_demo::DebugSystem::drawMainMenuBar(std::string& popupId)
 			ImGui::EndMenu();
 		}
 		ImGui::EndMainMenuBar();
+	}
+	if (!openPopupId.empty()) {
+		ImGui::OpenPopup(openPopupId.c_str());
+	}
+
+	if (ImGui::BeginPopup(Popup1Id.c_str())) {
+		ImGui::TextUnformatted("Pop up 1");
+		ImGui::EndPopup();
 	}
 }

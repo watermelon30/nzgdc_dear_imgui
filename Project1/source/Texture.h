@@ -12,6 +12,8 @@ namespace nzgdc_demo
 
         void Bind() const;
 
+        [[nodiscard]] unsigned int GetTextureId() const;
+
     private:
         void LoadTexture(const std::string_view path);
 

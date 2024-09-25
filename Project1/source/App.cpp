@@ -10,6 +10,7 @@
 #include "DebugModule/Widgets/QuadEditor.h"
 #include "FluidSimulator/FluidSimulator.h"
 #include "Widgets/CameraEditor.h"
+#include "Widgets/ImguiDemoWindow.h"
 
 namespace nzgdc_demo
 {
@@ -75,11 +76,12 @@ namespace nzgdc_demo
 		m_quad = std::make_shared<Quad>(defaultShader);
 		m_quadMVP = std::make_shared<QuadMVP>(defaultShader, "res/textures/jack.jpg");
 		m_quadMVP->GetTransform().m_scale = glm::vec3(400.0f);
-		
+
 #ifdef _DEBUG
 		// m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quad));
 		m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quadMVP), true);
 		m_debugSystem->AddWindow(std::make_shared<CameraEditor>(m_camera), true);
+		m_debugSystem->AddWindow(std::make_shared<ImguiDemoWindow>(), true);
 #endif
 
 		glfwSwapInterval(1);
