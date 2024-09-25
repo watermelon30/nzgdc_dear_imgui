@@ -7,10 +7,7 @@
 #include "Camera.h"
 #include "Quad.h"
 #include "QuadMVP.h"
-#include "DebugModule/Widgets/QuadEditor.h"
 #include "FluidSimulator/FluidSimulator.h"
-#include "Widgets/CameraEditor.h"
-#include "Widgets/ImguiDemoWindow.h"
 
 namespace nzgdc_demo
 {
@@ -47,10 +44,7 @@ namespace nzgdc_demo
 			std::cerr << "Failed to initialize GLAD\n";
 			return;
 		}
-#ifdef _DEBUG
-		m_debugSystem = std::make_shared<DebugSystem>();
-		m_debugSystem->Initialize(m_Window);
-#endif
+
 		FluidSimulator::Get().m_share = m_Window;
 	}
 
@@ -58,10 +52,6 @@ namespace nzgdc_demo
 	{
 		glfwDestroyWindow(m_Window);
 		glfwTerminate();
-
-#ifdef _DEBUG
-		m_debugSystem->Shutdown();
-#endif
 	}
 
 	void App::Run()
@@ -76,13 +66,6 @@ namespace nzgdc_demo
 		m_quad = std::make_shared<Quad>(defaultShader);
 		m_quadMVP = std::make_shared<QuadMVP>(defaultShader, "res/textures/jack.jpg");
 		m_quadMVP->GetTransform().m_scale = glm::vec3(400.0f);
-
-#ifdef _DEBUG
-		// m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quad));
-		m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quadMVP), true);
-		m_debugSystem->AddWindow(std::make_shared<CameraEditor>(m_camera), true);
-		m_debugSystem->AddWindow(std::make_shared<ImguiDemoWindow>(), true);
-#endif
 
 		glfwSwapInterval(1);
 		while (!glfwWindowShouldClose(m_Window))
@@ -116,11 +99,6 @@ namespace nzgdc_demo
 
 		// m_quad->Render();
 		m_quadMVP->Render();
-
-#ifdef _DEBUG
-		m_debugSystem->Render();
-#endif
-
 		glfwSwapBuffers(m_Window);
 	}
 

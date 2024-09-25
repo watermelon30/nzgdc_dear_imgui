@@ -24,22 +24,10 @@
     <ClCompile Include="source\App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\DebugModule\DebugSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\DebugModule\DebugWindowBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\DebugModule\Widgets\QuadEditor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\Quad.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\QuadMVP.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\DebugModule\Widgets\CameraEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\FluidSimulator\FluidSimulator.cpp">
@@ -62,15 +50,6 @@
     <ClInclude Include="source\App.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\DebugModule\DebugSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\DebugModule\DebugWindowBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\DebugModule\Widgets\QuadEditor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\Quad.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -78,9 +57,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\DebugModule\Widgets\CameraEditor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\Shader\ComputeShader.h">

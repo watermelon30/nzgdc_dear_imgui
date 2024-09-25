@@ -78,7 +78,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)glad\include;$(ProjectDir)imgui;$(ProjectDir)glfw\include\GLFW;$(ProjectDir)jsoncpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)glad\include;$(ProjectDir)glfw\include\GLFW;$(ProjectDir)jsoncpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -97,7 +97,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)glad\include;$(ProjectDir)imgui;$(ProjectDir)glfw\include\GLFW;$(ProjectDir)jsoncpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)glad\include;$(ProjectDir)glfw\include\GLFW;$(ProjectDir)jsoncpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -116,7 +116,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)glad\include;$(ProjectDir)imgui;$(ProjectDir)glfw\include\GLFW;$(ProjectDir)jsoncpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)glad\include;$(ProjectDir)glfw\include;$(ProjectDir)jsoncpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -135,7 +135,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)glad\include;$(ProjectDir)imgui;$(ProjectDir)glfw\include\GLFW;$(ProjectDir)jsoncpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)glad\include;$(ProjectDir)glfw\include\GLFW;$(ProjectDir)jsoncpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -440,16 +440,6 @@
     <ClInclude Include="glm\vec3.hpp" />
     <ClInclude Include="glm\vec4.hpp" />
     <ClInclude Include="glm\vector_relational.hpp" />
-    <ClInclude Include="imgui\backends\imgui_impl_glfw.h" />
-    <ClInclude Include="imgui\backends\imgui_impl_opengl3.h" />
-    <ClInclude Include="imgui\backends\imgui_impl_opengl3_loader.h" />
-    <ClInclude Include="imgui\imconfig.h" />
-    <ClInclude Include="imgui\imgui.h" />
-    <ClInclude Include="imgui\imgui_internal.h" />
-    <ClInclude Include="imgui\imstb_rectpack.h" />
-    <ClInclude Include="imgui\imstb_textedit.h" />
-    <ClInclude Include="imgui\imstb_truetype.h" />
-    <ClInclude Include="imgui\misc\cpp\imgui_stdlib.h" />
     <ClInclude Include="jsoncpp\include\json\allocator.h" />
     <ClInclude Include="jsoncpp\include\json\assertions.h" />
     <ClInclude Include="jsoncpp\include\json\config.h" />
@@ -467,14 +457,6 @@
     <ClCompile Include="glad\src\glad.c" />
     <ClCompile Include="glm\detail\glm.cpp" />
     <ClCompile Include="glm\glm.cppm" />
-    <ClCompile Include="imgui\backends\imgui_impl_glfw.cpp" />
-    <ClCompile Include="imgui\backends\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="imgui\imgui.cpp" />
-    <ClCompile Include="imgui\imgui_demo.cpp" />
-    <ClCompile Include="imgui\imgui_draw.cpp" />
-    <ClCompile Include="imgui\imgui_tables.cpp" />
-    <ClCompile Include="imgui\imgui_widgets.cpp" />
-    <ClCompile Include="imgui\misc\cpp\imgui_stdlib.cpp" />
     <ClCompile Include="jsoncpp\example\readFromString\readFromString.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
