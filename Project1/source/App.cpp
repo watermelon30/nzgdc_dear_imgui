@@ -8,6 +8,9 @@
 #include "Quad.h"
 #include "QuadMVP.h"
 #include "FluidSimulator/FluidSimulator.h"
+#include <imgui.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
 
 namespace nzgdc_demo
 {
@@ -46,10 +49,24 @@ namespace nzgdc_demo
 		}
 
 		FluidSimulator::Get().m_share = m_Window;
+
+		IMGUI_CHECKVERSION();
+		ImGui::CreateContext();
+		ImGuiIO& io = ImGui::GetIO();
+		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+		io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+		ImGui_ImplGlfw_InitForOpenGL(m_Window, true);
+		ImGui_ImplOpenGL3_Init();
 	}
 
 	App::~App()
 	{
+		ImGui_ImplOpenGL3_Shutdown(); // Clean up OpenGL resources
+		ImGui_ImplGlfw_Shutdown(); // Clean up glfw resources
+		ImGui::DestroyContext(); // Should be the last ImGui function call!
+
 		glfwDestroyWindow(m_Window);
 		glfwTerminate();
 	}
@@ -86,7 +103,7 @@ namespace nzgdc_demo
 	}
 
 	void App::Update(float deltaTime)
-	{		
+	{
 		m_quadMVP->SetView(m_camera->GetView());
 		m_quadMVP->SetProjection(m_camera->GetProjection());
 	}
@@ -99,6 +116,26 @@ namespace nzgdc_demo
 
 		// m_quad->Render();
 		m_quadMVP->Render();
+
+		ImGui_ImplGlfw_NewFrame();
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui::NewFrame();
+		{
+			ImGui::ShowDemoWindow();
+		}
+
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+		// Multi viewport
+		if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			GLFWwindow* currentContext = glfwGetCurrentContext();
+			ImGui::UpdatePlatformWindows();
+			ImGui::RenderPlatformWindowsDefault();
+			// restore previous context
+			glfwMakeContextCurrent(currentContext);
+		}
+
 		glfwSwapBuffers(m_Window);
 	}
 
