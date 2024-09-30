@@ -1,0 +1,126 @@
+#include "DebugSystem.h"
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
+
+#include "Widgets/QuadEditor.h"
+
+void nzgdc_demo::DebugSystem::Initialize(GLFWwindow* mainWindow)
+{
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO();
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
+	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+	ImGui_ImplGlfw_InitForOpenGL(mainWindow, true);
+	ImGui_ImplOpenGL3_Init();
+}
+
+void nzgdc_demo::DebugSystem::InitWindows()
+{
+	// Do AddWindow here
+}
+
+void nzgdc_demo::DebugSystem::Render()
+{
+	ImGui_ImplGlfw_NewFrame();
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui::NewFrame();
+	{
+		ImGui::ShowDemoWindow();
+		std::string popupId;
+		DrawMainMenuBar(popupId);
+		DrawPopups(popupId);
+		for (const auto& window : m_windows)
+		{
+			if (window->isWindowOpen())
+			{
+				window->Render();
+			}
+		}
+	}
+	ImGui::Render();
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+	// Multi viewport
+	if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+	{
+		GLFWwindow* currentContext = glfwGetCurrentContext();
+		ImGui::UpdatePlatformWindows();
+		ImGui::RenderPlatformWindowsDefault();
+		// restore previous context
+		glfwMakeContextCurrent(currentContext);
+	}
+}
+
+void nzgdc_demo::DebugSystem::Shutdown()
+{
+	ImGui_ImplOpenGL3_Shutdown();
+	ImGui_ImplGlfw_Shutdown();
+	ImGui::DestroyContext();
+}
+
+void nzgdc_demo::DebugSystem::AddWindow(std::shared_ptr<DebugWindowBase> window, bool open)
+{
+	window->SetWindowEnable(open);
+	m_windows.push_back(window);
+}
+
+void nzgdc_demo::DebugSystem::DrawMainMenuBar(std::string& openPopupId)
+{
+	if (ImGui::BeginMainMenuBar())
+	{
+		if (ImGui::BeginMenu("Open Window"))
+		{
+			for (const auto& window : m_windows)
+			{
+				if (ImGui::MenuItem(window->GetWindowId().c_str()))
+				{
+					window->SetWindowEnable(true);
+				}
+				// Demo: just to show you can do it this way too
+				bool isWindowOpen = window->isWindowOpen();
+				auto selectableId = window->GetWindowId() + " (selectable)";
+				// Note: ImGuiSelectableFlags_DontClosePopups will work only if ImGuiWindowFlags_NoFocusOnAppearing is set on the opening window.
+				if (ImGui::Selectable(selectableId.c_str(), &isWindowOpen, ImGuiSelectableFlags_DontClosePopups))
+				{
+					window->SetWindowEnable(!window->isWindowOpen());
+				}
+			}
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("Open pop up"))
+		{
+			if (ImGui::MenuItem("Popup1 (wrong)"))
+			{
+				ImGui::OpenPopup(Popup1Id.c_str()); // does not work, because BeginPopup is not in the same ID stack
+			}
+			if (ImGui::MenuItem("Popup1 (correct)"))
+			{
+				openPopupId = Popup1Id;
+			}
+			ImGui::EndMenu();
+		}
+		ImGui::EndMainMenuBar();
+	}
+}
+
+void nzgdc_demo::DebugSystem::DrawPopups(std::string& openPopupId)
+{
+	if (!openPopupId.empty())
+	{
+		ImGui::OpenPopup(openPopupId.c_str());
+	}
+	DrawPopup1();
+	// Add your DrawXXXPopup(); here
+}
+
+void nzgdc_demo::DebugSystem::DrawPopup1()
+{
+	if (ImGui::BeginPopup(Popup1Id.c_str()))
+	{
+		ImGui::TextUnformatted("This is pop up 1");
+		ImGui::EndPopup();
+	}
+}

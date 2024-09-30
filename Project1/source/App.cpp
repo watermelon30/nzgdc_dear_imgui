@@ -8,9 +8,8 @@
 #include "Quad.h"
 #include "QuadMVP.h"
 #include "FluidSimulator/FluidSimulator.h"
-#include <imgui.h>
-#include <imgui_impl_glfw.h>
-#include <imgui_impl_opengl3.h>
+
+#include "Widgets/QuadEditor.h"
 
 namespace nzgdc_demo
 {
@@ -48,24 +47,19 @@ namespace nzgdc_demo
 			return;
 		}
 
-		FluidSimulator::Get().m_share = m_Window;
+#ifdef _DEBUG
+		m_debugSystem = std::make_shared<DebugSystem>();
+		m_debugSystem->Initialize(m_Window);
+#endif
 
-		IMGUI_CHECKVERSION();
-		ImGui::CreateContext();
-		ImGuiIO& io = ImGui::GetIO();
-		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-		io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
-		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
-		ImGui_ImplGlfw_InitForOpenGL(m_Window, true);
-		ImGui_ImplOpenGL3_Init();
+		FluidSimulator::Get().m_share = m_Window;
 	}
 
 	App::~App()
 	{
-		ImGui_ImplOpenGL3_Shutdown(); // Clean up OpenGL resources
-		ImGui_ImplGlfw_Shutdown(); // Clean up glfw resources
-		ImGui::DestroyContext(); // Should be the last ImGui function call!
+#ifdef _DEBUG
+		m_debugSystem->Shutdown();
+#endif
 
 		glfwDestroyWindow(m_Window);
 		glfwTerminate();
@@ -83,6 +77,11 @@ namespace nzgdc_demo
 		m_quad = std::make_shared<Quad>(defaultShader);
 		m_quadMVP = std::make_shared<QuadMVP>(defaultShader, "res/textures/jack.jpg");
 		m_quadMVP->GetTransform().m_scale = glm::vec3(400.0f);
+
+#ifdef _DEBUG
+		m_debugSystem->InitWindows();
+		m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quadMVP), true);
+#endif
 
 		glfwSwapInterval(1);
 		while (!glfwWindowShouldClose(m_Window))
@@ -117,24 +116,9 @@ namespace nzgdc_demo
 		// m_quad->Render();
 		m_quadMVP->Render();
 
-		ImGui_ImplGlfw_NewFrame();
-		ImGui_ImplOpenGL3_NewFrame();
-		ImGui::NewFrame();
-		{
-			ImGui::ShowDemoWindow();
-		}
-
-		ImGui::Render();
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-		// Multi viewport
-		if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-		{
-			GLFWwindow* currentContext = glfwGetCurrentContext();
-			ImGui::UpdatePlatformWindows();
-			ImGui::RenderPlatformWindowsDefault();
-			// restore previous context
-			glfwMakeContextCurrent(currentContext);
-		}
+#ifdef _DEBUG
+		m_debugSystem->Render();
+#endif
 
 		glfwSwapBuffers(m_Window);
 	}

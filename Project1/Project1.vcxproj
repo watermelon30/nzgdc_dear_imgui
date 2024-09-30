@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\DebugModule\Widgets\QuadEditor.cpp" />
+    <ClCompile Include="source\DebugModule\DebugSystem.cpp" />
+    <ClCompile Include="source\DebugModule\DebugWindowBase.cpp" />
     <ClCompile Include="source\FluidSimulator\FluidSimulator.cpp" />
     <ClCompile Include="source\QuadMVP.cpp" />
     <ClCompile Include="source\App.cpp" />
@@ -30,6 +33,9 @@
     <ClCompile Include="source\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\DebugModule\Widgets\QuadEditor.h" />
+    <ClInclude Include="source\DebugModule\DebugSystem.h" />
+    <ClInclude Include="source\DebugModule\DebugWindowBase.h" />
     <ClInclude Include="source\Shader\ComputeShader.h" />
     <ClInclude Include="source\Window\Window.h" />
     <ClInclude Include="source\FluidSimulator\FluidSimulator.h" />

@@ -1,5 +1,7 @@
 #pragma once
 #include <memory>
+#include "DebugSystem.h"
+
 struct GLFWwindow;
 
 namespace nzgdc_demo
@@ -31,6 +33,8 @@ namespace nzgdc_demo
 		std::shared_ptr<Camera> m_camera;
 		std::shared_ptr<Quad> m_quad;
 		std::shared_ptr<QuadMVP> m_quadMVP;
+
+		std::shared_ptr<DebugSystem> m_debugSystem;
 
 		float m_currentFrame { 0.0f };
 		float m_lastFrame { 0.0f };
