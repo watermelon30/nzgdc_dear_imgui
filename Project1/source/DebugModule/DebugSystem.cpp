@@ -3,6 +3,8 @@
 #include <backends/imgui_impl_glfw.h>
 #include <backends/imgui_impl_opengl3.h>
 
+#include "FluidSimulator/FluidSimulator.h"
+
 void nzgdc_demo::DebugSystem::Initialize(GLFWwindow* mainWindow)
 {
 	IMGUI_CHECKVERSION();
@@ -64,6 +66,7 @@ void nzgdc_demo::DebugSystem::AddWindow(std::shared_ptr<DebugWindowBase> window,
 
 void nzgdc_demo::DebugSystem::drawMainMenuBar(std::string& popupId)
 {
+	std::string openPopupId;
 	if (ImGui::BeginMainMenuBar())
 	{
 		if (ImGui::BeginMenu("Open Window"))
@@ -79,7 +82,8 @@ void nzgdc_demo::DebugSystem::drawMainMenuBar(std::string& popupId)
 				bool isWindowOpen = window->isWindowOpen();
 				auto selectableId = window->GetWindowId() + " (selectable)";
 				// Note: ImGuiSelectableFlags_DontClosePopups will work only if ImGuiWindowFlags_NoFocusOnAppearing is set on the opening window.
-				if (ImGui::Selectable(selectableId.c_str(), &isWindowOpen, ImGuiSelectableFlags_DontClosePopups)) {
+				if (ImGui::Selectable(selectableId.c_str(), &isWindowOpen, ImGuiSelectableFlags_DontClosePopups))
+				{
 					window->SetWindowEnable(!window->isWindowOpen());
 				}
 			}
@@ -91,15 +95,35 @@ void nzgdc_demo::DebugSystem::drawMainMenuBar(std::string& popupId)
 		{
 			if (ImGui::MenuItem("Popup1 (wrong)"))
 			{
-				// TODO: do it wrong
+				ImGui::OpenPopup(Popup1Id.c_str()); // does not work
 			}
 			if (ImGui::MenuItem("Popup1 (correct)"))
 			{
-				// TODO: do it correctly
+				openPopupId = Popup1Id;
 			}
 
 			ImGui::EndMenu();
 		}
+
+		if (ImGui::BeginMenu("Open Editor"))
+		{
+			if (ImGui::MenuItem("Fluid Simulator"))
+			{
+				FluidSimulator::Get().Show(true);
+			}
+			
+			ImGui::EndMenu();
+		}
 		ImGui::EndMainMenuBar();
+	}
+	if (!openPopupId.empty())
+	{
+		ImGui::OpenPopup(openPopupId.c_str());
+	}
+
+	if (ImGui::BeginPopup(Popup1Id.c_str()))
+	{
+		ImGui::TextUnformatted("Pop up 1");
+		ImGui::EndPopup();
 	}
 }

@@ -22,6 +22,8 @@
     <ClCompile Include="source\DebugModule\Widgets\ParticleSystemEditor.cpp" />
     <ClCompile Include="source\Particle.cpp" />
     <ClCompile Include="source\ParticleSystem.cpp" />
+    <ClCompile Include="source\DebugModule\Widgets\ImguiDemoWindow.cpp" />
+    <ClCompile Include="source\FluidSimulator\FluidSimulator.cpp" />
     <ClCompile Include="source\QuadMVP.cpp" />
     <ClCompile Include="source\App.cpp" />
     <ClCompile Include="source\DebugModule\DebugSystem.cpp" />
@@ -31,11 +33,18 @@
     <ClCompile Include="source\Quad.cpp" />
     <ClCompile Include="source\Shader.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\Shader\ComputeShader.cpp" />
+    <ClCompile Include="source\Window\Window.cpp" />
+    <ClCompile Include="source\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\DebugModule\Widgets\ParticleSystemEditor.h" />
     <ClInclude Include="source\Particle.h" />
     <ClInclude Include="source\ParticleSystem.h" />
+    <ClInclude Include="source\DebugModule\Widgets\ImguiDemoWindow.h" />
+    <ClInclude Include="source\Shader\ComputeShader.h" />
+    <ClInclude Include="source\Window\Window.h" />
+    <ClInclude Include="source\FluidSimulator\FluidSimulator.h" />
     <ClInclude Include="source\QuadMVP.h" />
     <ClInclude Include="source\App.h" />
     <ClInclude Include="source\Camera.h" />
@@ -45,11 +54,22 @@
     <ClInclude Include="source\DebugModule\Widgets\QuadEditor.h" />
     <ClInclude Include="source\Quad.h" />
     <ClInclude Include="source\Shader.h" />
+    <ClInclude Include="source\Texture.h" />
+    <ClInclude Include="source\Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="res\shaders\basic.frag" />
     <Content Include="res\shaders\basic.vs" />
     <Content Include="res\shaders\color.frag" />
+    <Content Include="res\shaders\fluid\advectParticles.comp" />
+    <Content Include="res\shaders\fluid\applyForces.comp" />
+    <Content Include="res\shaders\fluid\fluid.frag" />
+    <Content Include="res\shaders\fluid\fluid.vert" />
+    <Content Include="res\shaders\fluid\pbf2d.comp" />
+    <Content Include="res\shaders\fluid\projectVelocities.comp" />
+    <Content Include="res\shaders\fluid\solvePressure.comp" />
+    <Content Include="res\shaders\fluid\transferGridToParticles.comp" />
+    <Content Include="res\shaders\fluid\transferParticlesToGrid.comp" />
     <Content Include="res\shaders\mvp.vs" />
     <Content Include="res\shaders\particle.frag" />
     <Content Include="res\shaders\particle.vs" />
@@ -134,14 +154,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;GLFW_INCLUDE_NONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)source;$(ProjectDir)source\DebugModule;$(SolutionDir)third_party\imgui;$(SolutionDir)third_party\imgui\backends;$(SolutionDir)third_party\glfw\include\GLFW;$(SolutionDir)third_party\glm;$(SolutionDir)third_party;$(SolutionDir)third_party\glad\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source;$(ProjectDir)source\DebugModule;$(SolutionDir)third_party\imgui;$(SolutionDir)third_party\imgui\backends;$(SolutionDir)third_party\glfw\include\GLFW;$(SolutionDir)third_party\glm;$(SolutionDir)third_party;$(SolutionDir)third_party\glad\include;$(SolutionDir)third_party\jsoncpp\include;$(SolutionDir)third_party\jsoncpp</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)third_party\glfw\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)third_party\glfw\lib-vc2022;$(SolutionDir)third_party\jsoncpp\build\debug\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;jsoncpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -152,7 +172,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)source;$(ProjectDir)source\DebugModule;$(SolutionDir)third_party\imgui;$(SolutionDir)third_party\imgui\backends;$(SolutionDir)third_party\glfw\include\GLFW;$(SolutionDir)third_party\glm;$(SolutionDir)third_party;$(SolutionDir)third_party\glad\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source;$(ProjectDir)source\DebugModule;$(SolutionDir)third_party\imgui;$(SolutionDir)third_party\imgui\backends;$(SolutionDir)third_party\glfw\include\GLFW;$(SolutionDir)third_party\glm;$(SolutionDir)third_party;$(SolutionDir)third_party\glad\include;$(SolutionDir)third_party\jsoncpp\include;$(SolutionDir)third_party\jsoncpp</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -161,7 +181,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)third_party\glfw\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;jsoncpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -169,16 +189,19 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)source;$(ProjectDir)source\DebugModule;$(SolutionDir)third_party\imgui;$(SolutionDir)third_party\imgui\backends;$(SolutionDir)third_party\glfw\include\GLFW;$(SolutionDir)third_party\glm;$(SolutionDir)third_party;$(SolutionDir)third_party\glad\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source;$(ProjectDir)source\DebugModule;$(SolutionDir)third_party\imgui;$(SolutionDir)third_party\imgui\backends;$(SolutionDir)third_party\glfw\include\GLFW;$(SolutionDir)third_party\glm;$(SolutionDir)third_party;$(SolutionDir)third_party\glad\include;$(SolutionDir)third_party\jsoncpp\include;$(SolutionDir)third_party\jsoncpp</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;GLFW_INCLUDE_NONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)third_party\glfw\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)third_party\glfw\lib-vc2022;$(SolutionDir)third_party\jsoncpp\lib;$(SolutionDir)third_party\jsoncpp\build\debug\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;jsoncpp.lib;jsoncpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y /I "$(SolutionDir)third_party\jsoncpp\jsoncpp.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -188,7 +211,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;GLFW_INCLUDE_NONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)source;$(ProjectDir)source\DebugModule;$(SolutionDir)third_party\imgui;$(SolutionDir)third_party\imgui\backends;$(SolutionDir)third_party\glfw\include\GLFW;$(SolutionDir)third_party\glm;$(SolutionDir)third_party;$(SolutionDir)third_party\glad\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source;$(ProjectDir)source\DebugModule;$(SolutionDir)third_party\imgui;$(SolutionDir)third_party\imgui\backends;$(SolutionDir)third_party\glfw\include\GLFW;$(SolutionDir)third_party\glm;$(SolutionDir)third_party;$(SolutionDir)third_party\glad\include;$(SolutionDir)third_party\jsoncpp\include;$(SolutionDir)third_party\jsoncpp</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -196,9 +219,12 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)third_party\glfw\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)third_party\glfw\lib-vc2022;$(SolutionDir)third_party\jsoncpp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;jsoncpp.lib;jsoncpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y /I "$(SolutionDir)third_party\jsoncpp\jsoncpp.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

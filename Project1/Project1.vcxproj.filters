@@ -49,6 +49,16 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\ParticleSystem.cpp">
+    <ClCompile Include="source\FluidSimulator\FluidSimulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Shader\ComputeShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Window\Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -87,6 +97,19 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\ParticleSystem.h">
+    <ClInclude Include="source\Shader\ComputeShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Window\Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\FluidSimulator\FluidSimulator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Transform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

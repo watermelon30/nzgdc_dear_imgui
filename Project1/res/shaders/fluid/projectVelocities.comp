@@ -1,0 +1,24 @@
+﻿#version 430 core
+
+layout (local_size_x = 16, local_size_y = 16) in;
+
+layout (std430, binding = 1) buffer Grid {
+    vec2 velocities[];
+    float pressures[];
+};
+
+uniform int gridWidth;
+uniform int gridHeight;
+
+void main() {
+    uint gridX = gl_GlobalInvocationID.x;
+    uint gridY = gl_GlobalInvocationID.y;
+
+    if (gridX > 0 && gridX < gridWidth - 1 && gridY > 0 && gridY < gridHeight - 1) {
+        uint gridIndex = gridY * gridWidth + gridX;
+        vec2 pressureGradient = vec2(pressures[gridIndex + 1] - pressures[gridIndex - 1],
+        pressures[gridIndex + gridWidth] - pressures[gridIndex - gridWidth]);
+
+        velocities[gridIndex] -= 0.5 * pressureGradient;
+    }
+}

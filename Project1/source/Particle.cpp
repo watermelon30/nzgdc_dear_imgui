@@ -10,8 +10,8 @@ nzgdc_demo::Particle::Particle(ParticleData data, const Shader& shader)
       , m_elapsedTime(0.0f)
 {
     InitVertexAttributes();
-    m_transform.Position = m_data.StartPosition;
-    m_transform.Scale = m_data.StartSize;
+    m_transform.m_position = m_data.StartPosition;
+    m_transform.m_scale = m_data.StartSize;
     m_velocity = m_data.Velocity;
     m_color = m_data.StartColor;
 }
@@ -51,15 +51,15 @@ void nzgdc_demo::Particle::Update(float deltaTime)
     }
 
     m_velocity += m_data.Acceleration * deltaTime;
-    m_transform.Position += m_velocity * deltaTime;
-    m_transform.Rotation += glm::vec3(0.0f, 0.0f, m_data.AngularVelocity * deltaTime);
+    m_transform.m_position += m_velocity * deltaTime;
+    m_transform.m_rotation += glm::vec3(0.0f, 0.0f, m_data.AngularVelocity * deltaTime);
 
     if (m_data.UseSizeOverLifeTime)
     {
         const auto normalizedTime = glm::min(m_elapsedTime / m_data.LifeTime, 1.0f);
         // TODO: can use different easing curves for interpolation
         const auto lerpValue = glm::linearInterpolation(normalizedTime);
-        m_transform.Scale = glm::mix(m_data.StartSize, m_data.EndSize, lerpValue);
+        m_transform.m_scale = glm::mix(m_data.StartSize, m_data.EndSize, lerpValue);
     }
 
     SetUniforms();
