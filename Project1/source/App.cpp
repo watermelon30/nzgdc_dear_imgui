@@ -9,10 +9,11 @@
 #include "Quad.h"
 #include "QuadMVP.h"
 #include "DebugModule/Widgets/QuadEditor.h"
-#include "FluidSimulator/FluidSimulator.h"
 #include "Widgets/CameraEditor.h"
 #include "Widgets/ParticleSystemEditor.h"
 #include "Widgets/ImguiDemoWindow.h"
+
+#include "Window/FluidSimulatorWindow.h"
 
 namespace nzgdc_demo
 {
@@ -50,11 +51,10 @@ namespace nzgdc_demo
             return;
         }
 #ifdef _DEBUG
-        m_debugSystem = std::make_shared<DebugSystem>();
-        m_debugSystem->Initialize(m_Window);
+		m_debugSystem = std::make_shared<DebugSystem>();
+		m_debugSystem->Initialize(this);
 #endif
-        FluidSimulator::Get().m_share = m_Window;
-    }
+	}
 
     App::~App()
     {
@@ -113,19 +113,37 @@ namespace nzgdc_demo
             Update(deltaTime);
             Render(deltaTime);
 
-            HandleFluidSimulator(deltaTime);
-        }
+			for (const auto& window : m_windows)
+			{
+				window->Update(deltaTime);
+				window->Render(deltaTime);
+			}
+		}
 
         glBindVertexArray(0);
     }
 
-    void App::Update(float deltaTime)
-    {
-        m_quadMVP->SetView(m_camera->GetView());
-        m_quadMVP->SetProjection(m_camera->GetProjection());
+	std::shared_ptr<Window> App::CreateFluidSimulatorWindow()
+	{
+		auto window = std::make_shared<FluidSimulatorWindow>();
+		window->Init(m_Window);
+		window->OnWindowShouldClose = [this, win = std::weak_ptr(window)](GLFWwindow* windowPtr)
+		{
+			if (auto sharedWindow = win.lock())
+			{
+				m_windows.erase(std::remove(m_windows.begin(), m_windows.end(), sharedWindow), m_windows.end());
+			}
+		};
+		m_windows.push_back(window);
+		return window;
+	}
 
-        m_particleSystem->Update(deltaTime);
-    }
+	void App::Update(float deltaTime)
+	{
+		m_quadMVP->SetView(m_camera->GetView());
+		m_quadMVP->SetProjection(m_camera->GetProjection());
+    	m_particleSystem->Update(deltaTime);
+	}
 
     void App::Render(float deltaTime)
     {
@@ -141,11 +159,7 @@ namespace nzgdc_demo
         m_debugSystem->Render();
 #endif
 
-        glfwSwapBuffers(m_Window);
-    }
+		glfwSwapBuffers(m_Window);
+	}
 
-    void App::HandleFluidSimulator(float deltaTime)
-    {
-        FluidSimulator::Get().Update(deltaTime);
-    }
 }

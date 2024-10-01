@@ -1,5 +1,4 @@
 #pragma once
-#include <glfw3.h>
 #include <memory>
 #include <string>
 #include <vector>
@@ -8,10 +7,12 @@
 
 namespace nzgdc_demo
 {
+	class App;
+
 	class DebugSystem
 	{
 	public:
-		static void Initialize(GLFWwindow* mainWindow);
+		void Initialize(App* app);
 		void Render();
 		void Shutdown();
 		void AddWindow(std::shared_ptr<DebugWindowBase> window, bool open = false);
@@ -22,6 +23,7 @@ namespace nzgdc_demo
 		inline static const std::string Popup1Id{"Popup1"};
 		
 		std::vector<std::shared_ptr<DebugWindowBase>> m_windows;
+		App* m_app{nullptr};
 	};
 
 }

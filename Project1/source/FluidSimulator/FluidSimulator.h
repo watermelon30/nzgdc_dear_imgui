@@ -1,18 +1,14 @@
 ﻿#pragma once
 #include <memory>
+#include <vector>
 
-#include "Shader.h"
 #include "vec2.hpp"
 #include "glad/glad.h"
-#include "Window/Window.h"
 
 namespace nzgdc_demo
 {
+	class Shader;
 	class ComputeShader;
-}
-
-namespace nzgdc_demo
-{
 	class Window;
 
 	const int WINDOW_WIDTH = 800;
@@ -121,21 +117,12 @@ namespace nzgdc_demo
 	class FluidSimulator
 	{
 	public:
-		static FluidSimulator& Get()
-		{
-			static FluidSimulator instance;
-			return instance;
-		}
-
 		FluidSimulator();
 
-		void Show(bool bNewShow);
+		void Init();
 		void Update(float deltaTime);
 		void Render(float deltaTime);
 
-		GLFWwindow* m_share = NULL;
-
-		void Init();
 		void InitGPU();
 
 	private:
@@ -156,9 +143,8 @@ namespace nzgdc_demo
 		std::shared_ptr<ComputeShader> m_transferToParticlesShader;
 
 		bool m_bShow = false;
-		std::shared_ptr<Window> m_window;
+		GLuint VBO, VAO;
 
-		unsigned int VAO, VBO;
 		std::vector<FluidParticle> particles;
 		Grid grid;
 

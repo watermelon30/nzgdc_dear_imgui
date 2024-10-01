@@ -3,10 +3,13 @@
 #include <backends/imgui_impl_glfw.h>
 #include <backends/imgui_impl_opengl3.h>
 
-#include "FluidSimulator/FluidSimulator.h"
+#include "App.h"
+#include "glfw3.h"
 
-void nzgdc_demo::DebugSystem::Initialize(GLFWwindow* mainWindow)
+void nzgdc_demo::DebugSystem::Initialize(App* app)
 {
+	m_app = app;
+	
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO();
@@ -15,7 +18,7 @@ void nzgdc_demo::DebugSystem::Initialize(GLFWwindow* mainWindow)
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
-	ImGui_ImplGlfw_InitForOpenGL(mainWindow, true);
+	ImGui_ImplGlfw_InitForOpenGL(app->GetMainWindow(), true);
 	ImGui_ImplOpenGL3_Init();
 }
 
@@ -109,7 +112,7 @@ void nzgdc_demo::DebugSystem::drawMainMenuBar(std::string& popupId)
 		{
 			if (ImGui::MenuItem("Fluid Simulator"))
 			{
-				FluidSimulator::Get().Show(true);
+				m_app->CreateFluidSimulatorWindow();
 			}
 			
 			ImGui::EndMenu();
