@@ -16,3 +16,9 @@ void nzgdc_demo::FluidSimulatorWindow::OnRender(float deltaTime)
 {
     m_fluidSimulator->Render(deltaTime);
 }
+void nzgdc_demo::FluidSimulatorWindow::Init(GLFWwindow* share)
+{
+    Window::Init(share);
+    m_fluidSimulator->Init();
+    m_fluidSimulator->InitGPU();
+}

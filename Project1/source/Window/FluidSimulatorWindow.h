@@ -11,11 +11,11 @@ namespace nzgdc_demo
     {
     public:
         FluidSimulatorWindow();
-        
+        void Init(GLFWwindow* share = NULL) override;
+
     protected:
-        virtual void OnUpdate(float deltaTime) override;
-        virtual void OnRender(float deltaTime) override;
-        
+        void OnUpdate(float deltaTime) override;
+        void OnRender(float deltaTime) override;
     private:
         std::shared_ptr<FluidSimulator> m_fluidSimulator;
     };

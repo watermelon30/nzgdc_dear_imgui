@@ -35,6 +35,7 @@ namespace nzgdc_demo
             std::cerr << "Failed to create GLFW window\n";
             return;
         }
+
         glfwSetWindowUserPointer(m_window, this);
         glfwSetWindowCloseCallback(m_window, Window::WindowCloseCallback);
 
@@ -44,6 +45,8 @@ namespace nzgdc_demo
         });
 
         glfwShowWindow(m_window);
+
+        this->Use();
     }
 
     bool Window::IsValid() const
@@ -56,6 +59,14 @@ namespace nzgdc_demo
         return m_window;
     }
 
+    void Window::Use()
+    {
+        assert(m_window != nullptr);
+        glfwGetFramebufferSize(m_window, &m_windowWidth, &m_windowHeight);
+        glfwMakeContextCurrent(m_window);
+        glViewport(0, 0, m_windowWidth, m_windowHeight);
+    }
+    
     void Window::WindowCloseCallback(GLFWwindow* window)
     {
         if (window)
@@ -82,11 +93,7 @@ namespace nzgdc_demo
 
     void Window::Render(float deltaTime)
     {
-        assert(m_window != nullptr);
-        glfwGetFramebufferSize(m_window, &m_windowWidth, &m_windowHeight);
-        glfwMakeContextCurrent(m_window);
-        glViewport(0, 0, m_windowWidth, m_windowHeight);
-
+        this->Use();
         OnRender(deltaTime);
 
         glfwSwapBuffers(m_window);

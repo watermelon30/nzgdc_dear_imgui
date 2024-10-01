@@ -1,0 +1,37 @@
+﻿#version 430 core
+
+layout(local_size_x = 256) in;
+
+struct Particle {
+    vec2 position;
+    vec2 velocity;
+};
+
+layout(std430, binding = 0) buffer Particles {
+    Particle particles[];
+};
+
+layout(std430, binding = 1) buffer Grid {
+    vec2 velocities[]; // Ensure this is declared as an array of vec2
+    float pressures[];
+};
+
+uniform int gridWidth;
+uniform int gridHeight;
+uniform float blendFactor;
+
+void main() {
+    uint particleIndex = gl_GlobalInvocationID.x;
+    Particle p = particles[particleIndex];
+
+    int gridX = int(p.position.x);
+    int gridY = int(p.position.y);
+    
+    if (gridX >= 0 && gridX < gridWidth && gridY >= 0 && gridY < gridHeight) {
+        uint gridIndex = gridY * gridWidth + gridX;
+        vec2 picVelocity = velocities[gridIndex]; // Correctly assign the velocity
+        p.velocity = mix(p.velocity, picVelocity, blendFactor);
+    }
+
+    particles[particleIndex] = p;
+}

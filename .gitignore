@@ -57,6 +57,7 @@ x86/
 *.pgc
 *.pgd
 *.ini
+imgui.ini
 
 # Temporary Files
 *.tmp

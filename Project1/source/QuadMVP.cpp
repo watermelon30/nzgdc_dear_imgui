@@ -1,11 +1,13 @@
 #include "QuadMVP.h"
-
 #include "Shader.h"
 #include "glad/glad.h"
 
-void nzgdc_demo::QuadMVP::Render() const
+void nzgdc_demo::QuadMVP::Render()
 {
     m_shader.Use();
+    m_texture.Bind();
+
+    glUniform1i(glGetUniformLocation(m_shader.GetId(), "texture_sampler"), 0);
     glUniformMatrix4fv(glGetUniformLocation(m_shader.GetId(), "model"), 1, GL_FALSE, glm::value_ptr(m_transform.Get()));
 
     glBindVertexArray(m_vao);

@@ -20,7 +20,7 @@ namespace nzgdc_demo
 
 		void Run();
 		std::shared_ptr<Window> CreateFluidSimulatorWindow();
-		GLFWwindow* GetMainWindow() const { return m_Window; }
+		[[nodiscard]] GLFWwindow* GetMainWindow() const { return m_Window; }
 
 		App(const App&) = delete;
 		App& operator=(const App&) = delete; 

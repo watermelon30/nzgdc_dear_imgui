@@ -17,8 +17,8 @@ namespace nzgdc_demo
         void Update(float deltaTime);
         void Render(float deltaTime);
 
-        bool IsValid() const;
-        GLFWwindow* GetGLFWwindow() const;
+        [[nodiscard]] bool IsValid() const;
+        [[nodiscard]] GLFWwindow* GetGLFWwindow() const;
 
         std::function<void(GLFWwindow*)> OnWindowShouldClose;
 
@@ -30,6 +30,7 @@ namespace nzgdc_demo
         virtual void OnUpdate(float deltaTime) = 0;
         virtual void OnRender(float deltaTime) = 0;
 
+        void Use();
     private:
         static void WindowCloseCallback(GLFWwindow* window);
         GLFWwindow* m_window = nullptr;
