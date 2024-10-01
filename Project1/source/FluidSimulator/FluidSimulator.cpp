@@ -11,8 +11,6 @@ namespace nzgdc_demo
 {
 	FluidSimulator::FluidSimulator()
 	{
-		Init();
-		InitGPU();
 	}
 
 	void FluidSimulator::Init()
@@ -71,7 +69,6 @@ namespace nzgdc_demo
 	void FluidSimulator::Update(float deltaTime)
 	{
 		StepGPU();
-		Render(deltaTime);
 	}
 
 	void FluidSimulator::Render(float deltaTime)

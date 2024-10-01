@@ -30,6 +30,10 @@ namespace nzgdc_demo
 
     void Texture::LoadTexture(const std::string_view path)
     {
+        if (path.empty())
+        {
+            return;
+        }
         glGenTextures(1, &m_id);
         glBindTexture(GL_TEXTURE_2D, m_id);
 

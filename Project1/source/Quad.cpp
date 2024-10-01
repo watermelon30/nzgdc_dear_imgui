@@ -38,6 +38,7 @@ namespace nzgdc_demo
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
 
+        // Reset buffer to 0
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
     }

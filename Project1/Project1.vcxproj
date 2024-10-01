@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\DebugModule\Widgets\ParticleSystemEditor.cpp" />
+    <ClCompile Include="source\Particle.cpp" />
+    <ClCompile Include="source\ParticleSystem.cpp" />
     <ClCompile Include="source\DebugModule\Widgets\ImguiDemoWindow.cpp" />
     <ClCompile Include="source\FluidSimulator\FluidSimulator.cpp" />
     <ClCompile Include="source\QuadMVP.cpp" />
@@ -37,6 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Window\FluidSimulatorWindow.h" />
+    <ClInclude Include="source\DebugModule\Widgets\ParticleSystemEditor.h" />
+    <ClInclude Include="source\Particle.h" />
+    <ClInclude Include="source\ParticleSystem.h" />
     <ClInclude Include="source\DebugModule\Widgets\ImguiDemoWindow.h" />
     <ClInclude Include="source\Shader\ComputeShader.h" />
     <ClInclude Include="source\Window\Window.h" />
@@ -56,6 +62,7 @@
   <ItemGroup>
     <Content Include="res\shaders\basic.frag" />
     <Content Include="res\shaders\basic.vs" />
+    <Content Include="res\shaders\color.frag" />
     <Content Include="res\shaders\fluid\advectParticles.comp" />
     <Content Include="res\shaders\fluid\applyForces.comp" />
     <Content Include="res\shaders\fluid\fluid.frag" />
@@ -66,6 +73,8 @@
     <Content Include="res\shaders\fluid\transferGridToParticles.comp" />
     <Content Include="res\shaders\fluid\transferParticlesToGrid.comp" />
     <Content Include="res\shaders\mvp.vs" />
+    <Content Include="res\shaders\particle.frag" />
+    <Content Include="res\shaders\particle.vs" />
     <Content Include="res\shaders\transform.vs" />
   </ItemGroup>
   <ItemGroup>

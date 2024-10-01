@@ -42,6 +42,13 @@
     <ClCompile Include="source\DebugModule\Widgets\CameraEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\DebugModule\Widgets\ParticleSystemEditor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Particle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ParticleSystem.cpp">
     <ClCompile Include="source\FluidSimulator\FluidSimulator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -83,6 +90,13 @@
     <ClInclude Include="source\DebugModule\Widgets\CameraEditor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\DebugModule\Widgets\ParticleSystemEditor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Particle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ParticleSystem.h">
     <ClInclude Include="source\Shader\ComputeShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>

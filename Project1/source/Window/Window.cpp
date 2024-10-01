@@ -45,8 +45,6 @@ namespace nzgdc_demo
         });
 
         glfwShowWindow(m_window);
-
-        this->Use();
     }
 
     bool Window::IsValid() const
@@ -93,7 +91,7 @@ namespace nzgdc_demo
 
     void Window::Render(float deltaTime)
     {
-        this->Use();
+        Use();
         OnRender(deltaTime);
 
         glfwSwapBuffers(m_window);

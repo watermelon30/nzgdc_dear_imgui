@@ -144,6 +144,7 @@ namespace nzgdc_demo
 
 		bool m_bShow = false;
 		GLuint VBO, VAO;
+
 		std::vector<FluidParticle> particles;
 		Grid grid;
 
