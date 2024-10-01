@@ -1,6 +1,11 @@
 ﻿#include "Quad.h"
-#include "Shader.h"
+
+#include <fstream>
+
+#include "Shader/Shader.h"
 #include <glad/glad.h>
+
+#include "json/reader.h"
 
 namespace nzgdc_demo
 {
@@ -41,6 +46,7 @@ namespace nzgdc_demo
         // Reset buffer to 0
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
+        LoadLocalData();
     }
 
     void Quad::Render()
@@ -52,5 +58,85 @@ namespace nzgdc_demo
 
         glBindVertexArray(m_vao);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    }
+    
+    void Quad::LoadLocalData()
+    {
+        QuadData quadData;
+        Json::Value jsonData;
+        if (!LoadJson(jsonData))
+        {
+            return;
+        }
+        
+        ParseJson(jsonData, quadData);
+        SetTransformData(quadData);
+    }
+
+    std::string Quad::GetSettingsPath() const
+    {
+        return "res/assets/Quad.json";
+    }
+    QuadData Quad::GetTransformData() noexcept
+    {
+        QuadData data;
+        data.Position[0] = m_transform.m_position.x;
+        data.Position[1] = m_transform.m_position.y;
+        data.Rotation = m_transform.m_rotation.z;
+        data.Scale[0] = m_transform.m_scale.x;
+        data.Scale[1] = m_transform.m_scale.y;
+        return data;
+    }
+
+
+    void Quad::SetTransformData(const QuadData& data)
+    {
+        m_transform.m_position = glm::vec3(data.Position[0], data.Position[1], 0.0f);
+        m_transform.m_rotation = glm::vec3(0.0f, 0.0f, data.Rotation);
+        m_transform.m_scale = glm::vec3(data.Scale[0], data.Scale[1], 0.0f);
+    }
+    
+    bool Quad::LoadJson(Json::Value& outData) const
+    {
+        std::ifstream file(GetSettingsPath());
+        if (!file.is_open())
+        {
+            // TODO: Log error (Failed to open the file)
+            return false;
+        }
+
+        Json::CharReaderBuilder readerBuilder;
+        std::string errors;
+
+        if (!Json::parseFromStream(readerBuilder, file, &outData, &errors))
+        {
+            // TODO: Log error (Failed to parse JSON)
+            return false;
+        }
+        return true;
+    }
+    
+    void Quad::ParseJson(const Json::Value& inJson, QuadData& outQuadData)
+    {
+        if (inJson.isMember("scale_x") && inJson["scale_x"].isNumeric())
+        {
+            outQuadData.Scale[0] = inJson["scale_x"].asFloat();
+        }
+        if (inJson.isMember("scale_y") && inJson["scale_y"].isNumeric())
+        {
+            outQuadData.Scale[1] = inJson["scale_y"].asFloat();
+        }
+        if (inJson.isMember("rotation") && inJson["rotation"].isNumeric())
+        {
+            outQuadData.Rotation = inJson["rotation"].asFloat();
+        }
+        if (inJson.isMember("position_x") && inJson["position_x"].isNumeric())
+        {
+            outQuadData.Position[0] = inJson["position_x"].asFloat();
+        }
+        if (inJson.isMember("position_y") && inJson["position_y"].isNumeric())
+        {
+            outQuadData.Position[1] = inJson["position_y"].asFloat();
+        }
     }
 }

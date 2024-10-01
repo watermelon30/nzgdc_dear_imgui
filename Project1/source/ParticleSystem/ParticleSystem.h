@@ -44,9 +44,9 @@ namespace nzgdc_demo
         void Restart();
         void Stop();
 
-        int GetNumParticles() const { return m_particles.size(); }
-        float GetPlaybackTime() const { return m_timer; }
-        bool IsPlaying() const { return m_isPlaying; }
+        [[nodiscard]] int GetNumParticles() const { return static_cast<int>(m_particles.size()); }
+        [[nodiscard]] float GetPlaybackTime() const { return m_timer; }
+        [[nodiscard]] bool IsPlaying() const { return m_isPlaying; }
 
         ParticleSystemData& GetData() { return m_data; }
 

@@ -1,14 +1,14 @@
 #include "App.h"
-#include "Shader.h"
+#include "Shader/Shader.h"
 #include "glad/glad.h"
 #include <glfw3.h>
 #include <iostream>
 
 #include "Camera.h"
-#include "ParticleSystem.h"
 #include "Quad.h"
 #include "QuadMVP.h"
 #include "DebugModule/Widgets/QuadEditor.h"
+#include "ParticleSystem/ParticleSystem.h"
 #include "Widgets/CameraEditor.h"
 #include "Widgets/ParticleSystemEditor.h"
 #include "Widgets/ImguiDemoWindow.h"
@@ -77,21 +77,16 @@ namespace nzgdc_demo
         m_camera = std::make_shared<Camera>(cameraData);
 
         Shader particleShader("res/shaders/particle.vs", "res/shaders/particle.frag");
-        m_quadMVP = std::make_shared<QuadMVP>(particleShader);
-        m_quadMVP->GetTransform().m_scale = glm::vec3(100.0f);
-
-        Shader transformShader("res/shaders/transform.vs", "res/shaders/basic.frag");
-        m_quad = std::make_shared<Quad>(transformShader);
+        // Shader transformShader("res/shaders/transform.vs", "res/shaders/basic.frag");
+        // m_quad = std::make_shared<Quad>(transformShader);
 
         ParticleSystemData particleSystemData;
         particleSystemData.AngularVelocity = 100.0f;
         m_particleSystem = std::make_shared<ParticleSystem>(particleSystemData, particleShader, m_camera);
         m_particleSystem->Play();
 
-        //const Shader defaultShader("res/shaders/basic.vs", "res/shaders/basic.frag");
-        // m_quad = std::make_shared<Quad>(defaultShader);
-        // m_quadMVP = std::make_shared<QuadMVP>(defaultShader, "res/textures/jack.jpg");
-        // m_quadMVP->GetTransform().m_scale = glm::vec3(400.0f);
+        const Shader defaultShader("res/shaders/basic.vs", "res/shaders/basic.frag");
+        m_quadMVP = std::make_shared<QuadMVP>(defaultShader, "res/textures/jack.jpg");
 
 #ifdef _DEBUG
         // m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quad));
@@ -152,7 +147,7 @@ namespace nzgdc_demo
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // m_quad->Render();
-        // m_quadMVP->Render();
+        m_quadMVP->Render();
         m_particleSystem->Render();
 
 #ifdef _DEBUG

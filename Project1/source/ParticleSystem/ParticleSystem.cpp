@@ -8,7 +8,7 @@ nzgdc_demo::ParticleSystem::ParticleSystem(const ParticleSystemData& data, const
     , m_camera(camera)
     , m_shader(shader)
 {
-    std::srand(std::time(nullptr));
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
 }
 
 void nzgdc_demo::ParticleSystem::Update(float deltaTime)

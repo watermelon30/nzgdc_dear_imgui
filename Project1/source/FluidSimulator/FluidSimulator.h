@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include <memory>
 #include <vector>
-
 #include "vec2.hpp"
 #include "glad/glad.h"
 

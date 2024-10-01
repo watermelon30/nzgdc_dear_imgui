@@ -1,5 +1,5 @@
 #include "QuadMVP.h"
-#include "Shader.h"
+#include "Shader/Shader.h"
 #include "glad/glad.h"
 
 void nzgdc_demo::QuadMVP::Render()
@@ -25,4 +25,3 @@ void nzgdc_demo::QuadMVP::SetProjection(const glm::mat4& projection) const
     m_shader.Use();
     glUniformMatrix4fv(glGetUniformLocation(m_shader.GetId(), "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 }
-

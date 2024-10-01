@@ -1,6 +1,6 @@
 ﻿#include "ParticleSystemEditor.h"
 
-#include "ParticleSystem.h"
+#include "ParticleSystem/ParticleSystem.h"
 
 nzgdc_demo::ParticleSystemEditor::ParticleSystemEditor(const std::shared_ptr<ParticleSystem>& particleSystem)
     : m_particleSystem(particleSystem)

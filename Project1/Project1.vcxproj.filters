@@ -18,7 +18,7 @@
     <ClCompile Include="source\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\Shader.cpp">
+    <ClCompile Include="source\Shader\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\App.cpp">
@@ -45,10 +45,10 @@
     <ClCompile Include="source\DebugModule\Widgets\ParticleSystemEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\Particle.cpp">
+    <ClCompile Include="source\Particle\Particle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\ParticleSystem.cpp">
+    <ClCompile Include="source\Particle\ParticleSystem.cpp">
     <ClCompile Include="source\FluidSimulator\FluidSimulator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -63,7 +63,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\Shader.h">
+    <ClInclude Include="source\Shader\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\App.h">
@@ -93,10 +93,10 @@
     <ClInclude Include="source\DebugModule\Widgets\ParticleSystemEditor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Particle.h">
+    <ClInclude Include="source\Particle\Particle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\ParticleSystem.h">
+    <ClInclude Include="source\Particle\ParticleSystem.h">
     <ClInclude Include="source\Shader\ComputeShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>

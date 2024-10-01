@@ -3,7 +3,7 @@
 #include <random>
 
 #include "geometric.hpp"
-#include "Shader.h"
+#include "Shader/Shader.h"
 #include "glad/glad.h"
 #include "Shader/ComputeShader.h"
 

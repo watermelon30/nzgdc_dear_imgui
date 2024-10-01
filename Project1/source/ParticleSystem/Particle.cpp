@@ -1,6 +1,6 @@
 ﻿#include "Particle.h"
 
-#include "Shader.h"
+#include "Shader/Shader.h"
 #include "glad/glad.h"
 #include "gtx/easing.hpp"
 
