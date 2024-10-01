@@ -16,6 +16,11 @@ namespace nzgdc_demo
         void RenderContent() override;
 
     private:
+        void DrawMenuBar(std::string popupId);
+
+        bool SaveToJson();
+
+    private:
         std::shared_ptr<ParticleSystem> m_particleSystem;
     };
 }

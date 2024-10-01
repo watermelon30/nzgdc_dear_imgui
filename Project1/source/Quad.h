@@ -24,7 +24,6 @@ namespace nzgdc_demo
         virtual ~Quad() = default;
 
         virtual void Render();
-        [[nodiscard]] virtual std::string GetSettingsPath() const;
 
         QuadData GetTransformData() noexcept;
         void SetTransformData(const QuadData& data);
@@ -34,6 +33,9 @@ namespace nzgdc_demo
 
     protected:
         void LoadLocalData();
+
+    public:
+        inline static std::string settingsPath {"res/assets/Quad.json"}; 
 
     protected:
         const Shader& m_shader;

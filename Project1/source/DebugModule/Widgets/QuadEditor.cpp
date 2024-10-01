@@ -96,7 +96,7 @@ bool nzgdc_demo::QuadEditor::SaveToJson()
 	m_loadedJson["position_x"] = m_quadData.Position[0];
 	m_loadedJson["position_y"] = m_quadData.Position[1];
 
-	std::ofstream file(m_quad->GetSettingsPath());
+	std::ofstream file(Quad::settingsPath);
 
 	if (!file.is_open())
 	{

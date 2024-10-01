@@ -73,10 +73,6 @@ namespace nzgdc_demo
         SetTransformData(quadData);
     }
 
-    std::string Quad::GetSettingsPath() const
-    {
-        return "res/assets/Quad.json";
-    }
     QuadData Quad::GetTransformData() noexcept
     {
         QuadData data;
@@ -98,7 +94,7 @@ namespace nzgdc_demo
     
     bool Quad::LoadJson(Json::Value& outData) const
     {
-        std::ifstream file(GetSettingsPath());
+        std::ifstream file(settingsPath);
         if (!file.is_open())
         {
             // TODO: Log error (Failed to open the file)

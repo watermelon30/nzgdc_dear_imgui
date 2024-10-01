@@ -49,11 +49,20 @@ namespace nzgdc_demo
         [[nodiscard]] bool IsPlaying() const { return m_isPlaying; }
 
         ParticleSystemData& GetData() { return m_data; }
+        void SetData(const ParticleSystemData& newData);
+
+        bool LoadJson(Json::Value& outData) const;
+        void ParseJson(const Json::Value& inJson, ParticleSystemData& outParticleSystemData);
 
     private:
+        void LoadLocalData();
+
         void EmitParticle();
         std::shared_ptr<Particle> GenerateParticle() const;
         glm::vec2 CalculateParticleVelocity() const;
+
+    public:
+        inline static std::string settingsPath {"res/assets/ParticleSystem.json"}; 
 
     private:
         ParticleSystemData m_data;
