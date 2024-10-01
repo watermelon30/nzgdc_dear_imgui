@@ -104,7 +104,7 @@ namespace nzgdc_demo
 
 		for (int i = 0; i < NUM_PARTICLES; ++i)
 		{
-			Particle p;
+			FluidParticle p;
 			p.position = glm::vec2(randomX(rng), randomY(rng)); // Random position within the box
 			p.velocity = glm::vec2(0.0f, -0.05f); // Initial velocity is zero
 			particles.push_back(p);
@@ -131,7 +131,7 @@ namespace nzgdc_demo
 		glGenBuffers(1, &particleSSBO);
 		glBindBuffer(GL_SHADER_STORAGE_BUFFER, particleSSBO);
 		// What does this do?
-		glBufferData(GL_SHADER_STORAGE_BUFFER, NUM_PARTICLES * sizeof(Particle), particles.data(), GL_DYNAMIC_COPY);
+		glBufferData(GL_SHADER_STORAGE_BUFFER, NUM_PARTICLES * sizeof(FluidParticle), particles.data(), GL_DYNAMIC_COPY);
 		// What does this do?
 		// glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, particleSSBO);
 		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
@@ -183,7 +183,7 @@ namespace nzgdc_demo
 		glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
 		
 		GLvoid* p = glMapBuffer(GL_SHADER_STORAGE_BUFFER, GL_WRITE_ONLY);
-		memcpy(p, particles.data(), NUM_PARTICLES * sizeof(Particle));
+		memcpy(p, particles.data(), NUM_PARTICLES * sizeof(FluidParticle));
 		glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
 		// Unbind
 		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);

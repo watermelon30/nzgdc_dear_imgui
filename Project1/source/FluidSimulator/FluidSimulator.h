@@ -35,7 +35,7 @@ namespace nzgdc_demo
 	const float POINT_SIZE = 10.f;
 
 	// Particle structure
-	struct Particle
+	struct FluidParticle
 	{
 		glm::vec2 position;
 		glm::vec2 velocity;
@@ -159,7 +159,7 @@ namespace nzgdc_demo
 		std::shared_ptr<Window> m_window;
 
 		unsigned int VAO, VBO;
-		std::vector<Particle> particles;
+		std::vector<FluidParticle> particles;
 		Grid grid;
 
 		// GPU

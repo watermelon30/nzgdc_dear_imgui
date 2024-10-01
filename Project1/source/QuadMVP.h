@@ -8,7 +8,7 @@ namespace nzgdc_demo
 	class QuadMVP : public Quad
 	{
 	public:
-		explicit QuadMVP(const Shader& shader, const std::string_view texturePath) :
+		explicit QuadMVP(const Shader& shader, const std::string_view texturePath = "") :
 			Quad(shader),
 			m_texture(texturePath)
 		{}
