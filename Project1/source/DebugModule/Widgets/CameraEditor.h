@@ -14,13 +14,14 @@ namespace nzgdc_demo
         std::string GetWindowId() const override;
         void UpdateCameraSettings();
 
+       static bool DrawCameraEditor(CameraData& m_data);
+
     private:
-        const char* m_projectionOptions[2] = { "ORTHOGRAPHIC", "PERSPECTIVE" };
+        inline static const char* projectionOptions[2] = { "ORTHOGRAPHIC", "PERSPECTIVE" };
         
         std::shared_ptr<Camera> m_camera;
 
         CameraData m_data;
         int m_selectedProjectionIndex { 0 };
-        const char* m_currentSelectedProjection = m_projectionOptions[0];
     };
 }

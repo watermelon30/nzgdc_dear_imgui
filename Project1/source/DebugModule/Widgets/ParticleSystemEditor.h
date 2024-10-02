@@ -12,9 +12,10 @@ namespace nzgdc_demo
     public:
         ParticleSystemEditor(const std::shared_ptr<ParticleSystem>& particleSystem);
 
-        std::string GetWindowId() const override;
+        [[nodiscard]] std::string GetWindowId() const override;
         void RenderContent() override;
 
+        static void DrawParticleSystemEditor(std::shared_ptr<ParticleSystem>& particleSystem);
     private:
         void DrawMenuBar(std::string& popupId);
 

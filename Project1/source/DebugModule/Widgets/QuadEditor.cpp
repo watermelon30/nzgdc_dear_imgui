@@ -26,20 +26,7 @@ void nzgdc_demo::QuadEditor::RenderContent()
 {
 	std::string popupId;
 	DrawMenuBar(popupId);
-	bool edited{false};
-	if (ImGui::DragFloat2("Position", m_quadData.Position))
-	{
-		edited = true;
-	}
-	if (ImGui::DragFloat("Rotation", &m_quadData.Rotation))
-	{
-		edited = true;
-	}
-	if (ImGui::DragFloat2("Scale", m_quadData.Scale))
-	{
-		edited = true;
-	}
-	if (edited)
+	if (DrawQuadEditor(m_quadData))
 	{
 		UpdateQuadSettings();
 	}
@@ -48,6 +35,24 @@ void nzgdc_demo::QuadEditor::RenderContent()
 std::string nzgdc_demo::QuadEditor::GetWindowId() const
 {
 	return "Quad Editor";
+}
+
+bool nzgdc_demo::QuadEditor::DrawQuadEditor(QuadData& quadData)
+{
+	bool edited{false};
+	if (ImGui::DragFloat2("Position", quadData.Position))
+	{
+		edited =  true;
+	}
+	if (ImGui::DragFloat("Rotation", &quadData.Rotation))
+	{
+		edited = true;
+	}
+	if (ImGui::DragFloat2("Scale", quadData.Scale))
+	{
+		edited = true;
+	}
+	return edited;
 }
 
 void nzgdc_demo::QuadEditor::DrawMenuBar(std::string popupId)

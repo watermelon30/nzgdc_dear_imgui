@@ -7,12 +7,30 @@ nzgdc_demo::CameraEditor::CameraEditor(const std::shared_ptr<Camera>& camera)
     : m_camera(camera)
 {
     m_data = m_camera->Data;
-    m_selectedProjectionIndex = static_cast<int>(m_camera->Data.Projection);
 }
 
 void nzgdc_demo::CameraEditor::RenderContent()
 {
+    if (DrawCameraEditor(m_data))
+    {
+        UpdateCameraSettings();
+    }
+}
+
+std::string nzgdc_demo::CameraEditor::GetWindowId() const
+{
+    return "Camera Editor";
+}
+
+void nzgdc_demo::CameraEditor::UpdateCameraSettings()
+{
+    m_camera->Data = m_data;
+}
+
+bool nzgdc_demo::CameraEditor::DrawCameraEditor(CameraData& m_data)
+{
     bool edited{false};
+
     if (ImGui::DragFloat3("Position", glm::value_ptr(m_data.Position)))
     {
         edited = true;
@@ -34,16 +52,17 @@ void nzgdc_demo::CameraEditor::RenderContent()
         edited = true;
     }
 
-    m_currentSelectedProjection = m_projectionOptions[m_selectedProjectionIndex];
-    if (ImGui::BeginCombo("Projection", m_currentSelectedProjection))
+    int projectionIndex = static_cast<int>(m_data.Projection);
+
+    if (ImGui::BeginCombo("Projection", projectionOptions[projectionIndex]))
     {
-        for (int i = 0; i < IM_ARRAYSIZE(m_projectionOptions); ++i)
+        for (int i = 0; i < IM_ARRAYSIZE(projectionOptions); ++i)
         {
-            const bool isSelected = i == m_selectedProjectionIndex;
-            if (ImGui::Selectable(m_projectionOptions[i], isSelected))
+            const bool isSelected = i == projectionIndex;
+            if (ImGui::Selectable(projectionOptions[i], isSelected))
             {
-                m_selectedProjectionIndex = i;
-                m_data.Projection = static_cast<ProjectionType>(m_selectedProjectionIndex);
+                projectionIndex = i;
+                m_data.Projection = static_cast<ProjectionType>(projectionIndex);
                 edited = true;
             }
 
@@ -53,7 +72,7 @@ void nzgdc_demo::CameraEditor::RenderContent()
         ImGui::EndCombo();
     }
     
-    if (static_cast<ProjectionType>(m_selectedProjectionIndex) == ProjectionType::Orthographic)
+    if (static_cast<ProjectionType>(projectionIndex) == ProjectionType::Orthographic)
     {
         if (ImGui::DragFloat("Width", &m_data.Width))
         {
@@ -64,7 +83,7 @@ void nzgdc_demo::CameraEditor::RenderContent()
             edited = true;
         }
     }
-    if (static_cast<ProjectionType>(m_selectedProjectionIndex) == ProjectionType::Perspective)
+    if (static_cast<ProjectionType>(projectionIndex) == ProjectionType::Perspective)
     {
         if (ImGui::DragFloat("Field Of View", &m_data.FieldOfView))
         {
@@ -75,19 +94,5 @@ void nzgdc_demo::CameraEditor::RenderContent()
             edited = true;
         }
     }
-    
-    if (edited)
-    {
-        UpdateCameraSettings();
-    }
-}
-
-std::string nzgdc_demo::CameraEditor::GetWindowId() const
-{
-    return "Camera Editor";
-}
-
-void nzgdc_demo::CameraEditor::UpdateCameraSettings()
-{
-    m_camera->Data = m_data;
+    return edited;
 }

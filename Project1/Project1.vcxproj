@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\DebugModule\Widgets\SceneManagerEditor.cpp" />
     <ClCompile Include="source\QuadMVP.cpp" />
     <ClCompile Include="source\App.cpp" />
     <ClCompile Include="source\DebugModule\DebugSystem.cpp" />
@@ -26,6 +27,7 @@
     <ClCompile Include="source\DebugModule\Widgets\CameraEditor.cpp" />
     <ClCompile Include="source\DebugModule\Widgets\QuadEditor.cpp" />
     <ClCompile Include="source\Quad.cpp" />
+    <ClCompile Include="source\SceneManager\SceneManager.cpp" />
     <ClCompile Include="source\Shader\Shader.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\Window\FluidSimulatorWindow.cpp" />
@@ -39,6 +41,8 @@
     <ClCompile Include="source\ParticleSystem\ParticleSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\DebugModule\Widgets\SceneManagerEditor.h" />
+    <ClInclude Include="source\SceneManager\SceneManager.h" />
     <ClInclude Include="source\Window\FluidSimulatorWindow.h" />
     <ClInclude Include="source\DebugModule\Widgets\ParticleSystemEditor.h" />
     <ClInclude Include="source\DebugModule\Widgets\ImguiDemoWindow.h" />

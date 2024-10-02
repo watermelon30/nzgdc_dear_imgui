@@ -9,9 +9,13 @@
 #include "QuadMVP.h"
 #include "DebugModule/Widgets/QuadEditor.h"
 #include "ParticleSystem/ParticleSystem.h"
+
+#include "SceneManager/SceneManager.h"
+
 #include "Widgets/CameraEditor.h"
 #include "Widgets/ParticleSystemEditor.h"
 #include "Widgets/ImguiDemoWindow.h"
+#include "Widgets/SceneManagerEditor.h"
 
 #include "Window/FluidSimulatorWindow.h"
 
@@ -72,27 +76,14 @@ namespace nzgdc_demo
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
         glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
-
-        const CameraData cameraData(ProjectionType::Orthographic, windowWidth, windowHeight, glm::vec3(0.0f, 0.0f, 3.0f));
-        m_camera = std::make_shared<Camera>(cameraData);
-
-        Shader particleShader("res/shaders/particle.vs", "res/shaders/particle.frag");
-        // Shader transformShader("res/shaders/transform.vs", "res/shaders/basic.frag");
-        // m_quad = std::make_shared<Quad>(transformShader);
-
-        ParticleSystemData particleSystemData;
-        particleSystemData.AngularVelocity = 100.0f;
-        m_particleSystem = std::make_shared<ParticleSystem>(particleSystemData, particleShader, m_camera);
-        m_particleSystem->Play();
-
-        const Shader defaultShader("res/shaders/basic.vs", "res/shaders/basic.frag");
-        m_quadMVP = std::make_shared<QuadMVP>(defaultShader, "res/textures/jack.jpg");
+    	m_sceneManager = std::make_shared<SceneManager>();
+    	m_sceneManager->Init(windowWidth, windowHeight);
 
 #ifdef _DEBUG
-        // m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quad));
-        m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quadMVP), true);
-        m_debugSystem->AddWindow(std::make_shared<CameraEditor>(m_camera), true);
-        m_debugSystem->AddWindow(std::make_shared<ParticleSystemEditor>(m_particleSystem), true);
+       // m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quadMVP), true);
+        //m_debugSystem->AddWindow(std::make_shared<CameraEditor>(m_camera), true);
+       // m_debugSystem->AddWindow(std::make_shared<ParticleSystemEditor>(m_particleSystem), true);
+    	m_debugSystem->AddWindow(std::make_shared<SceneManagerEditor>(m_sceneManager), true);
         m_debugSystem->AddWindow(std::make_shared<ImguiDemoWindow>(), true);
 #endif
 
@@ -135,9 +126,7 @@ namespace nzgdc_demo
 
 	void App::Update(float deltaTime)
 	{
-		m_quadMVP->SetView(m_camera->GetView());
-		m_quadMVP->SetProjection(m_camera->GetProjection());
-    	m_particleSystem->Update(deltaTime);
+    	m_sceneManager->Update(deltaTime);
 	}
 
     void App::Render(float deltaTime)
@@ -146,9 +135,7 @@ namespace nzgdc_demo
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // m_quad->Render();
-        m_quadMVP->Render();
-        m_particleSystem->Render();
+    	m_sceneManager->Render();
 
 #ifdef _DEBUG
         m_debugSystem->Render();

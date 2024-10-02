@@ -17,6 +17,8 @@ namespace nzgdc_demo {
 		void RenderContent() override;
 		[[nodiscard]] std::string GetWindowId() const override;
 
+		static bool DrawQuadEditor(QuadData& quadData);
+
 	private:
 		void DrawMenuBar(std::string popupId);
 		void ResetCoordinates();
