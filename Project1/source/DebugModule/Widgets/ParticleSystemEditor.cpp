@@ -155,7 +155,7 @@ bool nzgdc_demo::ParticleSystemEditor::SaveToJson()
     return true;
 }
 
-void nzgdc_demo::ParticleSystemEditor::DrawMenuBar(std::string popupId)
+void nzgdc_demo::ParticleSystemEditor::DrawMenuBar(std::string& popupId)
 {
     if (ImGui::BeginMenuBar())
     {

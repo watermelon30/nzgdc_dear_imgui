@@ -16,7 +16,7 @@ namespace nzgdc_demo
         void RenderContent() override;
 
     private:
-        void DrawMenuBar(std::string popupId);
+        void DrawMenuBar(std::string& popupId);
 
         bool SaveToJson();
 
