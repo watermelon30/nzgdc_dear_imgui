@@ -203,7 +203,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)third_party\glfw\lib-vc2022;$(SolutionDir)third_party\jsoncpp\lib;$(SolutionDir)third_party\jsoncpp\build\debug\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;jsoncpp.lib;jsoncpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;jsoncpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y /I "$(SolutionDir)third_party\jsoncpp\jsoncpp.dll" "$(OutDir)"</Command>

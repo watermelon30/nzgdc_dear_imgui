@@ -1,6 +1,9 @@
 ﻿#include "SceneManager.h"
 
+#include <fstream>
+
 #include "Camera.h"
+#include "json/reader.h"
 
 #include "ParticleSystem/ParticleSystem.h"
 
@@ -12,17 +15,7 @@ void nzgdc_demo::SceneManager::Init(float width, float height)
 {
     const CameraData cameraData(ProjectionType::Orthographic, width, height, glm::vec3(0.0f, 0.0f, 3.0f));
     m_camera = std::make_shared<Camera>(cameraData);
-
-    static Shader particleShader("res/shaders/particle.vs", "res/shaders/particle.frag");
-    ParticleSystemData particleSystemData;
-    particleSystemData.AngularVelocity = 100.0f;
-    auto particleSystem = std::make_shared<ParticleSystem>(particleSystemData, particleShader, m_camera);
-    m_particleSystems.emplace_back(particleSystem);
-    particleSystem->Play();
-
-    static const Shader defaultShader("res/shaders/basic.vs", "res/shaders/basic.frag");
-    auto quadMVP = std::make_shared<QuadMVP>(defaultShader, "res/textures/jack.jpg");
-    m_quadMVPs.emplace_back(quadMVP);
+    LoadLocalData();
 }
 
 void nzgdc_demo::SceneManager::Update(float deltaTime)
@@ -61,4 +54,65 @@ std::vector<std::shared_ptr<nzgdc_demo::QuadMVP>> nzgdc_demo::SceneManager::GetQ
 std::vector<std::shared_ptr<nzgdc_demo::ParticleSystem>> nzgdc_demo::SceneManager::GetParticleSystemsVector() const
 {
     return m_particleSystems;
+}
+bool nzgdc_demo::SceneManager::LoadJson(Json::Value& outData) const
+{
+    std::ifstream file(settingsPath);
+    if (!file.is_open())
+    {
+        // TODO: Log error (Failed to open the file)
+        return false;
+    }
+
+    Json::CharReaderBuilder readerBuilder;
+    std::string errors;
+
+    if (!Json::parseFromStream(readerBuilder, file, &outData, &errors))
+    {
+        // TODO: Log error (Failed to parse JSON)
+        return false;
+    }
+    return true;
+}
+
+void nzgdc_demo::SceneManager::ParseJson(const Json::Value& inJson, SceneManager* outSceneManager)
+{
+    static Shader particleShader("res/shaders/particle.vs", "res/shaders/particle.frag");
+    static const Shader defaultShader("res/shaders/basic.vs", "res/shaders/basic.frag");
+
+    if (inJson.isMember("ParticleSystems") && inJson["ParticleSystems"].isArray())
+    {
+        for (Json::Value::ArrayIndex i = 0; i != inJson["ParticleSystems"].size(); i++) // for (const auto& particleSystem : inJson["ParticleSystems"]) doesnt work for some reason
+        {
+            ParticleSystemData particleSystemData;
+            particleSystemData.AngularVelocity = 100.0f;
+            ParticleSystem::ParseJson(inJson["ParticleSystems"][i], particleSystemData);
+            std::shared_ptr<ParticleSystem> particleSystem = std::make_shared<ParticleSystem>(particleSystemData, particleShader, outSceneManager->GetCamera());
+            particleSystem->Play();
+            outSceneManager->m_particleSystems.emplace_back(particleSystem);
+        }
+    }
+    
+    if (inJson.isMember("Quads") && inJson["Quads"].isArray())
+    {
+        for (Json::Value::ArrayIndex i = 0; i != inJson["Quads"].size(); i++)
+        {
+            std::shared_ptr<QuadMVP> quadMvp = std::make_shared<QuadMVP>(defaultShader, "res/textures/jack.jpg"); // TODO: load path from json too
+            QuadData data;
+            Quad::ParseJson(inJson["Quads"][i], data);
+            quadMvp->SetTransformData(data);
+            outSceneManager->m_quadMVPs.emplace_back(quadMvp);
+        }
+    }
+}
+
+void nzgdc_demo::SceneManager::LoadLocalData()
+{
+    Json::Value jsonData;
+    if (!LoadJson(jsonData))
+    {
+        return;
+    }
+        
+    ParseJson(jsonData, this);
 }

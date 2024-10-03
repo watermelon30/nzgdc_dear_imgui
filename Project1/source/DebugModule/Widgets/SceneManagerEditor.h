@@ -19,7 +19,7 @@ namespace nzgdc_demo {
         [[nodiscard]] std::string GetWindowId() const override;
 
     private:
-        void DrawMenuBar(std::string popupId);
+        void DrawMenuBar(std::string& popupId);
         bool SaveToJson();
         bool LoadFromJson();
 

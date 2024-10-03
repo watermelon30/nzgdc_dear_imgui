@@ -1,0 +1,49 @@
+{
+	"ParticleSystems" : 
+	[
+		{
+			"acceleration_x" : 24.0,
+			"acceleration_y" : 31.0,
+			"acceleration_z" : 0.0,
+			"angular_velocity" : 200.0,
+			"arc" : 110,
+			"duration" : 22.701000213623047,
+			"emission_rate" : 150.0,
+			"end_color_a" : 0.0,
+			"end_color_b" : 0.0,
+			"end_color_g" : 0.58823531866073608,
+			"end_color_r" : 1.0,
+			"end_size_x" : 182.0,
+			"end_size_y" : 2.5,
+			"end_size_z" : 2.5,
+			"lifetime" : 2.0,
+			"looping" : true,
+			"max_particles" : 1000,
+			"particle_speed" : 150.0,
+			"position_x" : -16.0,
+			"position_y" : -18.0,
+			"position_z" : 0.0,
+			"radius" : 94.400001525878906,
+			"rotation" : 35.0,
+			"start_color_a" : 1.0,
+			"start_color_b" : 0.0,
+			"start_color_g" : 0.58823525905609131,
+			"start_color_r" : 1.0,
+			"start_size_x" : 1.0,
+			"start_size_y" : 3.0,
+			"start_size_z" : 2.0,
+			"use_color_over_lifetime" : true,
+			"use_size_over_lifetime" : true
+		}
+	],
+	"Quads" : 
+	[
+		{
+			"position_x" : 0.0,
+			"position_y" : -109.0,
+			"rotation" : 0.0,
+			"scale_x" : 335.0,
+			"scale_y" : 379.0
+		}
+	]
+}

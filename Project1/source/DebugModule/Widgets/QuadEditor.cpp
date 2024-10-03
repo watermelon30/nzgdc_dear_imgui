@@ -54,6 +54,19 @@ bool nzgdc_demo::QuadEditor::DrawQuadEditor(QuadData& quadData)
 	}
 	return edited;
 }
+Json::Value nzgdc_demo::QuadEditor::Serialize(const QuadData& data)
+{
+	Json::Value outJson;
+
+	outJson["scale_x"] = data.Scale[0];
+	outJson["scale_y"] = data.Scale[1];
+
+	outJson["rotation"] = data.Rotation;
+
+	outJson["position_x"] = data.Position[0];
+	outJson["position_y"] = data.Position[1];
+	return outJson;
+}
 
 void nzgdc_demo::QuadEditor::DrawMenuBar(std::string popupId)
 {
@@ -92,14 +105,7 @@ void nzgdc_demo::QuadEditor::ResetCoordinates()
 
 bool nzgdc_demo::QuadEditor::SaveToJson()
 {
-	m_loadedJson.clear();
-	m_loadedJson["scale_x"] = m_quadData.Scale[0];
-	m_loadedJson["scale_y"] = m_quadData.Scale[1];
-
-	m_loadedJson["rotation"] = m_quadData.Rotation;
-
-	m_loadedJson["position_x"] = m_quadData.Position[0];
-	m_loadedJson["position_y"] = m_quadData.Position[1];
+	m_loadedJson = Serialize(m_quadData);
 
 	std::ofstream file(Quad::settingsPath);
 
@@ -118,7 +124,7 @@ bool nzgdc_demo::QuadEditor::LoadFromJson()
 {
 	if (m_quad->LoadJson(m_loadedJson))
 	{
-		m_quad->ParseJson(m_loadedJson, m_quadData);
+		Quad::ParseJson(m_loadedJson, m_quadData);
 		m_quad->SetTransformData(m_quadData);
 		return true;
 	}

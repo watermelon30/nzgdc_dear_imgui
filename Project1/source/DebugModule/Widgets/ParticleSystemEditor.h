@@ -3,8 +3,11 @@
 
 #include "DebugWindowBase.h"
 
+#include "json/value.h"
+
 namespace nzgdc_demo
 {
+    struct ParticleSystemData;
     class ParticleSystem;
 
     class ParticleSystemEditor : public DebugWindowBase
@@ -16,6 +19,7 @@ namespace nzgdc_demo
         void RenderContent() override;
 
         static void DrawParticleSystemEditor(std::shared_ptr<ParticleSystem>& particleSystem);
+        static Json::Value Serialize(const ParticleSystemData& data);
     private:
         void DrawMenuBar(std::string& popupId);
 

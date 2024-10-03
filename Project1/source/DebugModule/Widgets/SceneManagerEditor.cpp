@@ -1,14 +1,20 @@
 ﻿#include "SceneManagerEditor.h"
 
+#include <fstream>
+
 #include "CameraEditor.h"
 #include "ParticleSystemEditor.h"
 #include "QuadEditor.h"
+
+#include "json/writer.h"
 
 #include "SceneManager/SceneManager.h"
 
 nzgdc_demo::SceneManagerEditor::SceneManagerEditor(const std::shared_ptr<SceneManager>& sceneManager)
     : m_sceneManager(sceneManager)
 {
+    m_flags = ImGuiWindowFlags_MenuBar;
+
     m_camera = m_sceneManager->GetCamera();
     auto quadVector = m_sceneManager->GetQuadsVector();
     auto particleSystemVector = m_sceneManager->GetParticleSystemsVector();
@@ -20,6 +26,8 @@ nzgdc_demo::SceneManagerEditor::SceneManagerEditor(const std::shared_ptr<SceneMa
 
 void nzgdc_demo::SceneManagerEditor::RenderContent()
 {
+    std::string popupId;
+    DrawMenuBar(popupId);
     if (ImGui::CollapsingHeader("Camera Editor"))
     {
         ImGui::PushID("Camera Editor");
@@ -58,14 +66,52 @@ std::string nzgdc_demo::SceneManagerEditor::GetWindowId() const
     return "Scene Manager";
 }
 
-void nzgdc_demo::SceneManagerEditor::DrawMenuBar(std::string popupId)
+void nzgdc_demo::SceneManagerEditor::DrawMenuBar(std::string& popupId)
 {
-
+    if (ImGui::BeginMenuBar())
+    {
+        if (ImGui::BeginMenu("Options"))
+        {
+            if (ImGui::MenuItem("Load"))
+            {
+                if (LoadFromJson())
+                {
+                }
+            }
+            if (ImGui::MenuItem("Save"))
+            {
+                SaveToJson();
+            }
+            ImGui::EndMenu();
+        }
+        ImGui::EndMenuBar();
+    }
 }
 
 bool nzgdc_demo::SceneManagerEditor::SaveToJson()
 {
-    return false;
+    Json::Value jsonVal;
+    
+    for (auto& quad : m_sceneManager->GetQuadsVector())
+    {
+        jsonVal["Quads"].append(QuadEditor::Serialize(quad->GetTransformData()));
+    }
+    for (auto& particleSystem : m_sceneManager->GetParticleSystemsVector())
+    {
+        jsonVal["ParticleSystems"].append(ParticleSystemEditor::Serialize(particleSystem->GetData()));
+    }
+
+    std::ofstream file(SceneManager::settingsPath);
+    if (!file.is_open())
+    {
+        // TODO: Log error
+        return false;
+    }
+    
+    Json::StreamWriterBuilder writerBuilder;
+    std::unique_ptr<Json::StreamWriter> writer(writerBuilder.newStreamWriter());
+    writer->write(jsonVal, &file);
+    return true;
 }
 
 bool nzgdc_demo::SceneManagerEditor::LoadFromJson()

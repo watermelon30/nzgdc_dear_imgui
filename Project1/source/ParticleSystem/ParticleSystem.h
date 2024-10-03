@@ -52,7 +52,7 @@ namespace nzgdc_demo
         void SetData(const ParticleSystemData& newData);
 
         bool LoadJson(Json::Value& outData) const;
-        void ParseJson(const Json::Value& inJson, ParticleSystemData& outParticleSystemData);
+        static void ParseJson(const Json::Value& inJson, ParticleSystemData& outParticleSystemData);
 
     private:
         void LoadLocalData();

@@ -98,52 +98,57 @@ void nzgdc_demo::ParticleSystemEditor::DrawParticleSystemEditor(std::shared_ptr<
     }
     ImGui::PopID();
 }
+Json::Value nzgdc_demo::ParticleSystemEditor::Serialize(const ParticleSystemData& data)
+{
+    Json::Value outJson;
+    outJson["looping"] = data.Looping;
+    outJson["duration"] = data.Duration;
+    outJson["max_particles"] = data.MaxParticles;
+    outJson["emission_rate"] = data.EmissionRate;
+    outJson["radius"] = data.Radius;
+    outJson["arc"] = data.Arc;
+    outJson["angular_velocity"] = data.AngularVelocity;
+    outJson["particle_speed"] = data.ParticleSpeed;
+    
+    outJson["position_x"] = data.Position.x;
+    outJson["position_y"] = data.Position.y;
+    outJson["position_z"] = data.Position.z;
+
+    outJson["rotation"] = data.Rotation;
+
+    outJson["start_size_x"] = data.StartSize.x;
+    outJson["start_size_y"] = data.StartSize.y;
+    outJson["start_size_z"] = data.StartSize.z;
+
+    outJson["lifetime"] = data.LifeTime;
+
+    outJson["use_size_over_lifetime"] = data.UseSizeOverLifeTime;
+    outJson["end_size_x"] = data.EndSize.x;
+    outJson["end_size_y"] = data.EndSize.y;
+    outJson["end_size_z"] = data.EndSize.z;
+
+    outJson["acceleration_x"] = data.Acceleration.x;
+    outJson["acceleration_y"] = data.Acceleration.y;
+    outJson["acceleration_z"] = data.Acceleration.z;
+
+    outJson["start_color_r"] = data.StartColor.r;
+    outJson["start_color_g"] = data.StartColor.g;
+    outJson["start_color_b"] = data.StartColor.b;
+    outJson["start_color_a"] = data.StartColor.a;
+
+    outJson["use_color_over_lifetime"] = data.UseColorOverLifeTime;
+    outJson["end_color_r"] = data.EndColor.r;
+    outJson["end_color_g"] = data.EndColor.g;
+    outJson["end_color_b"] = data.EndColor.b;
+    outJson["end_color_a"] = data.EndColor.a;
+
+    return outJson;
+}
 
 bool nzgdc_demo::ParticleSystemEditor::SaveToJson()
 {
     const auto& particleData = m_particleSystem->GetData();
-    Json::Value newVal;
-
-    newVal["looping"] = particleData.Looping;
-    newVal["duration"] = particleData.Duration;
-    newVal["max_particles"] = particleData.MaxParticles;
-    newVal["emission_rate"] = particleData.EmissionRate;
-    newVal["radius"] = particleData.Radius;
-    newVal["arc"] = particleData.Arc;
-    newVal["angular_velocity"] = particleData.AngularVelocity;
-    newVal["particle_speed"] = particleData.ParticleSpeed;
-    
-    newVal["position_x"] = particleData.Position.x;
-    newVal["position_y"] = particleData.Position.y;
-    newVal["position_z"] = particleData.Position.z;
-
-    newVal["rotation"] = particleData.Rotation;
-
-    newVal["start_size_x"] = particleData.StartSize.x;
-    newVal["start_size_y"] = particleData.StartSize.y;
-    newVal["start_size_z"] = particleData.StartSize.z;
-
-    newVal["lifetime"] = particleData.LifeTime;
-
-    newVal["use_size_over_lifetime"] = particleData.UseSizeOverLifeTime;
-    newVal["end_size_x"] = particleData.EndSize.x;
-    newVal["end_size_y"] = particleData.EndSize.y;
-    newVal["end_size_z"] = particleData.EndSize.z;
-
-    newVal["acceleration_x"] = particleData.Acceleration.x;
-    newVal["acceleration_y"] = particleData.Acceleration.y;
-    newVal["acceleration_z"] = particleData.Acceleration.z;
-
-    newVal["start_color_r"] = particleData.StartColor.r;
-    newVal["start_color_g"] = particleData.StartColor.g;
-    newVal["start_color_b"] = particleData.StartColor.b;
-    newVal["start_color_a"] = particleData.StartColor.a;
-
-    newVal["use_color_over_lifetime"] = particleData.UseColorOverLifeTime;
-    newVal["end_color_r"] = particleData.EndColor.r;
-    newVal["end_color_g"] = particleData.EndColor.g;
-    newVal["end_color_b"] = particleData.EndColor.b;
-    newVal["end_color_a"] = particleData.EndColor.a;
+    Json::Value newVal = Serialize(particleData);
 
     std::ofstream file(ParticleSystem::settingsPath);
     if (!file.is_open())
@@ -170,7 +175,7 @@ void nzgdc_demo::ParticleSystemEditor::DrawMenuBar(std::string& popupId)
                 if (m_particleSystem->LoadJson(jsonVal))
                 {
                     ParticleSystemData data;
-                    m_particleSystem->ParseJson(jsonVal, data);
+                    ParticleSystem::ParseJson(jsonVal, data);
                     m_particleSystem->SetData(data);
                 }
             }

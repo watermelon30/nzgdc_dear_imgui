@@ -18,6 +18,7 @@ namespace nzgdc_demo {
 		[[nodiscard]] std::string GetWindowId() const override;
 
 		static bool DrawQuadEditor(QuadData& quadData);
+		static Json::Value Serialize(const QuadData& data);
 
 	private:
 		void DrawMenuBar(std::string popupId);

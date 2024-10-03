@@ -29,7 +29,7 @@ namespace nzgdc_demo
         void SetTransformData(const QuadData& data);
 
         bool LoadJson(Json::Value& outData) const;
-        void ParseJson(const Json::Value& inJson, QuadData& outQuadData);
+        static void ParseJson(const Json::Value& inJson, QuadData& outQuadData);
 
     protected:
         void LoadLocalData();
