@@ -17,6 +17,7 @@ namespace nzgdc_demo{
             inline static const std::string LayoutDemo{"Layout helper Demo"};
             inline static const std::string ColorPickerDemo{"Color Picker Demo"};
             inline static const std::string InputTextDemo{"Input Text Demo"};
+            inline static const std::string ComboDemo{"Combo Demo"};
             inline static const std::string TreeDemo{"Tree Demo"};
             inline static const std::string DuplicateIdTable{"Duplicate ID table"};
             inline static const std::string MismatchIDTable{"Mismatch ID table"};
@@ -27,6 +28,7 @@ namespace nzgdc_demo{
             inline static const std::string ItemStateDemo{"Item States Demo"};
             inline static const std::string UserInputDemo{"User Input Demo"};
             inline static const std::string PopupDemo{"Popup Demo"};
+            inline static const std::string DebugLogDemo{"Debug Log Demo"};
         };
 
         inline static std::unordered_map<std::string, std::string> buttonToolTips{
@@ -37,6 +39,7 @@ namespace nzgdc_demo{
         static bool DrawLayoutHelperDemo();
         static bool DrawColorPickerDemo();
         static bool DrawInputTextDemo();
+        static bool DrawComboDemo();
         static bool DrawTreeDemo();
         static bool DrawPopupDemo();
         static bool DrawTableDuplicateIdDemo();
@@ -47,8 +50,9 @@ namespace nzgdc_demo{
         static bool DrawImageDemo();
         static bool DrawItemStateDemo();
         static bool DrawUserInputDemo();
+        static bool DrawDebugLog();
+
         static int FilterImGuiLetters(ImGuiInputTextCallbackData* data);
         std::vector<std::pair<std::string, std::pair<bool, std::function<bool()>>>> m_buttonsData;
-        
     };
 }

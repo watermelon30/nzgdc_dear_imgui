@@ -18,7 +18,7 @@ namespace nzgdc_demo
 		void SetWindowEnable(bool enabled);
 		[[nodiscard]] bool isWindowOpen() const;
 	protected:
-		bool m_isOpen{true};
+		bool m_isOpen{false};
 		ImGuiWindowFlags m_flags{ImGuiWindowFlags_NoFocusOnAppearing};
 	};
 }

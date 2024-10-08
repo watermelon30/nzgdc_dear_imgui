@@ -27,17 +27,24 @@ void nzgdc_demo::DebugSystem::Render()
 	ImGui_ImplGlfw_NewFrame();
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui::NewFrame();
-	ImGui::ShowDemoWindow();
 
 	std::string popupId;
 	drawMainMenuBar(popupId);
-
+	if (!popupId.empty())
+	{
+		ImGui::OpenPopup(popupId.c_str()); // Open pop up outside of the menu bar
+	}
+	drawPopups();
 	for (const auto& window : m_windows)
 	{
 		if (window->isWindowOpen())
 		{
 			window->Render();
 		}
+	}
+	if (m_imguiDemoOpen)
+	{
+		ImGui::ShowDemoWindow(&m_imguiDemoOpen);
 	}
 
 	ImGui::Render();
@@ -69,7 +76,6 @@ void nzgdc_demo::DebugSystem::AddWindow(std::shared_ptr<DebugWindowBase> window,
 
 void nzgdc_demo::DebugSystem::drawMainMenuBar(std::string& popupId)
 {
-	std::string openPopupId;
 	if (ImGui::BeginMainMenuBar())
 	{
 		if (ImGui::BeginMenu("Open Window"))
@@ -84,12 +90,14 @@ void nzgdc_demo::DebugSystem::drawMainMenuBar(std::string& popupId)
 				// Demo: just to show you can do it this way too
 				bool isWindowOpen = window->isWindowOpen();
 				auto selectableId = window->GetWindowId() + " (selectable)";
-				// Note: ImGuiSelectableFlags_DontClosePopups will work only if ImGuiWindowFlags_NoFocusOnAppearing is set on the opening window.
+				// Note: ImGuiSelectableFlags_DontClosePopups works only if ImGuiWindowFlags_NoFocusOnAppearing is set on the opening window.
 				if (ImGui::Selectable(selectableId.c_str(), &isWindowOpen, ImGuiSelectableFlags_DontClosePopups))
 				{
 					window->SetWindowEnable(!window->isWindowOpen());
 				}
 			}
+
+			ImGui::Selectable("ImGui Demo Window (ocornut)", &m_imguiDemoOpen, ImGuiSelectableFlags_DontClosePopups);
 
 			ImGui::EndMenu();
 		}
@@ -98,19 +106,18 @@ void nzgdc_demo::DebugSystem::drawMainMenuBar(std::string& popupId)
 		{
 			if (ImGui::MenuItem("Popup1 (wrong)"))
 			{
-				ImGui::OpenPopup(Popup1Id.c_str()); // does not work
+				ImGui::OpenPopup(PopupExample.data()); // does not work
 			}
 			if (ImGui::MenuItem("Popup1 (correct)"))
 			{
-				openPopupId = Popup1Id;
+				popupId = PopupExample;
 			}
-
 			ImGui::EndMenu();
 		}
 
 		if (ImGui::BeginMenu("Open Editor"))
 		{
-			if (ImGui::MenuItem("Fluid Simulator"))
+			if (ImGui::MenuItem("Fluid Simulator (WIP)"))
 			{
 				m_app->CreateFluidSimulatorWindow();
 			}
@@ -119,14 +126,12 @@ void nzgdc_demo::DebugSystem::drawMainMenuBar(std::string& popupId)
 		}
 		ImGui::EndMainMenuBar();
 	}
-	if (!openPopupId.empty())
+}
+void nzgdc_demo::DebugSystem::drawPopups()
+{
+	if (ImGui::BeginPopup(PopupExample.data()))
 	{
-		ImGui::OpenPopup(openPopupId.c_str());
-	}
-
-	if (ImGui::BeginPopup(Popup1Id.c_str()))
-	{
-		ImGui::TextUnformatted("Pop up 1");
+		ImGui::TextUnformatted("This is a pop up");
 		ImGui::EndPopup();
 	}
 }

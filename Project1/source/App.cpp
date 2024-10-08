@@ -90,10 +90,10 @@ namespace nzgdc_demo
 
 #ifdef _DEBUG
         // m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quad));
-        m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quadMVP), true);
-        m_debugSystem->AddWindow(std::make_shared<CameraEditor>(m_camera), true);
-        m_debugSystem->AddWindow(std::make_shared<ParticleSystemEditor>(m_particleSystem), true);
-        m_debugSystem->AddWindow(std::make_shared<ImguiDemoWindow>(), true);
+        m_debugSystem->AddWindow(std::make_shared<QuadEditor>(m_quadMVP), false);
+        m_debugSystem->AddWindow(std::make_shared<CameraEditor>(m_camera), false);
+        m_debugSystem->AddWindow(std::make_shared<ParticleSystemEditor>(m_particleSystem), false);
+        m_debugSystem->AddWindow(std::make_shared<ImguiDemoWindow>(), false);
 #endif
 
         glfwSwapInterval(1);

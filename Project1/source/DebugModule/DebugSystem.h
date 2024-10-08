@@ -18,12 +18,16 @@ namespace nzgdc_demo
 		void AddWindow(std::shared_ptr<DebugWindowBase> window, bool open = false);
 
 	private:
-		void drawMainMenuBar(std::string& popupId);
+		void drawMainMenuBar(std::string& popupId); // Pass the popup ID to open out of here if you need to open one
+
+		void drawPopups();
+
 	private:
-		inline static const std::string Popup1Id{"Popup1"};
-		
+		static constexpr std::string_view PopupExample{"PopupExample"};
+
 		std::vector<std::shared_ptr<DebugWindowBase>> m_windows;
+
+		bool m_imguiDemoOpen{true};
 		App* m_app{nullptr};
 	};
-
 }
