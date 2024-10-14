@@ -1,0 +1,6 @@
+# CMake generation dependency list for this directory.
+C:/Program Files/CMake/share/cmake-3.27/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/FindPackageMessage.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/FindPython/Support.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/FindPython3.cmake
+E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/src/jsontestrunner/CMakeLists.txt
