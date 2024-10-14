@@ -1,0 +1,74 @@
+{
+	"level_1": 
+	{
+		"item_1": 
+		{
+			"name" : "Jack",
+			"texture_path" : "res/textures/jack.jpg",
+			"size_x": 256,
+			"size_y": 512,
+			"point" : 8,
+			"comment" : "Jack is a beast"
+		},
+		"item_2": {
+			"name": "Pigeon",
+			"texture_path": "res/textures/pigeon.png",
+			"size_x": 256,
+			"size_y": 512,
+			"point": 4,
+			"comment": "Pigeon"
+		},
+		"item_3": {
+			"name": "Alvin",
+			"texture_path": "res/textures/alvin_sleep.png",
+			"size_x": 256,
+			"size_y": 512,
+			"point": 1,
+			"comment": "This dude just keep sleeping all day bruh"
+		}
+	},
+	"level_2": {
+		"item_1": {
+			"name": "Slow Down",
+			"texture_path": "res/textures/slow.jpg",
+			"size_x": 256,
+			"size_y": 512,
+			"point": 10,
+			"comment": "Slow down!"
+		},
+		"item_2": {
+			"name": "Dead banana",
+			"texture_path": "res/textures/banana_deadge.jpg",
+			"size_x": 256,
+			"size_y": 512,
+			"point": 0,
+			"comment": "Someone forgot their bananas!"
+		}
+	},
+	"level_3": {
+		"item_1": {
+			"name": "Jack",
+			"texture_path": "res/textures/jack.jpg",
+			"size_x": 256,
+			"size_y": 512,
+			"point": 5,
+			"comment": "Jack is a beast"
+		},
+		"item_2": {
+			"name": "Pigeon",
+			"texture_path": "res/textures/pigeon.png",
+			"size_x": 256,
+			"size_y": 512,
+			"point": 8,
+			"comment": "Pigeon"
+		},
+		"item_3": {
+			"name": "Alvin",
+			"texture_path": "res/textures/alvin_sleep.png",
+			"size_x": 256,
+			"size_y": 512,
+			"point": 0,
+			"comment": "This dude just keep sleeping all day bruh"
+		}
+	}
+}

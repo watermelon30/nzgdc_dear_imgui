@@ -10,6 +10,7 @@
 #include "DebugModule/Widgets/QuadEditor.h"
 #include "ParticleSystem/ParticleSystem.h"
 #include "Widgets/CameraEditor.h"
+#include "Widgets/DataAssetEditor.h"
 #include "Widgets/ParticleSystemEditor.h"
 #include "Widgets/ImguiDemoWindow.h"
 
@@ -94,6 +95,7 @@ namespace nzgdc_demo
         m_debugSystem->AddWindow(std::make_shared<CameraEditor>(m_camera), false);
         m_debugSystem->AddWindow(std::make_shared<ParticleSystemEditor>(m_particleSystem), false);
         m_debugSystem->AddWindow(std::make_shared<ImguiDemoWindow>(), false);
+        m_debugSystem->AddWindow(std::make_shared<DataAssetEditor>(), false);
 #endif
 
         glfwSwapInterval(1);

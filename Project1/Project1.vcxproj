@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\DebugModule\Widgets\DataAssetEditor.cpp" />
     <ClCompile Include="source\QuadMVP.cpp" />
     <ClCompile Include="source\App.cpp" />
     <ClCompile Include="source\DebugModule\DebugSystem.cpp" />
@@ -39,6 +40,7 @@
     <ClCompile Include="source\ParticleSystem\ParticleSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\DebugModule\Widgets\DataAssetEditor.h" />
     <ClInclude Include="source\Window\FluidSimulatorWindow.h" />
     <ClInclude Include="source\DebugModule\Widgets\ParticleSystemEditor.h" />
     <ClInclude Include="source\DebugModule\Widgets\ImguiDemoWindow.h" />
