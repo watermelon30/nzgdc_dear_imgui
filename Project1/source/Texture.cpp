@@ -12,6 +12,10 @@ namespace nzgdc_demo
         LoadTexture(path);
     }
 
+    Texture::Texture() : Texture("")
+    {
+    }
+
     Texture::~Texture()
     {
         glDeleteTextures(1, &m_id);

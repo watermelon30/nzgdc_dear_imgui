@@ -3,6 +3,7 @@
 #include <unordered_map>
 
 #include "DebugWindowBase.h"
+#include "Texture.h"
 
 #include "json/value.h"
 
@@ -19,6 +20,7 @@ struct SampleData
 	int Size_Y{128};
 	int Point{0};
 	std::string Comment;
+	std::vector<int> Available_Levels;
 };
 
 namespace nzgdc_demo
@@ -35,19 +37,26 @@ namespace nzgdc_demo
 		void ParseJson(const Json::Value& inJson);
 		bool SaveToJson();
 
-	private:
-		inline static std::string settingsPath {"res/assets/Data.json"};
+		void DrawMenuBar(std::string& popupId);
+		void DrawPopups(const std::string& popupId);
 
-		struct EnabledViewData {
-			bool Texture{false};
-			bool Size{false};
-			bool Table{false};
-			bool TreeNode{false};
-			bool ComboBox{false};
-			bool InputText{false};
-		} m_viewSettings;
+		void DrawItemList();
+
+		void* getTargetTexture(const std::string& textureId, const std::string& texturePath);
+
+	private:
+		static constexpr std::string_view SettingsPath {"res/assets/Data.json"};
+		static constexpr std::string_view ConfirmLoadJsonPopupId{"LoadFromJson"};
+		static constexpr std::string_view ConfirmSaveJsonPopupId{"SaveToJson"};
+
+		static constexpr int TexturePreviewSize {128};
 
 		std::unordered_map<std::string, std::unordered_map<std::string, SampleData>> m_levelData;
+		std::unordered_map<std::string, Texture> m_textureMap;
+
 		Json::Value m_localJson;
+
+		std::pair<std::string, std::unordered_map<std::string, SampleData>> m_currentEditingLevel;
+		std::pair<std::string, SampleData> m_currentEditingData;
 	};
 }

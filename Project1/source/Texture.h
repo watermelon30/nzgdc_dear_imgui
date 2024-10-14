@@ -8,6 +8,7 @@ namespace nzgdc_demo
     {
     public:
         Texture(const std::string_view path);
+        Texture();
         ~Texture();
 
         void Bind() const;

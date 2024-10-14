@@ -7,15 +7,47 @@
 #include "json/writer.h"
 nzgdc_demo::DataAssetEditor::DataAssetEditor()
 {
-	if (LoadJson(m_localJson))
+	// if (LoadJson(m_localJson))
+	// {
+	// 	ParseJson(m_localJson);
+	// }
+	m_flags = ImGuiWindowFlags_MenuBar;
+
+	std::unordered_map<std::string, SampleData> levelData;
+	for (int i = 0; i < 3; ++i)
 	{
-		ParseJson(m_localJson);
+		SampleData data;
+		data.Name = "Jack";
+		data.Texture_Path = "res/textures/jack.jpg";
+		data.Size_X = 256;
+		data.Size_Y = 512;
+		data.Point = 8;
+		data.Comment = "jack is a beast";
+		levelData.emplace(std::to_string(i), data);
 	}
+	m_levelData.emplace("level_1", levelData);
 }
 
 void nzgdc_demo::DataAssetEditor::RenderContent()
 {
 	ImGui::Begin(GetWindowId().c_str());
+
+	std::string popupId;
+	DrawMenuBar(popupId);
+	DrawPopups(popupId);
+
+	if (m_currentEditingLevel.first.empty())
+	{
+		ImGui::TextUnformatted("No target level selected.\nSelect a level from open menu");
+	}
+	else
+	{
+		ImGui::Columns(2);
+		DrawItemList();
+		ImGui::NextColumn();
+		
+	}
+
 	ImGui::End();
 }
 
@@ -26,7 +58,7 @@ std::string nzgdc_demo::DataAssetEditor::GetWindowId() const
 
 bool nzgdc_demo::DataAssetEditor::LoadJson(Json::Value& outData) const
 {
-	std::ifstream file(settingsPath);
+	std::ifstream file(SettingsPath.data());
 	if (!file.is_open())
 	{
 		// TODO: Log error (Failed to open the file)
@@ -96,6 +128,13 @@ void nzgdc_demo::DataAssetEditor::ParseJson(const Json::Value& inJson)
 bool nzgdc_demo::DataAssetEditor::SaveToJson()
 {
 	Json::Value newVal;
+
+	// Update edited data
+	if (m_levelData.contains(m_currentEditingLevel.first))
+	{
+		m_levelData[m_currentEditingLevel.first] = m_currentEditingLevel.second;
+	}
+
 	for (const std::pair<std::string, std::unordered_map<std::string, SampleData>>& levelData : m_levelData)
 	{
 		Json::Value levelJson;
@@ -113,7 +152,7 @@ bool nzgdc_demo::DataAssetEditor::SaveToJson()
 		newVal[levelData.first] = levelJson;
 	}
 
-	std::ofstream file(settingsPath);
+	std::ofstream file(SettingsPath.data());
 	if (!file.is_open())
 	{
 		// TODO: Log error
@@ -125,4 +164,133 @@ bool nzgdc_demo::DataAssetEditor::SaveToJson()
 	writer->write(newVal, &file);
 	m_localJson = newVal;
 	return true;
+}
+
+void nzgdc_demo::DataAssetEditor::DrawMenuBar(std::string& popupId)
+{
+	if (ImGui::BeginMenuBar())
+	{
+		if (ImGui::BeginMenu("Open"))
+		{
+			for (const auto& level : m_levelData)
+			{
+				if (ImGui::MenuItem(level.first.c_str()))
+				{
+					m_currentEditingLevel = level;
+				}
+			}
+			ImGui::EndMenu();
+		}
+
+		if (ImGui::BeginMenu("Options"))
+		{
+			if (ImGui::MenuItem("Load From Json"))
+			{
+				popupId = ConfirmLoadJsonPopupId;
+			}
+			if (ImGui::MenuItem("Save"))
+			{
+				popupId = ConfirmSaveJsonPopupId;
+			}
+			ImGui::EndMenu();
+		}
+		ImGui::EndMenuBar();
+	}
+}
+void nzgdc_demo::DataAssetEditor::DrawPopups(const std::string& popupId)
+{
+	if (!popupId.empty())
+	{
+		ImGui::OpenPopup(popupId.c_str());
+	}
+
+	if (ImGui::BeginPopup(ConfirmLoadJsonPopupId.data()))
+	{
+		if (ImGui::Button("Reload data from local json file?"))
+		{
+			if (LoadJson(m_localJson))
+			{
+				ParseJson(m_localJson);
+			}
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("Cancel"))
+		{
+			ImGui::CloseCurrentPopup();
+		}
+		if (ImGui::IsItemHovered() && ImGui::BeginTooltip())
+		{
+			ImGui::TextUnformatted("You can also click anywhere outside the popup to close");
+			ImGui::EndTooltip();
+		}
+		ImGui::EndPopup();
+	}
+
+	if (ImGui::BeginPopupModal(ConfirmSaveJsonPopupId.data()))
+	{
+		if (ImGui::Button("Save data to local json file?"))
+		{
+			SaveToJson();
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("Cancel"))
+		{
+			ImGui::CloseCurrentPopup();
+		}
+		ImGui::EndPopup();
+	}
+}
+
+void nzgdc_demo::DataAssetEditor::DrawItemList()
+{
+	ImGui::SeparatorText(("Current Level: " + m_currentEditingLevel.first).c_str());
+
+	if (ImGui::BeginTable("ItemListTable", 3, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg))
+	{
+		ImGui::TableSetupColumn("Id", ImGuiTableColumnFlags_NoResize | ImGuiTableColumnFlags_WidthFixed, 100.0f);
+		ImGui::TableSetupColumn("Name", ImGuiTableColumnFlags_WidthStretch, 125.0f);
+		ImGui::TableSetupColumn("Texture", ImGuiTableColumnFlags_WidthFixed, 150.0f);
+		ImGui::TableHeadersRow();
+		for (auto& data : m_currentEditingLevel.second)
+		{
+			ImGui::PushID(("table_row_" + data.first).c_str());
+			{
+				ImGui::TableNextRow();
+				ImGui::TableSetColumnIndex(0); // Same as ImGui::TableNextColumn()
+				{
+					ImGui::TextUnformatted(data.first.c_str());
+				}
+				ImGui::TableNextColumn(); // Same as ImGui::TableSetColumnIndex(1)
+				{
+					ImGui::TextUnformatted(data.second.Name.c_str());
+				}
+				ImGui::TableNextColumn(); // Same as ImGui::TableSetColumnIndex(2)
+				{
+					void* targetTextureId = getTargetTexture(data.first, data.second.Texture_Path);
+					ImGui::Image(targetTextureId, ImVec2(TexturePreviewSize, TexturePreviewSize), ImVec2(0, 1), ImVec2(1, 0));
+				}
+				ImGui::SameLine();
+				if (ImGui::Selectable("##selectable", m_currentEditingData.first == data.first, ImGuiSelectableFlags_SpanAllColumns | ImGuiSelectableFlags_AllowItemOverlap, ImVec2(0, TexturePreviewSize))) {
+					m_currentEditingData = data;
+				}
+			}
+			ImGui::PopID();
+		}
+		ImGui::EndTable();
+	}
+
+}
+void* nzgdc_demo::DataAssetEditor::getTargetTexture(const std::string& textureId, const std::string& texturePath)
+{
+	if (m_textureMap.contains(textureId))
+	{
+		return reinterpret_cast<void*>(m_textureMap[textureId].GetTextureId());
+	}
+	else
+	{
+		nzgdc_demo::Texture texture(texturePath);
+		m_textureMap.emplace(textureId, texture);
+		texture.Bind();
+		return reinterpret_cast<void*>(texture.GetTextureId());
+	}
 }
