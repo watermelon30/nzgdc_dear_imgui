@@ -5,12 +5,15 @@
 
 #include "json/reader.h"
 #include "json/writer.h"
+#include "misc/cpp/imgui_stdlib.h" // Necessary for using std::string with ImGui::InputText
+
+
 nzgdc_demo::DataAssetEditor::DataAssetEditor()
 {
-	// if (LoadJson(m_localJson))
-	// {
-	// 	ParseJson(m_localJson);
-	// }
+	 //if (LoadJson(m_localJson))
+	 //{
+	 //	ParseJson(m_localJson);
+	 //}
 	m_flags = ImGuiWindowFlags_MenuBar;
 
 	std::unordered_map<std::string, SampleData> levelData;
@@ -23,6 +26,7 @@ nzgdc_demo::DataAssetEditor::DataAssetEditor()
 		data.Size_Y = 512;
 		data.Point = 8;
 		data.Comment = "jack is a beast";
+		data.Available_Levels = {1,2,3,4};
 		levelData.emplace(std::to_string(i), data);
 	}
 	m_levelData.emplace("level_1", levelData);
@@ -45,7 +49,7 @@ void nzgdc_demo::DataAssetEditor::RenderContent()
 		ImGui::Columns(2);
 		DrawItemList();
 		ImGui::NextColumn();
-		
+		DrawDataEditor();
 	}
 
 	ImGui::End();
@@ -278,8 +282,88 @@ void nzgdc_demo::DataAssetEditor::DrawItemList()
 		}
 		ImGui::EndTable();
 	}
-
 }
+
+void nzgdc_demo::DataAssetEditor::DrawDataEditor()
+{
+	if (m_currentEditingData.first.empty())
+	{
+		ImGui::TextUnformatted("Select an object from the left to edit");
+		return;
+	}
+	ImGui::Text("Item Id: %s", m_currentEditingData.first.c_str());
+	ImGui::InputText("Name", &m_currentEditingData.second.Name);
+	ImGui::InputText("Texture Path", &m_currentEditingData.second.Texture_Path);
+
+	ImGui::InputInt("Size X", &m_currentEditingData.second.Size_X);
+	ImGui::DragInt("Size Y", &m_currentEditingData.second.Size_Y, 1, 0, INT_MAX);
+
+	DrawPointComboBox(m_currentEditingData.second.Point);
+
+	ImGui::InputTextMultiline("Comment", &m_currentEditingData.second.Comment, ImVec2(0.0f, ImGui::GetTextLineHeightWithSpacing() * 5));
+
+	if (ImGui::TreeNode("Edit available levels"))
+	{
+		if (ImGui::Button("Add new level"))
+		{
+			m_currentEditingData.second.Available_Levels.emplace_back(0);
+		}
+		DrawAvailableLevelTable(m_currentEditingData.second.Available_Levels);
+		ImGui::TreePop();
+	}
+}
+
+void nzgdc_demo::DataAssetEditor::DrawPointComboBox(int& targetPoint)
+{
+	if (ImGui::BeginCombo("Point", std::to_string(targetPoint).c_str()))
+	{
+		for (int point = SampleData::POINT_MIN; point < SampleData::POINT_MAX; ++point)
+		{
+			if (ImGui::Selectable(std::to_string(point).c_str(), targetPoint == point))
+			{
+				targetPoint = point;
+			}
+		}
+		ImGui::EndCombo();
+	}
+}
+void nzgdc_demo::DataAssetEditor::DrawAvailableLevelTable(std::vector<int>& AvailableLevels)
+{
+	if (ImGui::BeginTable("AvailableLevelTable", 2, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg))
+	{
+		ImGui::TableSetupColumn("LevelId", ImGuiTableColumnFlags_NoResize | ImGuiTableColumnFlags_WidthFixed, 100.0f);
+		ImGui::TableSetupColumn("Options", ImGuiTableColumnFlags_WidthStretch, 125.0f);
+		ImGui::TableHeadersRow();
+
+		int idToRemove{-1};
+		for (int i = 0; i < AvailableLevels.size(); ++i)
+		{
+			int& data = AvailableLevels[i];
+			ImGui::PushID(("table_row_" + std::to_string(i)).c_str());
+			{
+				ImGui::TableNextRow();
+				ImGui::TableSetColumnIndex(0); // Same as ImGui::TableNextColumn()
+				{
+					ImGui::InputInt("##AvailableLevelId",&data);
+				}
+				ImGui::TableNextColumn(); // Same as ImGui::TableSetColumnIndex(1)
+				{
+					if (ImGui::Button("Remove"))
+					{
+						idToRemove = i;
+					}
+				}
+			}
+			ImGui::PopID();
+		}
+		if (idToRemove >= 0)
+		{
+			AvailableLevels.erase(AvailableLevels.begin() + idToRemove);
+		}
+		ImGui::EndTable();
+	}
+}
+
 void* nzgdc_demo::DataAssetEditor::getTargetTexture(const std::string& textureId, const std::string& texturePath)
 {
 	if (m_textureMap.contains(textureId))

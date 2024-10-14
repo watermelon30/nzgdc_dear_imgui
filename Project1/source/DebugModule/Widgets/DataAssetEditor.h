@@ -21,6 +21,8 @@ struct SampleData
 	int Point{0};
 	std::string Comment;
 	std::vector<int> Available_Levels;
+	inline static constexpr int POINT_MAX{10};
+	inline static constexpr int POINT_MIN{0};
 };
 
 namespace nzgdc_demo
@@ -41,6 +43,11 @@ namespace nzgdc_demo
 		void DrawPopups(const std::string& popupId);
 
 		void DrawItemList();
+		void DrawDataEditor();
+
+		void DrawPointComboBox(int& targetPoint);
+		void DrawAvailableLevelTable(std::vector<int>& AvailableLevels);
+
 
 		void* getTargetTexture(const std::string& textureId, const std::string& texturePath);
 
