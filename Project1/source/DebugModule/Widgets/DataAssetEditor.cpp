@@ -135,6 +135,10 @@ bool nzgdc_demo::DataAssetEditor::SaveToJson()
 	Json::Value newVal;
 
 	// Update edited data
+	if (m_currentEditingLevel.second.contains(m_currentEditingData.first))
+	{
+		m_currentEditingLevel.second[m_currentEditingData.first] = m_currentEditingData.second;
+	}
 	if (m_levelData.contains(m_currentEditingLevel.first))
 	{
 		m_levelData[m_currentEditingLevel.first] = m_currentEditingLevel.second;
@@ -168,7 +172,13 @@ bool nzgdc_demo::DataAssetEditor::SaveToJson()
 	std::unique_ptr<Json::StreamWriter> writer(writerBuilder.newStreamWriter());
 	writer->write(newVal, &file);
 	m_localJson = newVal;
-	return true;
+ 	return true;
+}
+void nzgdc_demo::DataAssetEditor::OpenLevelData(const std::pair<std::string, std::unordered_map<std::string, SampleData>>& inLevelData)
+{
+	m_currentEditingLevel = inLevelData;
+	m_currentEditingData = std::pair<std::string, SampleData>();
+	m_textureMap.clear();
 }
 
 void nzgdc_demo::DataAssetEditor::DrawMenuBar(std::string& popupId)
@@ -181,7 +191,7 @@ void nzgdc_demo::DataAssetEditor::DrawMenuBar(std::string& popupId)
 			{
 				if (ImGui::MenuItem(level.first.c_str()))
 				{
-					m_currentEditingLevel = level;
+					OpenLevelData(level);
 				}
 			}
 			ImGui::EndMenu();
@@ -213,6 +223,7 @@ void nzgdc_demo::DataAssetEditor::DrawPopups(const std::string& popupId)
 	{
 		if (ImGui::Button("Reload data from local json file?"))
 		{
+			m_localJson = Json::Value();
 			if (LoadJson(m_localJson))
 			{
 				ParseJson(m_localJson);
@@ -271,7 +282,7 @@ void nzgdc_demo::DataAssetEditor::DrawItemList()
 				}
 				ImGui::TableNextColumn(); // Same as ImGui::TableSetColumnIndex(2)
 				{
-					void* targetTextureId = getTargetTexture(data.first, data.second.Texture_Path);
+					void* targetTextureId = GetTargetTexture(data.first, data.second.Texture_Path);
 					ImGui::Image(targetTextureId, ImVec2(TexturePreviewSize, TexturePreviewSize), ImVec2(0, 1), ImVec2(1, 0));
 				}
 				ImGui::SameLine();
@@ -292,6 +303,10 @@ void nzgdc_demo::DataAssetEditor::DrawDataEditor()
 		ImGui::TextUnformatted("Select an object from the left to edit");
 		return;
 	}
+	if (ImGui::Button("Save changes"))
+	{
+		SaveToJson();
+	}
 	ImGui::Text("Item Id: %s", m_currentEditingData.first.c_str());
 	ImGui::InputText("Name", &m_currentEditingData.second.Name);
 	ImGui::InputText("Texture Path", &m_currentEditingData.second.Texture_Path);
@@ -310,6 +325,13 @@ void nzgdc_demo::DataAssetEditor::DrawDataEditor()
 			m_currentEditingData.second.Available_Levels.emplace_back(0);
 		}
 		DrawAvailableLevelTable(m_currentEditingData.second.Available_Levels);
+		ImGui::TreePop();
+	}
+
+	if (ImGui::TreeNode("Show texture"))
+	{
+		void* targetTextureId = GetTargetTexture(m_currentEditingData.first, m_currentEditingData.second.Texture_Path);
+		ImGui::Image(targetTextureId, ImVec2(m_currentEditingData.second.Size_X, m_currentEditingData.second.Size_Y), ImVec2(0, 1), ImVec2(1, 0));
 		ImGui::TreePop();
 	}
 }
@@ -365,7 +387,7 @@ void nzgdc_demo::DataAssetEditor::DrawAvailableLevelTable(std::vector<int>& Avai
 	}
 }
 
-void* nzgdc_demo::DataAssetEditor::getTargetTexture(const std::string& textureId, const std::string& texturePath)
+void* nzgdc_demo::DataAssetEditor::GetTargetTexture(const std::string& textureId, const std::string& texturePath)
 {
 	if (m_textureMap.contains(textureId))
 	{

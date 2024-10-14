@@ -1,92 +1,83 @@
 {
-	"level_1": 
+	"level_1" : 
 	{
-		"item_1": 
+		"item_1" : 
 		{
-			"name" : "Jack",
-			"texture_path" : "res/textures/jack.jpg",
-			"size_x": 256,
-			"size_y": 512,
-			"point" : 8,
 			"comment" : "Jack is a beast",
-			"available_levels": [
-				1,
-				2,
-				15
-			]
+			"name" : "Jack",
+			"point" : 8,
+			"size_x" : 256,
+			"size_y" : 337,
+			"texture_path" : "res/textures/jack.jpg"
 		},
-		"item_2": {
-			"name": "Pigeon",
-			"texture_path": "res/textures/pigeon.png",
-			"size_x": 256,
-			"size_y": 512,
-			"point": 4,
-			"comment": "Pigeon",
-			"available_levels": [
-				1,
-				2,
-				3
-			]
+		"item_2" : 
+		{
+			"comment" : "Yummy",
+			"name" : "Food",
+			"point" : 4,
+			"size_x" : 256,
+			"size_y" : 419,
+			"texture_path" : "res/textures/yum.jpg"
 		},
-		"item_3": {
-			"name": "Alvin",
-			"texture_path": "res/textures/alvin_sleep.png",
-			"size_x": 256,
-			"size_y": 512,
-			"point": 1,
-			"comment": "This dude just keep sleeping all day bruh",
-			"available_levels": [
-				1
-			]
+		"item_3" : 
+		{
+			"comment" : "This dude is so mad",
+			"name" : "Alvin",
+			"point" : 1,
+			"size_x" : 256,
+			"size_y" : 363,
+			"texture_path" : "res/textures/alvin_mad.png"
 		}
 	},
-	"level_2": {
-		"item_1": {
-			"name": "Slow Down",
-			"texture_path": "res/textures/slow.jpg",
-			"size_x": 256,
-			"size_y": 512,
-			"point": 10,
-			"comment": "Slow down!"
+	"level_2" : 
+	{
+		"item_1" : 
+		{
+			"comment" : "Slow down!",
+			"name" : "Slow Down",
+			"point" : 10,
+			"size_x" : 256,
+			"size_y" : 344,
+			"texture_path" : "res/textures/slow.jpg"
 		},
-		"item_2": {
-			"name": "Dead banana",
-			"texture_path": "res/textures/banana_deadge.jpg",
-			"size_x": 256,
-			"size_y": 512,
-			"point": 0,
-			"comment": "Someone forgot their bananas!"
+		"item_2" : 
+		{
+			"comment" : "Someone forgot their bananas!",
+			"name" : "Dead banana",
+			"point" : 0,
+			"size_x" : 256,
+			"size_y" : 397,
+			"texture_path" : "res/textures/banana_deadge.jpg"
 		}
 	},
-	"level_3": {
-		"item_1": {
-			"name": "Jack",
-			"texture_path": "res/textures/jack.jpg",
-			"size_x": 256,
-			"size_y": 512,
-			"point": 5,
-			"comment": "Jack is a beast",
-			"available_levels": [
-				5,
-				6,
-				16
-			]
+	"level_3" : 
+	{
+		"item_1" : 
+		{
+			"comment" : "Jack is a beast",
+			"name" : "Jack",
+			"point" : 5,
+			"size_x" : 256,
+			"size_y" : 512,
+			"texture_path" : "res/textures/jack.jpg"
 		},
-		"item_2": {
-			"name": "Pigeon",
-			"texture_path": "res/textures/pigeon.png",
-			"size_x": 256,
-			"size_y": 512,
-			"point": 8,
-			"comment": "Pigeon"
+		"item_2" : 
+		{
+			"comment" : "Yummy",
+			"name" : "Food",
+			"point" : 8,
+			"size_x" : 256,
+			"size_y" : 512,
+			"texture_path" : "res/textures/yum.jpg"
 		},
-		"item_3": {
-			"name": "Alvin",
-			"texture_path": "res/textures/alvin_sleep.png",
-			"size_x": 256,
-			"size_y": 512,
-			"point": 0,
-			"comment": "This dude just keep sleeping all day bruh"
+		"item_3" : 
+		{
+			"comment" : "Why is this dude so mad",
+			"name" : "Alvin",
+			"point" : 0,
+			"size_x" : 256,
+			"size_y" : 363,
+			"texture_path" : "res/textures/alvin_mad.png"
 		}
 	}
 }

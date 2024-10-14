@@ -39,6 +39,8 @@ namespace nzgdc_demo
 		void ParseJson(const Json::Value& inJson);
 		bool SaveToJson();
 
+		void OpenLevelData(const std::pair<std::string, std::unordered_map<std::string, SampleData>>& inLevelData);
+
 		void DrawMenuBar(std::string& popupId);
 		void DrawPopups(const std::string& popupId);
 
@@ -49,7 +51,7 @@ namespace nzgdc_demo
 		void DrawAvailableLevelTable(std::vector<int>& AvailableLevels);
 
 
-		void* getTargetTexture(const std::string& textureId, const std::string& texturePath);
+		void* GetTargetTexture(const std::string& textureId, const std::string& texturePath);
 
 	private:
 		static constexpr std::string_view SettingsPath {"res/assets/Data.json"};
