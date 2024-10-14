@@ -368,13 +368,12 @@ void* nzgdc_demo::DataAssetEditor::getTargetTexture(const std::string& textureId
 {
 	if (m_textureMap.contains(textureId))
 	{
-		return reinterpret_cast<void*>(m_textureMap[textureId].GetTextureId());
+		return reinterpret_cast<void*>(m_textureMap[textureId]->GetTextureId());
 	}
 	else
 	{
-		nzgdc_demo::Texture texture(texturePath);
+		auto texture = std::make_shared<nzgdc_demo::Texture>(texturePath);
 		m_textureMap.emplace(textureId, texture);
-		texture.Bind();
-		return reinterpret_cast<void*>(texture.GetTextureId());
+		return reinterpret_cast<void*>(texture->GetTextureId());
 	}
 }

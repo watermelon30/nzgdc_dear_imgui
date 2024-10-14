@@ -59,7 +59,7 @@ namespace nzgdc_demo
 		static constexpr int TexturePreviewSize {128};
 
 		std::unordered_map<std::string, std::unordered_map<std::string, SampleData>> m_levelData;
-		std::unordered_map<std::string, Texture> m_textureMap;
+		std::unordered_map<std::string, std::shared_ptr<Texture>> m_textureMap;
 
 		Json::Value m_localJson;
 
