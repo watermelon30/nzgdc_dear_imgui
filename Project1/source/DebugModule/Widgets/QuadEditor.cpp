@@ -9,6 +9,7 @@
 #include <json/reader.h>
 #include <json/writer.h>
 
+#include "JsonHelper.h"
 #include "QuadMVP.h"
 
 nzgdc_demo::QuadEditor::QuadEditor(const std::shared_ptr<Quad>& quad)
@@ -54,6 +55,7 @@ bool nzgdc_demo::QuadEditor::DrawQuadEditor(QuadData& quadData)
 	}
 	return edited;
 }
+
 Json::Value nzgdc_demo::QuadEditor::Serialize(const QuadData& data)
 {
 	Json::Value outJson;
@@ -83,7 +85,7 @@ void nzgdc_demo::QuadEditor::DrawMenuBar(std::string popupId)
 			}
 			if (ImGui::MenuItem("Save"))
 			{
-				SaveToJson();
+				JsonHelper::SaveToJson(Quad::settingsPath, m_loadedJson);
 			}
 			if (ImGui::MenuItem("Reset coordinates"))
 			{
@@ -106,23 +108,12 @@ void nzgdc_demo::QuadEditor::ResetCoordinates()
 bool nzgdc_demo::QuadEditor::SaveToJson()
 {
 	m_loadedJson = Serialize(m_quadData);
-
-	std::ofstream file(Quad::settingsPath);
-
-	if (!file.is_open())
-	{
-		// TODO: Log error
-		return false;
-	}
-	Json::StreamWriterBuilder writerBuilder;
-	std::unique_ptr<Json::StreamWriter> writer(writerBuilder.newStreamWriter());
-	writer->write(m_loadedJson, &file);
-	return true;
+	return JsonHelper::SaveToJson(Quad::settingsPath, m_loadedJson);
 }
 
 bool nzgdc_demo::QuadEditor::LoadFromJson()
 {
-	if (m_quad->LoadJson(m_loadedJson))
+	if (JsonHelper::LoadJson(Quad::settingsPath, m_loadedJson))
 	{
 		Quad::ParseJson(m_loadedJson, m_quadData);
 		m_quad->SetTransformData(m_quadData);

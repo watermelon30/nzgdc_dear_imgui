@@ -23,6 +23,11 @@ namespace nzgdc_demo
         glBindTexture(GL_TEXTURE_2D, m_id);
     }
 
+    void Texture::SetTexturePath(const std::string_view path)
+    {
+        LoadTexture(path);
+    }
+
     unsigned Texture::GetTextureId() const
     {
         return m_id;

@@ -19,7 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\DebugModule\Widgets\QuadMvpEditor.cpp" />
     <ClCompile Include="source\DebugModule\Widgets\SceneManagerEditor.cpp" />
+    <ClCompile Include="source\JsonHelper.cpp" />
     <ClCompile Include="source\QuadMVP.cpp" />
     <ClCompile Include="source\App.cpp" />
     <ClCompile Include="source\DebugModule\DebugSystem.cpp" />
@@ -41,7 +43,9 @@
     <ClCompile Include="source\ParticleSystem\ParticleSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\DebugModule\Widgets\QuadMvpEditor.h" />
     <ClInclude Include="source\DebugModule\Widgets\SceneManagerEditor.h" />
+    <ClInclude Include="source\JsonHelper.h" />
     <ClInclude Include="source\SceneManager\SceneManager.h" />
     <ClInclude Include="source\Window\FluidSimulatorWindow.h" />
     <ClInclude Include="source\DebugModule\Widgets\ParticleSystemEditor.h" />

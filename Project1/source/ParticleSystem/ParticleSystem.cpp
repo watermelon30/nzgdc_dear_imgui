@@ -3,6 +3,7 @@
 #include <fstream>
 
 #include "Camera.h"
+#include "JsonHelper.h"
 #include "Particle.h"
 
 #include "json/reader.h"
@@ -94,25 +95,6 @@ void nzgdc_demo::ParticleSystem::Stop()
 void nzgdc_demo::ParticleSystem::SetData(const ParticleSystemData& newData)
 {
     m_data = newData;
-}
-bool nzgdc_demo::ParticleSystem::LoadJson(Json::Value& outData) const
-{
-    std::ifstream file(settingsPath);
-    if (!file.is_open())
-    {
-        // TODO: Log error (Failed to open the file)
-        return false;
-    }
-
-    Json::CharReaderBuilder readerBuilder;
-    std::string errors;
-
-    if (!Json::parseFromStream(readerBuilder, file, &outData, &errors))
-    {
-        // TODO: Log error (Failed to parse JSON)
-        return false;
-    }
-    return true;
 }
 
 void nzgdc_demo::ParticleSystem::ParseJson(const Json::Value& inJson, ParticleSystemData& outParticleSystemData)
@@ -249,7 +231,7 @@ void nzgdc_demo::ParticleSystem::ParseJson(const Json::Value& inJson, ParticleSy
 void nzgdc_demo::ParticleSystem::LoadLocalData()
 {
     Json::Value jsonVal;
-    if (LoadJson(jsonVal))
+    if (JsonHelper::LoadJson(settingsPath, jsonVal))
     {
         ParseJson(jsonVal, m_data);
     }

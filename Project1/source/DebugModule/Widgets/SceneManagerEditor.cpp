@@ -3,6 +3,7 @@
 #include <fstream>
 
 #include "CameraEditor.h"
+#include "JsonHelper.h"
 #include "ParticleSystemEditor.h"
 #include "QuadEditor.h"
 
@@ -100,18 +101,8 @@ bool nzgdc_demo::SceneManagerEditor::SaveToJson()
     {
         jsonVal["ParticleSystems"].append(ParticleSystemEditor::Serialize(particleSystem->GetData()));
     }
-
-    std::ofstream file(SceneManager::settingsPath);
-    if (!file.is_open())
-    {
-        // TODO: Log error
-        return false;
-    }
-    
-    Json::StreamWriterBuilder writerBuilder;
-    std::unique_ptr<Json::StreamWriter> writer(writerBuilder.newStreamWriter());
-    writer->write(jsonVal, &file);
-    return true;
+    //return JsonHelper::SaveToJson(settingsPath, jsonVal);
+    return false;
 }
 
 bool nzgdc_demo::SceneManagerEditor::LoadFromJson()

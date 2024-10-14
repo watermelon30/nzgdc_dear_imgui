@@ -51,7 +51,6 @@ namespace nzgdc_demo
         ParticleSystemData& GetData() { return m_data; }
         void SetData(const ParticleSystemData& newData);
 
-        bool LoadJson(Json::Value& outData) const;
         static void ParseJson(const Json::Value& inJson, ParticleSystemData& outParticleSystemData);
 
     private:

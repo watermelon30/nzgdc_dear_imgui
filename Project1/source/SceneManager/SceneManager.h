@@ -28,7 +28,6 @@ namespace nzgdc_demo
         [[nodiscard]] std::vector<std::shared_ptr<QuadMVP>> GetQuadsVector() const;
         [[nodiscard]] std::vector<std::shared_ptr<ParticleSystem>> GetParticleSystemsVector() const;
 
-        bool LoadJson(Json::Value& outData) const;
         static void ParseJson(const Json::Value& inJson, SceneManager* outSceneManager);
         
     private:

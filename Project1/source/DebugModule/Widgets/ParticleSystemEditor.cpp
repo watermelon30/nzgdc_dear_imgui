@@ -2,6 +2,8 @@
 
 #include <fstream>
 
+#include "JsonHelper.h"
+
 #include "json/writer.h"
 
 #include "ParticleSystem/ParticleSystem.h"
@@ -148,19 +150,7 @@ Json::Value nzgdc_demo::ParticleSystemEditor::Serialize(const ParticleSystemData
 bool nzgdc_demo::ParticleSystemEditor::SaveToJson()
 {
     const auto& particleData = m_particleSystem->GetData();
-    Json::Value newVal = Serialize(particleData);
-
-    std::ofstream file(ParticleSystem::settingsPath);
-    if (!file.is_open())
-    {
-        // TODO: Log error
-        return false;
-    }
-    
-    Json::StreamWriterBuilder writerBuilder;
-    std::unique_ptr<Json::StreamWriter> writer(writerBuilder.newStreamWriter());
-    writer->write(newVal, &file);
-    return true;
+    return JsonHelper::SaveToJson(ParticleSystem::settingsPath, Serialize(particleData));
 }
 
 void nzgdc_demo::ParticleSystemEditor::DrawMenuBar(std::string& popupId)
@@ -172,7 +162,7 @@ void nzgdc_demo::ParticleSystemEditor::DrawMenuBar(std::string& popupId)
             if (ImGui::MenuItem("Load From Json"))
             {
                 Json::Value jsonVal;
-                if (m_particleSystem->LoadJson(jsonVal))
+                if (JsonHelper::LoadJson(ParticleSystem::settingsPath, jsonVal))
                 {
                     ParticleSystemData data;
                     ParticleSystem::ParseJson(jsonVal, data);
