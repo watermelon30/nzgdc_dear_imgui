@@ -10,10 +10,10 @@
 
 nzgdc_demo::DataAssetEditor::DataAssetEditor()
 {
-	 //if (LoadJson(m_localJson))
-	 //{
-	 //	ParseJson(m_localJson);
-	 //}
+	 if (LoadJson(m_localJson))
+	 {
+	 	ParseJson(m_localJson);
+	 }
 	m_flags = ImGuiWindowFlags_MenuBar;
 
 	std::unordered_map<std::string, SampleData> levelData;
@@ -77,51 +77,52 @@ bool nzgdc_demo::DataAssetEditor::LoadJson(Json::Value& outData) const
 		// TODO: Log error (Failed to parse JSON)
 		return false;
 	}
-	auto data = outData.toStyledString();
-	std::cout << data.c_str() << std::endl;
 	return true;
 }
 
 void nzgdc_demo::DataAssetEditor::ParseJson(const Json::Value& inJson)
 {
-	std::vector<std::string> levelNames = inJson.getMemberNames();
 
-	for (Json::Value::ArrayIndex i = 0; i < inJson.size(); i++)
+	for (const auto& levelId : inJson.getMemberNames())
 	{
-		const Json::Value levelJson = inJson[i];
-		std::string levelId = levelNames[i];
-
+		const Json::Value levelJson = inJson[levelId];
 		std::unordered_map<std::string, SampleData> levelData;
 
-		std::vector<std::string> dataNames = levelJson.getMemberNames();
-		for (Json::Value::ArrayIndex j = 0; j != inJson.size(); j++)
+		for (const auto& dataId : levelJson.getMemberNames())
 		{
-			Json::Value dataJson = levelJson[j];
-			std::string dataId = dataNames[j];
+			Json::Value dataJson = levelJson[dataId];
 			SampleData data;
-			if (dataJson.isMember("name") && inJson["name"].isString())
+			std::string dataStr = dataJson.toStyledString();
+			if (dataJson.isMember("name") && dataJson["name"].isString())
 			{
 				data.Name = dataJson["name"].asString();
 			}
-			if (dataJson.isMember("texture_path") && inJson["texture_path"].isString())
+			if (dataJson.isMember("texture_path") && dataJson["texture_path"].isString())
 			{
 				data.Texture_Path = dataJson["texture_path"].asString();
 			}
-			if (dataJson.isMember("size_x") && inJson["size_x"].isInt())
+			if (dataJson.isMember("size_x") && dataJson["size_x"].isInt())
 			{
 				data.Size_X = dataJson["size_x"].asInt();
 			}
-			if (dataJson.isMember("size_y") && inJson["size_y"].isInt())
+			if (dataJson.isMember("size_y") && dataJson["size_y"].isInt())
 			{
 				data.Size_Y = dataJson["size_y"].asInt();
 			}
-			if (dataJson.isMember("point") && inJson["point"].isInt())
+			if (dataJson.isMember("point") && dataJson["point"].isInt())
 			{
 				data.Point = dataJson["point"].asInt();
 			}
-			if (dataJson.isMember("comment") && inJson["comment"].isString())
+			if (dataJson.isMember("comment") && dataJson["comment"].isString())
 			{
 				data.Comment = dataJson["comment"].asString();
+			}
+			if (dataJson.isMember("available_levels") && dataJson["available_levels"].isArray()) {
+				for (const auto& level : dataJson["available_levels"]) {
+					if (level.isInt()) {
+						data.Available_Levels.push_back(level.asInt());
+					}
+				}
 			}
 			levelData.emplace(dataId, data);
 		}

@@ -475,7 +475,10 @@
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="imgui\misc\cpp\imgui_stdlib.cpp" />
+    <ClCompile Include="jsoncpp\example\readFromStream\readFromStream.cpp" />
     <ClCompile Include="jsoncpp\example\readFromString\readFromString.cpp" />
+    <ClCompile Include="jsoncpp\example\streamWrite\streamWrite.cpp" />
+    <ClCompile Include="jsoncpp\example\stringWrite\stringWrite.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

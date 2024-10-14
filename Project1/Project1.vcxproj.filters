@@ -1,117 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="source\DebugModule\Widgets\DataAssetEditor.cpp" />
+    <ClCompile Include="source\QuadMVP.cpp" />
+    <ClCompile Include="source\App.cpp" />
+    <ClCompile Include="source\DebugModule\DebugSystem.cpp" />
+    <ClCompile Include="source\DebugModule\DebugWindowBase.cpp" />
+    <ClCompile Include="source\DebugModule\Widgets\CameraEditor.cpp" />
+    <ClCompile Include="source\DebugModule\Widgets\QuadEditor.cpp" />
+    <ClCompile Include="source\Quad.cpp" />
+    <ClCompile Include="source\Shader\Shader.cpp" />
+    <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\Window\FluidSimulatorWindow.cpp" />
+    <ClCompile Include="source\Shader\ComputeShader.cpp" />
+    <ClCompile Include="source\Window\Window.cpp" />
+    <ClCompile Include="source\Texture.cpp" />
+    <ClCompile Include="source\DebugModule\Widgets\ParticleSystemEditor.cpp" />
+    <ClCompile Include="source\DebugModule\Widgets\ImguiDemoWindow.cpp" />
+    <ClCompile Include="source\FluidSimulator\FluidSimulator.cpp" />
+    <ClCompile Include="source\ParticleSystem\Particle.cpp" />
+    <ClCompile Include="source\ParticleSystem\ParticleSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Shader\Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\App.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\DebugModule\DebugSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\DebugModule\DebugWindowBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\DebugModule\Widgets\QuadEditor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Quad.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\QuadMVP.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\DebugModule\Widgets\CameraEditor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\DebugModule\Widgets\ParticleSystemEditor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Particle\Particle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Particle\ParticleSystem.cpp">
-    <ClCompile Include="source\FluidSimulator\FluidSimulator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Shader\ComputeShader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Window\Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="source\Shader\Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\App.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\DebugModule\DebugSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\DebugModule\DebugWindowBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\DebugModule\Widgets\QuadEditor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Quad.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\QuadMVP.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\DebugModule\Widgets\CameraEditor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\DebugModule\Widgets\ParticleSystemEditor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Particle\Particle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Particle\ParticleSystem.h">
-    <ClInclude Include="source\Shader\ComputeShader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Window\Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\FluidSimulator\FluidSimulator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Transform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="source\DebugModule\Widgets\DataAssetEditor.h" />
+    <ClInclude Include="source\Window\FluidSimulatorWindow.h" />
+    <ClInclude Include="source\DebugModule\Widgets\ParticleSystemEditor.h" />
+    <ClInclude Include="source\DebugModule\Widgets\ImguiDemoWindow.h" />
+    <ClInclude Include="source\ParticleSystem\Particle.h" />
+    <ClInclude Include="source\ParticleSystem\ParticleSystem.h" />
+    <ClInclude Include="source\Shader\ComputeShader.h" />
+    <ClInclude Include="source\Shader\Shader.h" />
+    <ClInclude Include="source\Window\Window.h" />
+    <ClInclude Include="source\FluidSimulator\FluidSimulator.h" />
+    <ClInclude Include="source\QuadMVP.h" />
+    <ClInclude Include="source\App.h" />
+    <ClInclude Include="source\Camera.h" />
+    <ClInclude Include="source\DebugModule\DebugSystem.h" />
+    <ClInclude Include="source\DebugModule\DebugWindowBase.h" />
+    <ClInclude Include="source\DebugModule\Widgets\CameraEditor.h" />
+    <ClInclude Include="source\DebugModule\Widgets\QuadEditor.h" />
+    <ClInclude Include="source\Quad.h" />
+    <ClInclude Include="source\Texture.h" />
+    <ClInclude Include="source\Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.frag" />

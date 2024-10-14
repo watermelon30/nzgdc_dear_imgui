@@ -193,18 +193,18 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)source;$(ProjectDir)source\DebugModule;$(SolutionDir)third_party\imgui;$(SolutionDir)third_party\imgui\backends;$(SolutionDir)third_party\glfw\include\GLFW;$(SolutionDir)third_party\glm;$(SolutionDir)third_party;$(SolutionDir)third_party\glad\include;$(SolutionDir)third_party\jsoncpp\include;$(SolutionDir)third_party\jsoncpp</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source;$(ProjectDir)source\DebugModule;$(SolutionDir)third_party\imgui;$(SolutionDir)third_party\imgui\backends;$(SolutionDir)third_party\glfw\include\GLFW;$(SolutionDir)third_party\glm;$(SolutionDir)third_party;$(SolutionDir)third_party\glad\include;$(SolutionDir)third_party\jsoncpp\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;GLFW_INCLUDE_NONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)third_party\glfw\lib-vc2022;$(SolutionDir)third_party\jsoncpp\lib;$(SolutionDir)third_party\jsoncpp\build\debug\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)third_party\glfw\lib-vc2022;$(SolutionDir)third_party\jsoncpp\build\lib\Debug;$(SolutionDir)third_party\jsoncpp\build\bin\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;jsoncpp.lib;jsoncpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y /I "$(SolutionDir)third_party\jsoncpp\jsoncpp.dll" "$(OutDir)"</Command>
+      <Command>xcopy /Y /I "$(SolutionDir)third_party\jsoncpp\build\bin\Debug\jsoncpp.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
