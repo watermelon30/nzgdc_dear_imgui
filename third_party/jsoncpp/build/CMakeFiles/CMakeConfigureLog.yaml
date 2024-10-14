@@ -1,0 +1,573 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.27/Modules/CMakeDetermineSystem.cmake:211 (message)"
+      - "CMakeLists.txt:57 (project)"
+    message: |
+      The system is: Windows - 10.0.19045 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-3.27/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:57 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+      Build started 10/14/2024 8:03:09 PM.
+      
+      Project "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\3.27.1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
+      PrepareForBuild:
+        Creating directory "Debug\\".
+        Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+        Creating directory "Debug\\CompilerIdCXX.tlog\\".
+      InitializeBuildStatus:
+        Creating "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+        Touching "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
+      ClCompile:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TP /FC /errorReport:queue CMakeCXXCompilerId.cpp
+        CMakeCXXCompilerId.cpp
+      Link:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdCXX.lib" /MACHINE:X64 Debug\\CMakeCXXCompilerId.obj
+        CompilerIdCXX.vcxproj -> E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\3.27.1\\CompilerIdCXX\\CompilerIdCXX.exe
+      PostBuildEvent:
+        for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
+        :VCEnd
+        CMAKE_CXX_COMPILER=C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.40.33807\\bin\\Hostx64\\x64\\cl.exe
+      FinalizeBuildStatus:
+        Deleting file "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
+        Touching "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.lastbuildstate".
+      Done Building Project "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\3.27.1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" (default targets).
+      
+      Build succeeded.
+          0 Warning(s)
+          0 Error(s)
+      
+      Time Elapsed 00:00:00.48
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
+      
+      The CXX compiler identification is MSVC, found in:
+        E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/3.27.1/CompilerIdCXX/CompilerIdCXX.exe
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.27/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.27/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:57 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-vpwvb9"
+      binary: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-vpwvb9"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/cmake"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-vpwvb9'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_435d3.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+        Build started 10/14/2024 8:03:10 PM.
+        
+        Project "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vpwvb9\\cmTC_435d3.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_435d3.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vpwvb9\\Debug\\".
+          Creating directory "cmTC_435d3.dir\\Debug\\cmTC_435d3.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_435d3.dir\\Debug\\cmTC_435d3.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_435d3.dir\\Debug\\cmTC_435d3.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_435d3.dir\\Debug\\\\" /Fd"cmTC_435d3.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.27\\Modules\\CMakeCXXCompilerABI.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.40.33811 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_435d3.dir\\Debug\\\\" /Fd"cmTC_435d3.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.27\\Modules\\CMakeCXXCompilerABI.cpp"
+          CMakeCXXCompilerABI.cpp
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vpwvb9\\Debug\\cmTC_435d3.exe" /INCREMENTAL /ILK:"cmTC_435d3.dir\\Debug\\cmTC_435d3.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-vpwvb9/Debug/cmTC_435d3.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-vpwvb9/Debug/cmTC_435d3.lib" /MACHINE:X64  /machine:x64 cmTC_435d3.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_435d3.vcxproj -> E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vpwvb9\\Debug\\cmTC_435d3.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_435d3.dir\\Debug\\cmTC_435d3.tlog\\unsuccessfulbuild".
+          Touching "cmTC_435d3.dir\\Debug\\cmTC_435d3.tlog\\cmTC_435d3.lastbuildstate".
+        Done Building Project "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vpwvb9\\cmTC_435d3.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.47
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.27/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "CMakeLists.txt:97 (check_function_exists)"
+    checks:
+      - "Looking for memset_s"
+    directories:
+      source: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-pqsqp4"
+      binary: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-pqsqp4"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/cmake"
+    buildResult:
+      variable: "HAVE_MEMSET_S"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-pqsqp4'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_0ab16.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+        Build started 10/14/2024 8:03:11 PM.
+        
+        Project "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pqsqp4\\cmTC_0ab16.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_0ab16.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pqsqp4\\Debug\\".
+          Creating directory "cmTC_0ab16.dir\\Debug\\cmTC_0ab16.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_0ab16.dir\\Debug\\cmTC_0ab16.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_0ab16.dir\\Debug\\cmTC_0ab16.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=memset_s /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_0ab16.dir\\Debug\\\\" /Fd"cmTC_0ab16.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pqsqp4\\CheckFunctionExists.cxx"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.40.33811 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=memset_s /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_0ab16.dir\\Debug\\\\" /Fd"cmTC_0ab16.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pqsqp4\\CheckFunctionExists.cxx"
+          CheckFunctionExists.cxx
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pqsqp4\\Debug\\cmTC_0ab16.exe" /INCREMENTAL /ILK:"cmTC_0ab16.dir\\Debug\\cmTC_0ab16.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-pqsqp4/Debug/cmTC_0ab16.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-pqsqp4/Debug/cmTC_0ab16.lib" /MACHINE:X64  /machine:x64 cmTC_0ab16.dir\\Debug\\CheckFunctionExists.obj
+        CheckFunctionExists.obj : error LNK2019: unresolved external symbol memset_s referenced in function main [E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pqsqp4\\cmTC_0ab16.vcxproj]
+        E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pqsqp4\\Debug\\cmTC_0ab16.exe : fatal error LNK1120: 1 unresolved externals [E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pqsqp4\\cmTC_0ab16.vcxproj]
+        Done Building Project "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pqsqp4\\cmTC_0ab16.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pqsqp4\\cmTC_0ab16.vcxproj" (default target) (1) ->
+        (Link target) -> 
+          CheckFunctionExists.obj : error LNK2019: unresolved external symbol memset_s referenced in function main [E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pqsqp4\\cmTC_0ab16.vcxproj]
+          E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pqsqp4\\Debug\\cmTC_0ab16.exe : fatal error LNK1120: 1 unresolved externals [E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pqsqp4\\cmTC_0ab16.vcxproj]
+        
+            0 Warning(s)
+            2 Error(s)
+        
+        Time Elapsed 00:00:00.41
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.27/Modules/CheckIncludeFileCXX.cmake:89 (try_compile)"
+      - "src/lib_json/CMakeLists.txt:11 (check_include_file_cxx)"
+    checks:
+      - "Looking for C++ include clocale"
+    directories:
+      source: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-hidtan"
+      binary: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-hidtan"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/cmake"
+    buildResult:
+      variable: "HAVE_CLOCALE"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-hidtan'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_d09fa.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+        Build started 10/14/2024 8:03:12 PM.
+        
+        Project "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-hidtan\\cmTC_d09fa.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_d09fa.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-hidtan\\Debug\\".
+          Creating directory "cmTC_d09fa.dir\\Debug\\cmTC_d09fa.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_d09fa.dir\\Debug\\cmTC_d09fa.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_d09fa.dir\\Debug\\cmTC_d09fa.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_d09fa.dir\\Debug\\\\" /Fd"cmTC_d09fa.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-hidtan\\CheckIncludeFile.cxx"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.40.33811 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_d09fa.dir\\Debug\\\\" /Fd"cmTC_d09fa.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-hidtan\\CheckIncludeFile.cxx"
+          CheckIncludeFile.cxx
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-hidtan\\Debug\\cmTC_d09fa.exe" /INCREMENTAL /ILK:"cmTC_d09fa.dir\\Debug\\cmTC_d09fa.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-hidtan/Debug/cmTC_d09fa.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-hidtan/Debug/cmTC_d09fa.lib" /MACHINE:X64  /machine:x64 cmTC_d09fa.dir\\Debug\\CheckIncludeFile.obj
+          cmTC_d09fa.vcxproj -> E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-hidtan\\Debug\\cmTC_d09fa.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_d09fa.dir\\Debug\\cmTC_d09fa.tlog\\unsuccessfulbuild".
+          Touching "cmTC_d09fa.dir\\Debug\\cmTC_d09fa.tlog\\cmTC_d09fa.lastbuildstate".
+        Done Building Project "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-hidtan\\cmTC_d09fa.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.46
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.27/Modules/CheckSymbolExists.cmake:140 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.27/Modules/CheckCXXSymbolExists.cmake:72 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "src/lib_json/CMakeLists.txt:12 (check_cxx_symbol_exists)"
+    checks:
+      - "Looking for localeconv"
+    directories:
+      source: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-3n5778"
+      binary: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-3n5778"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/cmake"
+    buildResult:
+      variable: "HAVE_LOCALECONV"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-3n5778'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_992fa.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+        Build started 10/14/2024 8:03:12 PM.
+        
+        Project "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3n5778\\cmTC_992fa.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_992fa.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3n5778\\Debug\\".
+          Creating directory "cmTC_992fa.dir\\Debug\\cmTC_992fa.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_992fa.dir\\Debug\\cmTC_992fa.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_992fa.dir\\Debug\\cmTC_992fa.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_992fa.dir\\Debug\\\\" /Fd"cmTC_992fa.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3n5778\\CheckSymbolExists.cxx"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.40.33811 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_992fa.dir\\Debug\\\\" /Fd"cmTC_992fa.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3n5778\\CheckSymbolExists.cxx"
+          CheckSymbolExists.cxx
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3n5778\\Debug\\cmTC_992fa.exe" /INCREMENTAL /ILK:"cmTC_992fa.dir\\Debug\\cmTC_992fa.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-3n5778/Debug/cmTC_992fa.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-3n5778/Debug/cmTC_992fa.lib" /MACHINE:X64  /machine:x64 cmTC_992fa.dir\\Debug\\CheckSymbolExists.obj
+          cmTC_992fa.vcxproj -> E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3n5778\\Debug\\cmTC_992fa.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_992fa.dir\\Debug\\cmTC_992fa.tlog\\unsuccessfulbuild".
+          Touching "cmTC_992fa.dir\\Debug\\cmTC_992fa.tlog\\cmTC_992fa.lastbuildstate".
+        Done Building Project "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3n5778\\cmTC_992fa.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.45
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.27/Modules/CheckIncludeFileCXX.cmake:89 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.27/Modules/CheckTypeSize.cmake:254 (check_include_file_cxx)"
+      - "src/lib_json/CMakeLists.txt:15 (check_type_size)"
+    checks:
+      - "Looking for C++ include sys/types.h"
+    directories:
+      source: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-fjn31p"
+      binary: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-fjn31p"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/cmake"
+    buildResult:
+      variable: "HAVE_SYS_TYPES_H"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-fjn31p'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_755fc.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+        Build started 10/14/2024 8:03:13 PM.
+        
+        Project "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fjn31p\\cmTC_755fc.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_755fc.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fjn31p\\Debug\\".
+          Creating directory "cmTC_755fc.dir\\Debug\\cmTC_755fc.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_755fc.dir\\Debug\\cmTC_755fc.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_755fc.dir\\Debug\\cmTC_755fc.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_755fc.dir\\Debug\\\\" /Fd"cmTC_755fc.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fjn31p\\CheckIncludeFile.cxx"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.40.33811 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_755fc.dir\\Debug\\\\" /Fd"cmTC_755fc.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fjn31p\\CheckIncludeFile.cxx"
+          CheckIncludeFile.cxx
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fjn31p\\Debug\\cmTC_755fc.exe" /INCREMENTAL /ILK:"cmTC_755fc.dir\\Debug\\cmTC_755fc.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-fjn31p/Debug/cmTC_755fc.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-fjn31p/Debug/cmTC_755fc.lib" /MACHINE:X64  /machine:x64 cmTC_755fc.dir\\Debug\\CheckIncludeFile.obj
+          cmTC_755fc.vcxproj -> E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fjn31p\\Debug\\cmTC_755fc.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_755fc.dir\\Debug\\cmTC_755fc.tlog\\unsuccessfulbuild".
+          Touching "cmTC_755fc.dir\\Debug\\cmTC_755fc.tlog\\cmTC_755fc.lastbuildstate".
+        Done Building Project "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fjn31p\\cmTC_755fc.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.45
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.27/Modules/CheckIncludeFileCXX.cmake:89 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.27/Modules/CheckTypeSize.cmake:259 (check_include_file_cxx)"
+      - "src/lib_json/CMakeLists.txt:15 (check_type_size)"
+    checks:
+      - "Looking for C++ include stdint.h"
+    directories:
+      source: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-v1u8fs"
+      binary: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-v1u8fs"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/cmake"
+    buildResult:
+      variable: "HAVE_STDINT_H"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-v1u8fs'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_58a61.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+        Build started 10/14/2024 8:03:13 PM.
+        
+        Project "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-v1u8fs\\cmTC_58a61.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_58a61.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-v1u8fs\\Debug\\".
+          Creating directory "cmTC_58a61.dir\\Debug\\cmTC_58a61.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_58a61.dir\\Debug\\cmTC_58a61.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_58a61.dir\\Debug\\cmTC_58a61.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_58a61.dir\\Debug\\\\" /Fd"cmTC_58a61.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-v1u8fs\\CheckIncludeFile.cxx"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.40.33811 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_58a61.dir\\Debug\\\\" /Fd"cmTC_58a61.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-v1u8fs\\CheckIncludeFile.cxx"
+          CheckIncludeFile.cxx
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-v1u8fs\\Debug\\cmTC_58a61.exe" /INCREMENTAL /ILK:"cmTC_58a61.dir\\Debug\\cmTC_58a61.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-v1u8fs/Debug/cmTC_58a61.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-v1u8fs/Debug/cmTC_58a61.lib" /MACHINE:X64  /machine:x64 cmTC_58a61.dir\\Debug\\CheckIncludeFile.obj
+          cmTC_58a61.vcxproj -> E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-v1u8fs\\Debug\\cmTC_58a61.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_58a61.dir\\Debug\\cmTC_58a61.tlog\\unsuccessfulbuild".
+          Touching "cmTC_58a61.dir\\Debug\\cmTC_58a61.tlog\\cmTC_58a61.lastbuildstate".
+        Done Building Project "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-v1u8fs\\cmTC_58a61.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.44
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.27/Modules/CheckIncludeFileCXX.cmake:89 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.27/Modules/CheckTypeSize.cmake:260 (check_include_file_cxx)"
+      - "src/lib_json/CMakeLists.txt:15 (check_type_size)"
+    checks:
+      - "Looking for C++ include stddef.h"
+    directories:
+      source: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-vf4ydd"
+      binary: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-vf4ydd"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/cmake"
+    buildResult:
+      variable: "HAVE_STDDEF_H"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-vf4ydd'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_d7583.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+        Build started 10/14/2024 8:03:14 PM.
+        
+        Project "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vf4ydd\\cmTC_d7583.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_d7583.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vf4ydd\\Debug\\".
+          Creating directory "cmTC_d7583.dir\\Debug\\cmTC_d7583.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_d7583.dir\\Debug\\cmTC_d7583.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_d7583.dir\\Debug\\cmTC_d7583.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_d7583.dir\\Debug\\\\" /Fd"cmTC_d7583.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vf4ydd\\CheckIncludeFile.cxx"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.40.33811 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_d7583.dir\\Debug\\\\" /Fd"cmTC_d7583.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vf4ydd\\CheckIncludeFile.cxx"
+          CheckIncludeFile.cxx
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vf4ydd\\Debug\\cmTC_d7583.exe" /INCREMENTAL /ILK:"cmTC_d7583.dir\\Debug\\cmTC_d7583.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-vf4ydd/Debug/cmTC_d7583.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-vf4ydd/Debug/cmTC_d7583.lib" /MACHINE:X64  /machine:x64 cmTC_d7583.dir\\Debug\\CheckIncludeFile.obj
+          cmTC_d7583.vcxproj -> E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vf4ydd\\Debug\\cmTC_d7583.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_d7583.dir\\Debug\\cmTC_d7583.tlog\\unsuccessfulbuild".
+          Touching "cmTC_d7583.dir\\Debug\\cmTC_d7583.tlog\\cmTC_d7583.lastbuildstate".
+        Done Building Project "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vf4ydd\\cmTC_d7583.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.45
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.27/Modules/CheckTypeSize.cmake:146 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.27/Modules/CheckTypeSize.cmake:271 (__check_type_size_impl)"
+      - "src/lib_json/CMakeLists.txt:15 (check_type_size)"
+    checks:
+      - "Check size of lconv"
+    directories:
+      source: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-2vcupp"
+      binary: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-2vcupp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/cmake"
+    buildResult:
+      variable: "HAVE_LCONV_SIZE"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-2vcupp'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_7362f.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+        Build started 10/14/2024 8:03:15 PM.
+        
+        Project "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2vcupp\\cmTC_7362f.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_7362f.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2vcupp\\Debug\\".
+          Creating directory "cmTC_7362f.dir\\Debug\\cmTC_7362f.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_7362f.dir\\Debug\\cmTC_7362f.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_7362f.dir\\Debug\\cmTC_7362f.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_7362f.dir\\Debug\\\\" /Fd"cmTC_7362f.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2vcupp\\LCONV_SIZE.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.40.33811 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_7362f.dir\\Debug\\\\" /Fd"cmTC_7362f.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2vcupp\\LCONV_SIZE.cpp"
+          LCONV_SIZE.cpp
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2vcupp\\Debug\\cmTC_7362f.exe" /INCREMENTAL /ILK:"cmTC_7362f.dir\\Debug\\cmTC_7362f.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-2vcupp/Debug/cmTC_7362f.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-2vcupp/Debug/cmTC_7362f.lib" /MACHINE:X64  /machine:x64 cmTC_7362f.dir\\Debug\\LCONV_SIZE.obj
+          cmTC_7362f.vcxproj -> E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2vcupp\\Debug\\cmTC_7362f.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_7362f.dir\\Debug\\cmTC_7362f.tlog\\unsuccessfulbuild".
+          Touching "cmTC_7362f.dir\\Debug\\cmTC_7362f.tlog\\cmTC_7362f.lastbuildstate".
+        Done Building Project "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2vcupp\\cmTC_7362f.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.45
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.27/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.27/Modules/CheckSourceCompiles.cmake:77 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.27/Modules/CheckStructHasMember.cmake:79 (CHECK_SOURCE_COMPILES)"
+      - "src/lib_json/CMakeLists.txt:17 (check_struct_has_member)"
+    checks:
+      - "Performing Test HAVE_DECIMAL_POINT"
+    directories:
+      source: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-3dhnlo"
+      binary: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-3dhnlo"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/cmake"
+    buildResult:
+      variable: "HAVE_DECIMAL_POINT"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-3dhnlo'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_70190.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+        Build started 10/14/2024 8:03:15 PM.
+        
+        Project "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3dhnlo\\cmTC_70190.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_70190.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3dhnlo\\Debug\\".
+          Creating directory "cmTC_70190.dir\\Debug\\cmTC_70190.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_70190.dir\\Debug\\cmTC_70190.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_70190.dir\\Debug\\cmTC_70190.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D HAVE_DECIMAL_POINT /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_70190.dir\\Debug\\\\" /Fd"cmTC_70190.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3dhnlo\\src.cxx"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.40.33811 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D HAVE_DECIMAL_POINT /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_70190.dir\\Debug\\\\" /Fd"cmTC_70190.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3dhnlo\\src.cxx"
+          src.cxx
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3dhnlo\\Debug\\cmTC_70190.exe" /INCREMENTAL /ILK:"cmTC_70190.dir\\Debug\\cmTC_70190.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-3dhnlo/Debug/cmTC_70190.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/imgui_demo/nzgdc_dear_imgui/third_party/jsoncpp/build/CMakeFiles/CMakeScratch/TryCompile-3dhnlo/Debug/cmTC_70190.lib" /MACHINE:X64  /machine:x64 cmTC_70190.dir\\Debug\\src.obj
+          cmTC_70190.vcxproj -> E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3dhnlo\\Debug\\cmTC_70190.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_70190.dir\\Debug\\cmTC_70190.tlog\\unsuccessfulbuild".
+          Touching "cmTC_70190.dir\\Debug\\cmTC_70190.tlog\\cmTC_70190.lastbuildstate".
+        Done Building Project "E:\\imgui_demo\\nzgdc_dear_imgui\\third_party\\jsoncpp\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3dhnlo\\cmTC_70190.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.45
+        
+      exitCode: 0
+...

@@ -204,7 +204,7 @@
       <AdditionalDependencies>glfw3.lib;jsoncpp.lib;jsoncpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y /I "$(SolutionDir)third_party\jsoncpp\build\bin\Debug\jsoncpp.dll" "$(OutDir)"</Command>
+      <Command>xcopy /Y /I "$(SolutionDir)third_party\jsoncpp\build\bin\Debug\jsoncpp.pdb" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
