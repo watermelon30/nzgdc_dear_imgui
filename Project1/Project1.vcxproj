@@ -167,6 +167,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)third_party\glfw\lib-vc2022;$(SolutionDir)third_party\jsoncpp\build\lib\Debug;$(SolutionDir)third_party\jsoncpp\build\bin\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;jsoncpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y /I "$(SolutionDir)third_party\jsoncpp\build\bin\Debug\jsoncpp.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -187,6 +190,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)third_party\glfw\lib-vc2022;$(SolutionDir)third_party\jsoncpp\build\lib\Debug;$(SolutionDir)third_party\jsoncpp\build\bin\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;jsoncpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y /I "$(SolutionDir)third_party\jsoncpp\build\bin\Debug\jsoncpp.pdb" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -204,7 +210,7 @@
       <AdditionalDependencies>glfw3.lib;jsoncpp.lib;jsoncpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y /I "$(SolutionDir)third_party\jsoncpp\build\bin\Debug\jsoncpp.pdb" "$(OutDir)"</Command>
+      <Command>xcopy /Y /I "$(SolutionDir)third_party\jsoncpp\build\bin\Debug\jsoncpp.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
