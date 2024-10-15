@@ -1,8 +1,6 @@
 ﻿#include "ParticleSystem.h"
 
 #include <fstream>
-#include <iostream>
-
 #include "Camera.h"
 #include "Particle.h"
 

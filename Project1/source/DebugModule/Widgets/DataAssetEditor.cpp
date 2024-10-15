@@ -352,7 +352,7 @@ void nzgdc_demo::DataAssetEditor::DrawAvailableLevelTable(std::vector<int>& Avai
 		ImGui::TableHeadersRow();
 
 		int idToRemove{-1};
-		for (int i = 0; i < AvailableLevels.size(); ++i)
+		for (auto i = 0; i < AvailableLevels.size(); ++i)
 		{
 			int& data = AvailableLevels[i];
 			ImGui::PushID(("table_row_" + std::to_string(i)).c_str());

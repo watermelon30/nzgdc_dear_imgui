@@ -81,3 +81,5 @@ imgui.ini
 # Add jsoncpp built files
 !third_party/jsoncpp/build/lib/Debug
 !third_party/jsoncpp/build/bin/Debug
+!third_party/jsoncpp/build/lib/Release
+!third_party/jsoncpp/build/bin/Release
