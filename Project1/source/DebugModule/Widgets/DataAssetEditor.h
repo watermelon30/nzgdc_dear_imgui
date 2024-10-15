@@ -50,7 +50,6 @@ namespace nzgdc_demo
 		void DrawPointComboBox(int& targetPoint);
 		void DrawAvailableLevelTable(std::vector<int>& AvailableLevels);
 
-
 		void* GetTargetTexture(const std::string& textureId, const std::string& texturePath);
 
 	private:

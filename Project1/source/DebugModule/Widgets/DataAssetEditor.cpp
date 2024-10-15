@@ -1,7 +1,6 @@
 ﻿#include "DataAssetEditor.h"
 
 #include <fstream>
-#include <iostream>
 
 #include "json/reader.h"
 #include "json/writer.h"
@@ -15,43 +14,28 @@ nzgdc_demo::DataAssetEditor::DataAssetEditor()
 	 	ParseJson(m_localJson);
 	 }
 	m_flags = ImGuiWindowFlags_MenuBar;
-
-	std::unordered_map<std::string, SampleData> levelData;
-	for (int i = 0; i < 3; ++i)
-	{
-		SampleData data;
-		data.Name = "Jack";
-		data.Texture_Path = "res/textures/jack.jpg";
-		data.Size_X = 256;
-		data.Size_Y = 512;
-		data.Point = 8;
-		data.Comment = "jack is a beast";
-		data.Available_Levels = {1,2,3,4};
-		levelData.emplace(std::to_string(i), data);
-	}
-	m_levelData.emplace("level_1", levelData);
 }
 
 void nzgdc_demo::DataAssetEditor::RenderContent()
 {
-	ImGui::Begin(GetWindowId().c_str());
-
-	std::string popupId;
-	DrawMenuBar(popupId);
-	DrawPopups(popupId);
-
-	if (m_currentEditingLevel.first.empty())
+	bool open;
+	ImGui::Begin("Data asset editor sample", &open, ImGuiWindowFlags_MenuBar);
 	{
-		ImGui::TextUnformatted("No target level selected.\nSelect a level from open menu");
+		std::string popupId;
+		DrawMenuBar(popupId);
+		DrawPopups(popupId);
+		if (m_currentEditingLevel.first.empty())
+		{
+			ImGui::TextUnformatted("No target level selected.\nSelect a level from open menu");
+		}
+		else
+		{
+			ImGui::Columns(2);
+			DrawItemList();
+			ImGui::NextColumn();
+			DrawDataEditor();
+		}
 	}
-	else
-	{
-		ImGui::Columns(2);
-		DrawItemList();
-		ImGui::NextColumn();
-		DrawDataEditor();
-	}
-
 	ImGui::End();
 }
 
@@ -156,6 +140,12 @@ bool nzgdc_demo::DataAssetEditor::SaveToJson()
 			objectJson["size_y"] = objectData.second.Size_Y;
 			objectJson["point"] = objectData.second.Point;
 			objectJson["comment"] = objectData.second.Comment;
+
+			Json::Value jsonArray(Json::arrayValue);
+			for (int level : objectData.second.Available_Levels) {
+				jsonArray.append(level);
+			}
+			objectJson["available_levels"] = jsonArray;
 			levelJson[objectData.first] = objectJson;
 		}
 		newVal[levelData.first] = levelJson;
@@ -212,6 +202,7 @@ void nzgdc_demo::DataAssetEditor::DrawMenuBar(std::string& popupId)
 		ImGui::EndMenuBar();
 	}
 }
+
 void nzgdc_demo::DataAssetEditor::DrawPopups(const std::string& popupId)
 {
 	if (!popupId.empty())
@@ -247,6 +238,7 @@ void nzgdc_demo::DataAssetEditor::DrawPopups(const std::string& popupId)
 		if (ImGui::Button("Save data to local json file?"))
 		{
 			SaveToJson();
+			ImGui::CloseCurrentPopup();
 		}
 		ImGui::SameLine();
 		if (ImGui::Button("Cancel"))
@@ -286,7 +278,8 @@ void nzgdc_demo::DataAssetEditor::DrawItemList()
 					ImGui::Image(targetTextureId, ImVec2(TexturePreviewSize, TexturePreviewSize), ImVec2(0, 1), ImVec2(1, 0));
 				}
 				ImGui::SameLine();
-				if (ImGui::Selectable("##selectable", m_currentEditingData.first == data.first, ImGuiSelectableFlags_SpanAllColumns | ImGuiSelectableFlags_AllowItemOverlap, ImVec2(0, TexturePreviewSize))) {
+				if (ImGui::Selectable("##selectable", m_currentEditingData.first == data.first, ImGuiSelectableFlags_SpanAllColumns | ImGuiSelectableFlags_AllowItemOverlap, ImVec2(0, TexturePreviewSize)))
+				{
 					m_currentEditingData = data;
 				}
 			}
@@ -393,10 +386,8 @@ void* nzgdc_demo::DataAssetEditor::GetTargetTexture(const std::string& textureId
 	{
 		return reinterpret_cast<void*>(m_textureMap[textureId]->GetTextureId());
 	}
-	else
-	{
-		auto texture = std::make_shared<nzgdc_demo::Texture>(texturePath);
-		m_textureMap.emplace(textureId, texture);
-		return reinterpret_cast<void*>(texture->GetTextureId());
-	}
+
+	auto texture = std::make_shared<nzgdc_demo::Texture>(texturePath);
+	m_textureMap.emplace(textureId, texture);
+	return reinterpret_cast<void*>(texture->GetTextureId());
 }
