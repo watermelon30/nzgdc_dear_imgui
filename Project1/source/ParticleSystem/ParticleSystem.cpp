@@ -96,6 +96,7 @@ void nzgdc_demo::ParticleSystem::SetData(const ParticleSystemData& newData)
 {
     m_data = newData;
 }
+
 bool nzgdc_demo::ParticleSystem::LoadJson(Json::Value& outData) const
 {
     std::ifstream file(settingsPath);

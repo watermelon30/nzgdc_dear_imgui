@@ -235,7 +235,7 @@
       <AdditionalDependencies>glfw3.lib;jsoncpp.lib;jsoncpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y /I "$(SolutionDir)third_party\jsoncpp\build\bin\Debug\jsoncpp.pdb" "$(OutDir)"</Command>
+      <Command>xcopy /Y /I "$(SolutionDir)third_party\jsoncpp\build\bin\Debug\jsoncpp.dll" "$(SolutionDir)x64\$(Configuration)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
