@@ -13,6 +13,7 @@
 #include "Widgets/DataAssetEditor.h"
 #include "Widgets/ParticleSystemEditor.h"
 #include "Widgets/ImguiDemoWindow.h"
+#include "Widgets/PaintWindow.h"
 
 #include "Window/FluidSimulatorWindow.h"
 
@@ -96,6 +97,7 @@ namespace nzgdc_demo
         m_debugSystem->AddWindow(std::make_shared<ParticleSystemEditor>(m_particleSystem), false);
         m_debugSystem->AddWindow(std::make_shared<ImguiDemoWindow>(), false);
         m_debugSystem->AddWindow(std::make_shared<DataAssetEditor>(), false);
+        m_debugSystem->AddWindow(std::make_shared<PaintWindow>(), false);
 #endif
 
         glfwSwapInterval(1);

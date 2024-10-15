@@ -20,6 +20,7 @@
     <ClCompile Include="source\FluidSimulator\FluidSimulator.cpp" />
     <ClCompile Include="source\ParticleSystem\Particle.cpp" />
     <ClCompile Include="source\ParticleSystem\ParticleSystem.cpp" />
+    <ClCompile Include="source\DebugModule\Widgets\PaintWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\DebugModule\Widgets\DataAssetEditor.h" />
@@ -42,6 +43,7 @@
     <ClInclude Include="source\Quad.h" />
     <ClInclude Include="source\Texture.h" />
     <ClInclude Include="source\Transform.h" />
+    <ClInclude Include="source\DebugModule\Widgets\PaintWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.frag" />
